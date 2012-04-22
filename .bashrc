@@ -3,7 +3,7 @@ alias ls='ls -lav --color=auto'
 alias grep='grep --color'
 
 # editor
-alias sublime='nohup /cygdrive/c/Program\ Files/Sublime\ Text\ 2/sublime_text.exe > /dev/null'
+alias sublime='nohup /cygdrive/c/Program\ Files/Sublime\ Text\ 2/sublime_text.exe > /dev/null &'
 
 # non-standard ssh port
 alias vps='ssh vps.p5dev.com -p 60013'

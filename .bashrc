@@ -1,5 +1,6 @@
 # Common parameters
-alias ls='ls -lav --color=auto'
+alias ls='ls -v --color=auto'
+alias ll='ls -val'
 alias grep='grep --color'
 
 # editor

@@ -1,7 +1,13 @@
 # Common parameters
-alias ls='ls -v --color=auto'
-alias ll='ls -val'
-alias grep='grep --color'
+if [ "$OSTYPE" == "linux-gnu" ]; then
+  alias ls='ls -v --color=auto'
+  alias ll='ls -lav'
+  alias grep='grep --color'
+else
+  alias ls='ls'
+  alias ll='ls -la'
+  alias grep='grep'
+fi
 
 # Case insensitive matching
 shopt -s nocaseglob

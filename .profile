@@ -1,2 +1,2 @@
 source ~/.bashrc
-source ~/.initrc
+source ~/.inputrc

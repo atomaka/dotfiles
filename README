@@ -1,0 +1,1 @@
+cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile

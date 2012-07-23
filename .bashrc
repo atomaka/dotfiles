@@ -12,13 +12,13 @@ fi
 # Case insensitive matching
 shopt -s nocaseglob
 
-PS1='\[\t\]'
+PS1="\e[1;34m[\t] \w\n"
 # Prompt color based on location
 if [ "$SSH_CONNECTION" == "" ]; then
   # Yellow prompt for local login
-  PS1="$PS1\[\e[1;32m\][\u@\h \W]"
+  PS1="$PS1\[\e[1;32m\][\u@\h]"
 else
-  PS1="$PS1\[\e[1;33m\][\u@\h \W]"
+  PS1="$PS1\[\e[1;33m\][\u@\h]"
 fi
 
 # Ripped from Doug - color based on return code

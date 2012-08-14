@@ -9,6 +9,8 @@ else
   alias grep='grep'
 fi
 
+alias dotfiles='cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile'
+
 # Case insensitive matching
 shopt -s nocaseglob
 

@@ -17,7 +17,7 @@
     changed = green
     untracked = cyan
 [merge]
-    tool = sublime
+    tool = vimdiff
 [apply]
     whitespace = fix
 [core]

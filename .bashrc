@@ -10,9 +10,6 @@ else
 fi
 
 alias dotfiles='cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile'
-alias npdev='sshfs -o idmap=user -o workaround=rename $USER@netprint:/data/test ~/Source/netprint-dev'
-alias nplive='sshfs -o idmap=user -o workaround=rename $USER@netprint:/data/www ~/Source/netprint'
-alias worksource='sshfs -0 idmap=user -o workaround=rename $USER@work:/home/atomaka/Source ~/Source/work'
 
 alias gvim='gvim -f &'
 

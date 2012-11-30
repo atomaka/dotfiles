@@ -23,5 +23,5 @@
 [core]
     excludesfile = ~/.gitignore_global
     autocrlf = input
-    editor = sublime
+    editor = subl
     filemode = false

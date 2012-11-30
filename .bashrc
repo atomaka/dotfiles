@@ -28,3 +28,5 @@ fi
 # Ripped from Doug - color based on return code
 PS1="$PS1\$(if [ \$? = 0 ]; then echo -e \"\$\"; else echo -e \"\[\033[0;31m\]\$\"; fi)\[\033[0m\] "
 
+# Add bin to path
+PATH=$PATH:$HOME/bin

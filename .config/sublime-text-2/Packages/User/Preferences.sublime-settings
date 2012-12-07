@@ -1,7 +1,7 @@
 {
 	"color_scheme": "Packages/Tomorrow-Night-Blue.tmTheme",
 	"draw_indent_guides": true,
-	"font_face": "Consolas",
+	"font_face": "Ubuntu Mono",
 	"font_size": 11.0,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,

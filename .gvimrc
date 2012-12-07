@@ -1,5 +1,5 @@
 source ~/.vimrc
 
-colorscheme Tomorrow-Night-Blue
+set guioptions=aci
+
 winsize 80 50
-set guifont=Consolas\ 10

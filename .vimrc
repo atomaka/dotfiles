@@ -50,3 +50,19 @@ filetype plugin on
 filetype indent on
 " --- }}}
 
+" --- Style and font --------------------------------------------------------{{{
+if has('gui_running')
+    colorscheme Tomorrow-Night-Blue
+elseif $COLORTERM == 'gnome-terminal'
+    set term=gnome-256color
+    colorscheme Tomorrow-Night-Blue
+else
+    colorscheme default
+endif
+
+if has("gui_gtk2")
+    set guifont=Ubuntu\ Mono\ 10
+else
+    set guifont=Ubuntu\ Mono:01
+endif
+" --- }}}

@@ -1,5 +1,3 @@
-source ~/.vimrc
-
 set guioptions=aci
 
-winsize 80 50
+winsize 180 48

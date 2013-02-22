@@ -10,6 +10,7 @@ else
 fi
 
 alias dotfiles='cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile'
+alias sudo='sudo env PATH=$PATH'
 
 # Case insensitive matching
 shopt -s nocaseglob

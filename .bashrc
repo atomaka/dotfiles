@@ -1,7 +1,43 @@
+# [----------------------------------------------------------------------------]
+# [----------------------------- PROMPT ---------------------------------------]
+# [----------------------------------------------------------------------------]
+hostn=$(hostname -s)
+usern=$(whoami)
+
+function prompt {
+  ctime=$(date +%T)
+  prmpt="[${PWD}][${ctime}]"
+  cols=$(tput cols)
+  let FILLS=${cols}-${#prmpt}
+  LINE=""
+
+  if [[ "$PWD" =~ "/home/$usern" ]]; then
+    let FILLS=$FILLS+5+${#usern}
+  fi
+
+  for (( f=0; f<$FILLS; f++ ))  
+  do   
+    LINE=$LINE"\e(0q\e(B"  
+  done   
+
+  PS1="\e[1;34m[\t] \w ${LINE}\n"
+  if [ "$SSH_CONNECTION" == "" ]; then
+    # Yellow prompt for local login
+    PS1="$PS1\[\e[1;32m\][\u@\h]"
+  else
+    PS1="$PS1\[\e[1;33m\][\u@\h]"
+  fi
+  PS1="$PS1\$(if [ \$? = 0 ]; then echo -e \"\$\"; else echo -e \"\[\033[0;31m\]\$\"; fi)\[\033[0m\] "
+} 
+PROMPT_COMMAND=prompt
+
+# [----------------------------------------------------------------------------]
+# [----------------------------- ALIAS  ---------------------------------------]
+# [----------------------------------------------------------------------------]
 # Common parameters
 if [ "$OSTYPE" == "linux-gnu" ]; then
   alias ls='ls -v --color=auto'
-  alias ll='ls -lav'
+  alias ll='ls -lavh'
   alias grep='grep --color'
 else
   alias ls='ls'
@@ -9,23 +45,15 @@ else
   alias grep='grep'
 fi
 
-alias dotfiles='cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile'
 alias sudo='sudo env PATH=$PATH'
 
+# [----------------------------------------------------------------------------]
+# [------------------------------ OTHER ---------------------------------------]
+# [----------------------------------------------------------------------------]
 # Case insensitive matching
 shopt -s nocaseglob
 
-PS1="\e[1;34m[\t] \w\n"
-# Prompt color based on location
-if [ "$SSH_CONNECTION" == "" ]; then
-  # Yellow prompt for local login
-  PS1="$PS1\[\e[1;32m\][\u@\h]"
-else
-  PS1="$PS1\[\e[1;33m\][\u@\h]"
-fi
-
-# Ripped from Doug - color based on return code
-PS1="$PS1\$(if [ \$? = 0 ]; then echo -e \"\$\"; else echo -e \"\[\033[0;31m\]\$\"; fi)\[\033[0m\] "
-
-# Add bin to path
+# [----------------------------------------------------------------------------]
+# [------------------------------ PATH ----------------------------------------]
+# [----------------------------------------------------------------------------]
 PATH=$PATH:$HOME/bin

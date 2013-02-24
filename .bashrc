@@ -7,8 +7,7 @@ usern=$(whoami)
 function prompt {
   ctime=$(date +%T)
   prmpt="[${PWD}][${ctime}]"
-  cols=$(tput cols)
-  let FILLS=${cols}-${#prmpt}
+  let FILLS=${COLUMNS}-${#prmpt}
   LINE=""
 
   if [[ "$PWD" =~ "/home/$usern" ]]; then
@@ -34,18 +33,26 @@ PROMPT_COMMAND=prompt
 # [----------------------------------------------------------------------------]
 # [----------------------------- ALIAS  ---------------------------------------]
 # [----------------------------------------------------------------------------]
+
 # Common parameters
-if [ "$OSTYPE" == "linux-gnu" ]; then
-  alias ls='ls -v --color=auto'
-  alias ll='ls -lavh'
-  alias grep='grep --color'
-else
-  alias ls='ls'
-  alias ll='ls -la'
-  alias grep='grep'
-fi
+alias ls='ls -v --color=auto'
+alias ll='ls -lavh'
+alias grep='grep --color'
 
 alias sudo='sudo env PATH=$PATH'
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# for git
+alias get='git'
+alias ga='git add'
+alias gaa='git add .'
+alias gs='git status'
+alias gl='git log'
+alias gcm='git commit -m'
+alias gcf='git commit -F'
 
 # [----------------------------------------------------------------------------]
 # [------------------------------ OTHER ---------------------------------------]

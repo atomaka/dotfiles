@@ -21,10 +21,9 @@ function prompt {
 
   PS1="\e[44;1;37m[\t] \w ${LINE}\e[0m\n"
   if [ "$SSH_CONNECTION" == "" ]; then
-    # Yellow prompt for local login
     PS1="$PS1\[\e[1;32;40m\][\u@\h]"
   else
-    PS1="$PS1\[\e[1;32;40m\][\u@\h]"
+    PS1="$PS1\[\e[1;33;40m\][\u@\h]"
   fi
   PS1="$PS1\$(if [ \$? = 0 ]; then echo -e \"\$\"; else echo -e \"\[\e[0;31m\]\$\"; fi)\[\e[0m\] "
 } 

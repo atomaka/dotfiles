@@ -38,8 +38,10 @@ alias ls='ls -v --color=auto'
 alias ll='ls -lavh'
 alias grep='grep --color'
 
-alias sudo='sudo env PATH=$PATH'
+# Seems like a better idea than it actually is?
+#alias sudo='sudo env PATH=$PATH'
 
+# move around
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
@@ -52,6 +54,9 @@ alias gs='git status'
 alias gl='git log'
 alias gcm='git commit -m'
 alias gcf='git commit -F'
+
+# random
+alias calc='bc <<<'
 
 # [----------------------------------------------------------------------------]
 # [------------------------------ OTHER ---------------------------------------]

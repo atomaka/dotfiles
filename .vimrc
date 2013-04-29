@@ -26,6 +26,10 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" Plugins
+execute pathogen#incubate()
+execute pathogen#infect()
+
 " Filetype stuff
 filetype on
 filetype plugin on

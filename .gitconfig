@@ -25,3 +25,5 @@
     autocrlf = input
     editor = subl
     filemode = false
+[push]
+    default = upstream

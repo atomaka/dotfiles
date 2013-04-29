@@ -1,6 +1,13 @@
 [user]
-	name = Andrew Tomaka
-	email = atomaka@gmail.com
+    name = Andrew Tomaka
+    email = atomaka@gmail.com
+[github]
+    user = atomaka
+
+[apply]
+    whitespace = fix
+[alias]
+    hist = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 [color]
     ui = auto
 [color "branch"]
@@ -16,12 +23,12 @@
     added = yellow
     changed = green
     untracked = cyan
-[merge]
-    tool = vimdiff
-[apply]
-    whitespace = fix
-[core]
+[core]    
     excludesfile = ~/.gitignore_global
     autocrlf = input
     editor = subl
     filemode = false
+[merge]
+    tool = vimdiff
+[push]
+    default = upstream

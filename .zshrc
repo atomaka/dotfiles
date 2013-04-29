@@ -54,4 +54,10 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Aliases file
+source $HOME/.aliases
+
+# Add personal bin folder
+PATH=$PATH:$HOME/bin
+
 # Customize to your needs...

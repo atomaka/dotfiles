@@ -17,6 +17,10 @@ HISTSIZE=10000
 HISTFILE=~/.zsh_history
 SAVEHIST=10000
 
+# Make sure C-s works in vim
+stty start undef
+stty stop undef
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -54,8 +58,9 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
-# Aliases file
+# Aliases/Functions files
 source $HOME/.aliases
+source $HOME/.functions
 
 # Add personal bin folder
 PATH=$PATH:$HOME/bin

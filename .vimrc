@@ -25,3 +25,22 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+
+" Filetype stuff
+filetype on
+filetype plugin on
+filetype indent on
+
+" Keybinds
+" ctrl+s for save spam
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
+
+" Leaders (whatever that means)
+let mapleader = ","
+
+map <Leader>s :e ~/Source/
+
+" Set style
+set guifont=Ubuntu\ Mono\ 10
+colorscheme vividchalk

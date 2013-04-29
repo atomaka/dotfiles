@@ -7,6 +7,8 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 
+Bundle 'airblade/vim-gitgutter'
+Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -34,6 +36,7 @@ set showcmd             " Show command as you type
 set hls                 " Highlight search (hlsearch?)
 set ruler               " Show cursor position
 set autoindent
+set number              " Show line numbers
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2

@@ -67,4 +67,6 @@ colorscheme vividchalk
 set t_Co=256            " 256 terminal colors
 set cursorline
 hi CursorLine cterm=NONE ctermbg=234
+highlight StatusLine ctermfg=white ctermbg=236
+hi SignColumn ctermbg=black
 

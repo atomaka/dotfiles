@@ -11,6 +11,12 @@ ZSH_THEME="robbyrussell"
 chpwd() {
   ls -lvh --color=auto
 }
+
+# Larger history
+HISTSIZE=10000
+HISTFILE=~/.zsh_history
+SAVEHIST=10000
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"

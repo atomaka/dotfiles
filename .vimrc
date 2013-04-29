@@ -63,3 +63,8 @@ map <Leader>nc :Nyancat<cr>
 " Set style
 set guifont=Ubuntu\ Mono\ 10
 colorscheme vividchalk
+
+set t_Co=256            " 256 terminal colors
+set cursorline
+hi CursorLine cterm=NONE ctermbg=234
+

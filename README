@@ -5,4 +5,5 @@ git clone repo
 mv dotfiles/* .
 git submodule update --init
 source .zshrc
+:BundleInstall inside of vim
 

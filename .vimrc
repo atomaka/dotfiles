@@ -1,3 +1,17 @@
+" Plugins
+execute pathogen#incubate()
+execute pathogen#infect()
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'vim-scripts/ruby-matchit'
+
 " Options
 set nocompatible        " Disable vi compatibility
 set ffs=unix,dos        " File format prefer unix endings
@@ -26,11 +40,8 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-" Plugins
-execute pathogen#incubate()
-execute pathogen#infect()
-
 " Filetype stuff
+syntax on
 filetype on
 filetype plugin on
 filetype indent on
@@ -44,6 +55,7 @@ imap <C-s> <esc>:w<CR>
 let mapleader = ","
 
 map <Leader>s :e ~/Source/
+map <Leader>nc :Nyancat<cr>
 
 " Set style
 set guifont=Ubuntu\ Mono\ 10

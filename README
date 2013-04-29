@@ -1,1 +1,8 @@
-cd; curl -#L https://github.com/atomaka/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README,.gitignore}; source ~/.profile
+sudo apt-get zsh
+chsh -s /bin/zsh
+LOGOUT COMPLETELY and relogin
+git clone repo
+mv dotfiles/* .
+git submodule update --init
+source .zshrc
+

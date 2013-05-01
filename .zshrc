@@ -66,3 +66,7 @@ source $HOME/.functions
 PATH=$PATH:$HOME/bin
 
 # Customize to your needs...
+
+# tmuxinator
+export EDITOR='vim'
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator

@@ -1,4 +1,7 @@
 sudo apt-get zsh
+sudo apt-get install ruby1.9.3
+sudo gem install tmuxinator
+
 chsh -s /bin/zsh
 LOGOUT COMPLETELY and relogin
 git clone repo
@@ -7,3 +10,4 @@ git submodule update --init
 source .zshrc
 :BundleInstall inside of vim
 
+mux work

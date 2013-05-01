@@ -10,4 +10,10 @@ tabs:
         - vim
         - #empty, zsh
         - #empty, zsh
+  - irc:
+      panes:
+        - irssi
+  - emaik:
+      panes:
+        - mutt
 

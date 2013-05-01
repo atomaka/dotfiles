@@ -67,6 +67,12 @@ PATH=$PATH:$HOME/bin
 
 # Customize to your needs...
 
+# make 256colors work maybe
+if [ $TERM="xterm" ]; then
+  export TERM=xterm-256color
+fi
+
 # tmuxinator
 export EDITOR='vim'
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+

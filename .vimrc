@@ -1,7 +1,4 @@
 " Plugins
-execute pathogen#incubate()
-execute pathogen#infect()
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 

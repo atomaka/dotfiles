@@ -17,6 +17,7 @@ set ffs=unix,dos        " File format prefer unix endings
 set eol                 " Add newlien at end of file
 set shellslash          " Forward slashes
 set nobk                " No backup files
+set formatoptions=crq
 set textwidth=80
 set laststatus=2        " Always show status line
 set showmode            " Show current mode
@@ -34,6 +35,8 @@ set hls                 " Highlight search (hlsearch?)
 set ruler               " Show cursor position
 set autoindent
 set number              " Show line numbers
+set colorcolumn=80      " Ruler at line 80
+set nomodeline
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2
@@ -56,6 +59,7 @@ let mapleader = ","
 
 map <Leader>s :e ~/Source/
 map <Leader>nc :Nyancat<cr>
+map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style
 set guifont=Ubuntu\ Mono\ 10
@@ -65,4 +69,4 @@ set cursorline
 hi CursorLine cterm=NONE ctermbg=234
 highlight StatusLine ctermfg=white ctermbg=236
 hi SignColumn ctermbg=black
-
+hi ColorColumn ctermbg=234

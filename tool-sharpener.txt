@@ -1,0 +1,2 @@
+* :Bclose leaders
+* Alias: gcf => git commit -F 

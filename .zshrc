@@ -72,6 +72,10 @@ PATH=$PATH:$HOME/bin
 
 # Customize to your needs...
 
+# Bind insert_sudo function
+zle -N insert-sudo
+bindkey "^z" insert-sudo
+
 # make 256colors work maybe
 if [ $TERM="xterm" ]; then
   export TERM=xterm-256color

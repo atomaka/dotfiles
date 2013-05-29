@@ -7,7 +7,12 @@ function g {
 }
 compdef g=git
 
+insert-sudo() {
+  zle beginning-of-line
+  zle -U "sudo "
+}
+
 function port-forward {
-  ssh $1 -R $2":localhost:"$2 -g;
+  ssh $1 -R $2":localhost:"$2 -g
 }
 

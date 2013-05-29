@@ -1,2 +1,4 @@
-* :Bclose leaders
-* Alias: gcf => git commit -F 
+* Auto start tmux
+* * if [[ $STY = '' ]] then mux work; fi
+* insert-sudo function return to end of line
+

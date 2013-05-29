@@ -7,3 +7,7 @@ function g {
 }
 compdef g=git
 
+function port-forward {
+  ssh $1 -R $2":localhost:"$2 -g;
+}
+

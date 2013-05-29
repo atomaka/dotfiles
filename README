@@ -11,3 +11,11 @@ source .zshrc
 :BundleInstall inside of vim
 
 mux work
+
+Remote Server:
+edit /etc/ssh/sshd_config
+```
+PermitTunnel yes
+GatewayPorts yes
+```
+

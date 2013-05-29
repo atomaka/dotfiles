@@ -4,3 +4,4 @@
 * git checkout bind 
 * vi mode on command line
 * * set -o vi
+* source keybinds

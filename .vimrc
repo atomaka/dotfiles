@@ -5,7 +5,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'airblade/vim-gitgutter'
+Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'puppetlabs/puppet-syntax-vim'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -57,8 +59,9 @@ imap <C-s> <esc>:w<CR>
 " Leaders (whatever that means)
 let mapleader = ","
 
-map <Leader>s :e ~/Source/
+map <Leader>s :e ~/Source/<cr>
 map <Leader>nc :Nyancat<cr>
+map <Leader>t :Tabularize /
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style

@@ -1,7 +1,5 @@
 * Auto start tmux
 * * if [[ $STY = '' ]] then mux work; fi
 * insert-sudo function return to end of line
-* git checkout bind 
 * vi mode on command line
 * * set -o vi
-* source keybinds

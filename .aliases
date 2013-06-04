@@ -4,6 +4,7 @@ alias agl="dpkg --get-selections"
 alias agL="dpkg --listfiles"
 alias agu="sudo apt-get update && sudo apt-get upgrade"
 alias al="zsh_stats"
+alias ber="bundle exec rake"
 alias c="clear"
 alias g="g" # overwrite g alias in git plugin so function will work
 alias ga="git add"

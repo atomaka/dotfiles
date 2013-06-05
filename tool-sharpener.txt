@@ -3,3 +3,4 @@
 * insert-sudo function return to end of line
 * vi mode on command line
 * * set -o vi
+* Leader for buffer nexting (,n?)

@@ -16,3 +16,6 @@ function port-forward {
   ssh $1 -R $2":localhost:"$2 -g
 }
 
+function map-sshfs {
+  sshfs -o idmap=user -o workaround=rename $USER@$1 $HOME"/Mounts/"$2
+}

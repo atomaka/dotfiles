@@ -1,6 +1,7 @@
 * Auto start tmux
 * * if [[ $STY = '' ]] then mux work; fi
+* * only if not ssh
 * insert-sudo function return to end of line
 * vi mode on command line
 * * set -o vi
-* Leader for buffer nexting (,n?)
+* vagrant aliases

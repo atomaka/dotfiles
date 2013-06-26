@@ -20,6 +20,7 @@ alias gs="git status"
 alias Grep='grep'
 alias l="ls"
 alias ll="ls -lv --human-readable --color=auto"
+alias ms="tmux -S /tmp/pair && chmod 777 /tmp/pair"
 alias mw="mux work"
 alias s="cd ~/Source"
 alias sfs="map-sshfs"

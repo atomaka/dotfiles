@@ -4,10 +4,7 @@
 project_name: work
 project_root: ~/
 tabs:
-  - ide:
-      layout: 9f02,274x70,0,0[274x53,0,0,274x16,0,54{137x16,0,54,136x16,138,54}]
+  - zsh:
       panes:
-        - vim
-        - #empty, zsh
         - #empty, zsh
 

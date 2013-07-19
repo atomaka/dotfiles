@@ -46,6 +46,11 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" Other settings
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors=0
+
 " Filetype stuff
 syntax on
 filetype on
@@ -72,8 +77,9 @@ map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 set guifont=Ubuntu\ Mono\ 10
 colorscheme vividchalk
 
-set cursorline
 hi CursorLine cterm=NONE ctermbg=234
-highlight StatusLine ctermfg=white ctermbg=236
+hi StatusLine ctermfg=white ctermbg=236
 hi SignColumn ctermbg=black
 hi ColorColumn ctermbg=234
+hi IndentGuidesOdd  ctermbg=black
+hi IndentGuidesEven ctermbg=234

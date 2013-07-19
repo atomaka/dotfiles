@@ -1,5 +1,5 @@
 " Plugins
-set rtp+=~/.vim/bundle/vundle/
+set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -15,17 +15,17 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/ruby-matchit'
 
 " Options
-set nocompatible        " Disable vi compatibility
-set ffs=unix,dos        " File format prefer unix endings
-set eol                 " Add newlien at end of file
-set shellslash          " Forward slashes
-set nobk                " No backup files
+set nocompatible         " Disable vi compatibility
+set fileformats=unix,dos " File format prefer unix endings
+set endofline            " Add newlien at end of file
+set shellslash           " Forward slashes
+set nobackup             " No backup files
 set formatoptions=crq
 set textwidth=80
 set laststatus=2        " Always show status line
 set showmode            " Show current mode
 set history=100         " History length
-set cul                 " Highlight current line
+set cursorline          " Highlight current line
 set nowrap              " Disable wrapping by default
 set backspace=2         " Backspace over indent, eol, start of insert
 set hlsearch            " Search highlights
@@ -34,12 +34,11 @@ set incsearch           " Search as yuo type
 set ignorecase          " Ignore case with search
 set smartcase           " Search will not ignore uppercase
 set showcmd             " Show command as you type
-set hls                 " Highlight search (hlsearch?)
 set ruler               " Show cursor position
 set autoindent
-set number              " Show line numbers
 set colorcolumn=80      " Ruler at line 80
 set nomodeline
+set relativenumber      " Relative line numbers
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2
@@ -66,7 +65,7 @@ imap <C-s> <esc>:w<CR>
 let mapleader = ","
 
 map <Leader>bi :BundleInstall<cr>
-map <Leader>nc :Nyancat<cr>
+map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>s :e ~/Source/<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sz :so ~/.vimrc<cr>
@@ -83,3 +82,14 @@ hi SignColumn ctermbg=black
 hi ColorColumn ctermbg=234
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=234
+
+" Functions
+" Toggle relative line numbers and cursorline; useful for long line files
+function! LargeFileToggle()
+  if &relativenumber
+    set number
+  else
+    set relativenumber
+  endif
+  set cursorline!
+endfunction

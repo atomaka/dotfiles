@@ -7,6 +7,7 @@ Bundle 'gmarik/vundle'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
+Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rodjek/vim-puppet'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
@@ -59,8 +60,11 @@ imap <C-s> <esc>:w<CR>
 " Leaders (whatever that means)
 let mapleader = ","
 
-map <Leader>s :e ~/Source/<cr>
+map <Leader>bi :BundleInstall<cr>
 map <Leader>nc :Nyancat<cr>
+map <Leader>s :e ~/Source/<cr>
+map <Leader>se :e ~/.vimrc<cr>
+map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>t :Tabularize /
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 

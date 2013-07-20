@@ -15,30 +15,31 @@ Bundle 'tpope/vim-surround'
 Bundle 'vim-scripts/ruby-matchit'
 
 " Options
-set nocompatible         " Disable vi compatibility
-set fileformats=unix,dos " File format prefer unix endings
-set endofline            " Add newlien at end of file
-set shellslash           " Forward slashes
-set nobackup             " No backup files
+set nocompatible          " Disable vi compatibility
+set fileformats=unix,dos  " File format prefer unix endings
+set endofline             " Add newlien at end of file
+set shellslash            " Forward slashes
+set nobackup              " No backup files
 set formatoptions=crq
 set textwidth=80
-set laststatus=2        " Always show status line
-set showmode            " Show current mode
-set history=100         " History length
-set cursorline          " Highlight current line
-set nowrap              " Disable wrapping by default
-set backspace=2         " Backspace over indent, eol, start of insert
-set hlsearch            " Search highlights
-set wrapscan            " Wraped search
-set incsearch           " Search as yuo type
-set ignorecase          " Ignore case with search
-set smartcase           " Search will not ignore uppercase
-set showcmd             " Show command as you type
-set ruler               " Show cursor position
+set laststatus=2          " Always show status line
+set showmode              " Show current mode
+set history=100           " History length
+set cursorline            " Highlight current line
+set nowrap                " Disable wrapping by default
+set backspace=2           " Backspace over indent, eol, start of insert
+set hlsearch              " Search highlights
+set wrapscan              " Wraped search
+set incsearch             " Search as yuo type
+set ignorecase            " Ignore case with search
+set smartcase             " Search will not ignore uppercase
+set showcmd               " Show command as you type
+set ruler                 " Show cursor position
 set autoindent
-set colorcolumn=80      " Ruler at line 80
+set colorcolumn=80        " Ruler at line 80
 set nomodeline
-set relativenumber      " Relative line numbers
+set relativenumber        " Relative line numbers
+set noswapfile            " Hope for the best
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2

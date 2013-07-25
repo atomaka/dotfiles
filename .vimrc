@@ -26,6 +26,7 @@ set laststatus=2          " Always show status line
 set showmode              " Show current mode
 set history=100           " History length
 set cursorline            " Highlight current line
+set cursorcolumn          " Highlight current column
 set nowrap                " Disable wrapping by default
 set backspace=2           " Backspace over indent, eol, start of insert
 set hlsearch              " Search highlights
@@ -78,6 +79,7 @@ set guifont=Ubuntu\ Mono\ 10
 colorscheme vividchalk
 
 hi CursorLine cterm=NONE ctermbg=234
+hi CursorColumn cterm=NONE ctermbg=234
 hi StatusLine ctermfg=white ctermbg=236
 hi SignColumn ctermbg=black
 hi ColorColumn ctermbg=234
@@ -93,4 +95,5 @@ function! LargeFileToggle()
     set relativenumber
   endif
   set cursorline!
+  set cursorcolumn!
 endfunction

@@ -65,18 +65,26 @@ filetype indent on
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
 
+" Still using arrow keys when in insert mode sometimes
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
+
 " Leaders (whatever that means)
 let mapleader = ","
 
 map <Leader>bi :BundleInstall<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>s :e ~/Source/<cr>
+map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>t :Tabularize /
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style
+set t_Co=256
 set guifont=Ubuntu\ Mono\ 10
 colorscheme vividchalk
 
@@ -98,4 +106,15 @@ function! LargeFileToggle()
   endif
   set cursorline!
   set cursorcolumn!
+endfunction
+
+" Rename current file - from github/garybernhardt
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
 endfunction

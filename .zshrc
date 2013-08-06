@@ -18,9 +18,9 @@ chpwd() {
 }
 
 # Larger history
-HISTSIZE=10000
+HISTSIZE=20000
 HISTFILE=~/.zsh_history
-SAVEHIST=10000
+SAVEHIST=20000
 
 # Make sure C-s works in vim
 stty start undef

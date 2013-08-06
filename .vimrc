@@ -5,6 +5,7 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'airblade/vim-gitgutter'
+Bundle 'bronson/vim-trailing-whitespace'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
@@ -75,6 +76,7 @@ map <Down> <Nop>
 let mapleader = ","
 
 map <Leader>bi :BundleInstall<cr>
+map <Leader>fw :FixWhitespace<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>s :e ~/Source/<cr>
 map <Leader>sa :call RenameFile()<cr>

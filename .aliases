@@ -25,6 +25,7 @@ alias gr="git reset"
 alias grh="git reset --hard"
 alias grm="git rm"
 alias gs="git status"
+alias gw="git diff --check"
 alias Grep='grep'
 alias l="ls"
 alias ll="ls -lv --human-readable --color=auto"

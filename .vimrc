@@ -46,6 +46,8 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+" Show whitespace markers before cursor in insert mode
+set list listchars=tab:\ \ ,trail:·
 
 " Other settings
 let g:indent_guides_guide_size=1

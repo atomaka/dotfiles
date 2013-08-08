@@ -23,6 +23,7 @@ set shellslash            " Forward slashes
 set nobackup              " No backup files
 set formatoptions=crq
 set textwidth=80
+set cpoptions+=$          " delimit end of change text
 set laststatus=2          " Always show status line
 set showmode              " Show current mode
 set history=100           " History length

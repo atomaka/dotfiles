@@ -77,8 +77,10 @@ map <Down> <Nop>
 let mapleader = ","
 
 map <Leader>bi :BundleInstall<cr>
+map <Leader>c "+
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
+map <Leader>p "+p
 map <Leader>s :e ~/Source/<cr>
 map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>

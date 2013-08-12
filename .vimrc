@@ -43,6 +43,7 @@ set colorcolumn=80        " Ruler at line 80
 set nomodeline
 set relativenumber        " Relative line numbers
 set noswapfile            " Hope for the best
+set virtualedit=all       " Cursor can go anywhere
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2

@@ -42,8 +42,10 @@ set autoindent
 set colorcolumn=80        " Ruler at line 80
 set nomodeline
 set relativenumber        " Relative line numbers
+set number
 set noswapfile            " Hope for the best
 set virtualedit=all       " Cursor can go anywhere
+set scrolloff=3           " Keep cursor from touching edges
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2
@@ -80,6 +82,7 @@ let mapleader = ","
 map <Leader>bi :BundleInstall<cr>
 map <Leader>c "+
 map <Leader>fw :FixWhitespace<cr>
+map <Leader>i mmgg=G`m<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>p "+p
 map <Leader>s :e ~/Source/<cr>
@@ -105,11 +108,7 @@ hi IndentGuidesEven ctermbg=234
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files
 function! LargeFileToggle()
-  if &relativenumber
-    set number
-  else
-    set relativenumber
-  endif
+  set relativenumber!
   set cursorline!
   set cursorcolumn!
 endfunction

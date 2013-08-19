@@ -4,3 +4,6 @@
 * insert-sudo function return to end of line
 * vi mode on command line
 * * set -o vi
+* vim
+* * copy and paste still off on laptop
+* OpenCurrentLineInBrowser() vimscript function

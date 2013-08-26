@@ -8,8 +8,8 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="gnzh"
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/usr/local/opt/coreutils/libexec/gnubin:$MANPATH"
+  PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
 fi
 
 # List directory when changing (github/r00k)
@@ -81,7 +81,8 @@ if [ $TERM="xterm" ]; then
   export TERM=xterm-256color
 fi
 
-# tmuxinator
 export EDITOR='vim'
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
+if [[ "$OSTYPE" == darwin* ]]; then
+  source /opt/boxen/env.sh
+fi

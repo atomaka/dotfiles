@@ -7,9 +7,11 @@ Bundle 'gmarik/vundle'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'bronson/vim-trailing-whitespace'
 Bundle 'godlygeek/tabular'
+Bundle 'itchney/lightline.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rodjek/vim-puppet'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
@@ -53,11 +55,6 @@ set shiftwidth=2
 set expandtab
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
-
-" Other settings
-let g:indent_guides_guide_size=1
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_auto_colors=0
 
 " Filetype stuff
 syntax on
@@ -105,6 +102,25 @@ hi ColorColumn ctermbg=234
 hi IndentGuidesOdd  ctermbg=black
 hi IndentGuidesEven ctermbg=234
 
+" Indentation
+let g:indent_guides_guide_size=1
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_auto_colors=0
+
+" lightline
+ let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component': {
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ }
+      \ }
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files
 function! LargeFileToggle()

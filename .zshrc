@@ -10,6 +10,8 @@ ZSH_THEME="gnzh"
 if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
+else
+  export PATH="$HOME/.rvenv/bin:$PATH"
 fi
 
 # List directory when changing (github/r00k)
@@ -85,4 +87,6 @@ export EDITOR='vim'
 
 if [[ "$OSTYPE" == darwin* ]]; then
   source /opt/boxen/env.sh
+else
+  eval "$(rbenv init -)"
 fi

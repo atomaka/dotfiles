@@ -1,3 +1,7 @@
+" Fix for CSE servers
+scriptencoding utf-8
+set encoding=utf-8
+
 " Plugins
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()

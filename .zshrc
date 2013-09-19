@@ -14,6 +14,10 @@ else
   export PATH="$HOME/.rvenv/bin:$PATH"
 fi
 
+if test -d /soft/linux/pkg/bin ; then
+  export PATH=/soft/linux/pkg/bin:${PATH};
+fi
+
 # List directory when changing (github/r00k)
 chpwd() {
   ls -lvh --color=auto

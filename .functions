@@ -17,5 +17,9 @@ function port-forward {
 }
 
 function map-sshfs {
-  sshfs -o idmap=user -o workaround=rename $USER'@'$1':'$2 $HOME'/Mounts/'$3
+  if [ $# -eq 0 ]; then
+    echo Usage: map-sshfs HOST DIRECTORY MOUNT
+  else
+    sshfs -o idmap=user -o workaround=rename $USER'@'$1':'$2 $HOME'/Mounts/'$3
+  fi
 }

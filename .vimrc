@@ -81,16 +81,20 @@ map <Down> <Nop>
 let mapleader = ","
 
 map <Leader>bi :BundleInstall<cr>
+map <Leader>bu :BundleInstall!<cr>
 map <Leader>c "+
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>i mmgg=G`m<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>p "+p
+map <Leader>pm :set paste!<cr>
 map <Leader>s :e ~/Source/<cr>
 map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>t :Tabularize /
+map <Leader>t> :Tabularize /=><cr>
+map <Leader>te :Tabularize /=<cr>
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style

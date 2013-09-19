@@ -16,6 +16,7 @@ fi
 
 if test -d /soft/linux/pkg/bin ; then
   export PATH=/soft/linux/pkg/bin:${PATH};
+  export PATH=/soft/lus/linux/vim/7.4-$(uname -m)/bin:$PATH;
 fi
 
 # List directory when changing (github/r00k)

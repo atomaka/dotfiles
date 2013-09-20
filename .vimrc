@@ -80,6 +80,9 @@ map <Down> <Nop>
 " Leaders (whatever that means)
 let mapleader = ","
 
+map <Leader>2 :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<cr>
+map <Leader>4 :set tabstop=4 softtabstop=4 shiftwidth=4 expandtab<cr>
+map <Leader>a :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<cr>
 map <Leader>bi :BundleInstall<cr>
 map <Leader>bu :BundleInstall!<cr>
 map <Leader>c "+

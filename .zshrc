@@ -7,6 +7,8 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="gnzh"
 
+PATH="$HOME/bin:$PATH"
+
 if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"

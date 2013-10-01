@@ -77,23 +77,39 @@ map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
 
+" Don't cancel visual mode while indenting
+vnoremap > >gv
+vnoremap < <gv
+
 " Leaders (whatever that means)
 let mapleader = ","
 
+" tab swaps
 map <Leader>2 :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<cr>
 map <Leader>4 :set tabstop=4 softtabstop=4 shiftwidth=4 expandtab<cr>
 map <Leader>a :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<cr>
+
+" buffer movement
+map <Leader>h :wincmd h<cr>
+map <Leader>j :wincmd j<cr>
+map <Leader>k :wincmd k<cr>
+map <Leader>l :wincmd l<cr>
+
+" others
 map <Leader>bi :BundleInstall<cr>
 map <Leader>bu :BundleInstall!<cr>
 map <Leader>c "+
+map <Leader>cs :let @/ = ""<cr>
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>i mmgg=G`m<cr>
 map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>p "+p
 map <Leader>pm :set paste!<cr>
+map <Leader>ra :bufdo e!<cr>
 map <Leader>s :e ~/Source/<cr>
 map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>
+map <Leader>st :call SyntaxToggle()<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>t :Tabularize /
 map <Leader>t> :Tabularize /=><cr>
@@ -102,16 +118,8 @@ map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style
 set t_Co=256
-set guifont=Ubuntu\ Mono\ 10
 colorscheme vividchalk
-
-hi CursorLine cterm=NONE ctermbg=234
-hi CursorColumn cterm=NONE ctermbg=234
-hi StatusLine ctermfg=white ctermbg=236
-hi SignColumn ctermbg=black
-hi ColorColumn ctermbg=234
-hi IndentGuidesOdd  ctermbg=black
-hi IndentGuidesEven ctermbg=234
+" special case colors set at end of file via function
 
 " Indentation
 let g:indent_guides_guide_size=1
@@ -132,12 +140,23 @@ let g:indent_guides_auto_colors=0
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ }
       \ }
+
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files
 function! LargeFileToggle()
   set relativenumber!
   set cursorline!
   set cursorcolumn!
+endfunction
+
+" Toggle syntax highlighting
+function! SyntaxToggle()
+   if exists("g:syntax_on")
+     :syntax off
+   else
+     syntax enable
+   endif
+   call SetColors()
 endfunction
 
 " Rename current file - from github/garybernhardt
@@ -150,3 +169,17 @@ function! RenameFile()
     redraw!
   endif
 endfunction
+
+" Set special case colors
+function! SetColors()
+  hi CursorLine cterm=NONE ctermbg=234
+  hi CursorColumn cterm=NONE ctermbg=234
+  hi StatusLine ctermfg=white ctermbg=236
+  hi SignColumn ctermbg=black
+  hi ColorColumn ctermbg=234
+  hi IndentGuidesOdd  ctermbg=black
+  hi IndentGuidesEven ctermbg=234
+endfunction
+
+" Needs to come after SetColors definition
+call SetColors()

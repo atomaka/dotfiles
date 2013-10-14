@@ -16,10 +16,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rodjek/vim-puppet'
 Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/ruby-matchit'
 
 " Options
 set nocompatible          " Disable vi compatibility
@@ -95,25 +94,34 @@ map <Leader>j :wincmd j<cr>
 map <Leader>k :wincmd k<cr>
 map <Leader>l :wincmd l<cr>
 
-" others
+" auto character alignment
+map <Leader>t :Tabularize /
+map <Leader>t> :Tabularize /=><cr>
+map <Leader>te :Tabularize /=<cr>
+
+" vundle
 map <Leader>bi :BundleInstall<cr>
 map <Leader>bu :BundleInstall!<cr>
+
+" copy and paste - for Linux
 map <Leader>c "+
-map <Leader>cs :let @/ = ""<cr>
-map <Leader>fw :FixWhitespace<cr>
-map <Leader>i mmgg=G`m<cr>
-map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>p "+p
 map <Leader>pm :set paste!<cr>
+
+" others
+" clear search - do not put this comment to the right of ,cs
+map <Leader>cs :let @/ = ""<cr>
+map <Leader>fw :FixWhitespace<cr>
+" indent and return
+map <Leader>i mmgg=G`m<cr>
+map <Leader>lf :call LargeFileToggle()<cr>
+" reload all buffers
 map <Leader>ra :bufdo e!<cr>
 map <Leader>s :e ~/Source/<cr>
 map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>st :call SyntaxToggle()<cr>
 map <Leader>sz :so ~/.vimrc<cr>
-map <Leader>t :Tabularize /
-map <Leader>t> :Tabularize /=><cr>
-map <Leader>te :Tabularize /=<cr>
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style
@@ -127,7 +135,7 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_auto_colors=0
 
 " lightline
- let g:lightline = {
+let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
@@ -147,16 +155,17 @@ function! LargeFileToggle()
   set relativenumber!
   set cursorline!
   set cursorcolumn!
+  call SyntaxToggle()
 endfunction
 
 " Toggle syntax highlighting
 function! SyntaxToggle()
-   if exists("g:syntax_on")
-     :syntax off
-   else
-     syntax enable
-   endif
-   call SetColors()
+  if exists("g:syntax_on")
+    :syntax off
+  else
+    syntax enable
+  endif
+  call SetColors()
 endfunction
 
 " Rename current file - from github/garybernhardt

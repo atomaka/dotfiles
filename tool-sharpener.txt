@@ -1,9 +1,5 @@
-* Auto start tmux
-* * if [[ $STY = '' ]] then mux work; fi
-* * only if not ssh
 * insert-sudo function return to end of line
 * vi mode on command line
 * * set -o vi
 * vim
 * * copy and paste still off on laptop
-* OpenCurrentLineInBrowser() vimscript function

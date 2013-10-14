@@ -51,6 +51,10 @@ set number
 set noswapfile            " Hope for the best
 set virtualedit=all       " Cursor can go anywhere
 set scrolloff=3           " Keep cursor from touching edges
+" Make syntax highlighting faster
+syntax sync minlines=256
+set ttyfast
+set lazyredraw
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2

@@ -13,7 +13,11 @@ insert-sudo() {
 }
 
 function port-forward {
-  ssh $1 -R $2":localhost:"$2 -g
+  if [ $# -lt 2 ]; then
+    echo Usage: port-forward HOST LOCAL_PORT \[REMOTE_PORT\]
+  else
+    ssh $1 -R ${3:-$2}":localhost:"$2 -g
+  fi
 }
 
 function map-sshfs {

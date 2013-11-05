@@ -185,14 +185,17 @@ endfunction
 
 " Set special case colors
 function! SetColors()
-  hi CursorLine cterm=NONE ctermbg=234
-  hi CursorColumn cterm=NONE ctermbg=234
-  hi StatusLine ctermfg=white ctermbg=236
-  hi SignColumn ctermbg=black
-  hi ColorColumn ctermbg=234
-  hi IndentGuidesOdd  ctermbg=black
-  hi IndentGuidesEven ctermbg=234
+  highlight CursorLine cterm=NONE ctermbg=234
+  highlight CursorColumn cterm=NONE ctermbg=234
+  highlight StatusLine ctermfg=white ctermbg=236
+  highlight SignColumn ctermbg=black
+  highlight ColorColumn ctermbg=234
+  highlight IndentGuidesOdd  ctermbg=black
+  highlight IndentGuidesEven ctermbg=234
+  highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
 endfunction
 
 " Needs to come after SetColors definition
 call SetColors()
+
+match OverLength /\%81v.*/

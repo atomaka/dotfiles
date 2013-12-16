@@ -13,7 +13,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
 else
-  export PATH="$HOME/.rvenv/bin:$PATH"
+  if test -d "$HOME/.rbenv/bin" ; then
+    export PATH="$HOME/.rvenv/bin:$PATH"
+  fi
 fi
 
 if test -d /soft/linux/pkg/bin ; then
@@ -95,5 +97,7 @@ export EDITOR='vim'
 if [[ "$OSTYPE" == darwin* ]]; then
   source /opt/boxen/env.sh
 else
-  eval "$(rbenv init -)"
+  if test -d "$HOME/.rbenv/bin" ; then
+    eval "$(rbenv init -)"
+  fi
 fi

@@ -17,6 +17,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rodjek/vim-puppet'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 

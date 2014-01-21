@@ -11,7 +11,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
 else
   if test -d "$HOME/.rbenv/bin" ; then
-    export PATH="$HOME/.rvenv/bin:$PATH"
+    export PATH="$HOME/.rbenv/bin:$PATH"
   fi
 fi
 

@@ -10,12 +10,12 @@ Bundle 'gmarik/vundle'
 
 Bundle 'airblade/vim-gitgutter'
 Bundle 'bronson/vim-trailing-whitespace'
-Bundle 'FredKSchott/CoVim'
 Bundle 'godlygeek/tabular'
 Bundle 'itchyny/lightline.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rodjek/vim-puppet'
+Bundle 'sotte/presenting.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
@@ -109,9 +109,6 @@ map <Leader>te :Tabularize /=<cr>
 map <Leader>bi :BundleInstall<cr>
 map <Leader>bu :BundleInstall!<cr>
 
-" covim
-map <Leader>cvs :CoVim start<cr>
-
 " copy and paste - for Linux
 map <Leader>c "+
 map <Leader>p "+p
@@ -157,10 +154,6 @@ let g:lightline = {
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ }
       \ }
-
-" covim
-let CoVim_default_name = "atomaka"
-let CoVim_default_port = "5120"
 
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files

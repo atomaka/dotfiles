@@ -85,10 +85,14 @@ map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
 
 " Still using arrow keys when in insert mode sometimes
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+map <Left> <NOP>
+map <Right> <NOP>
+map <Up> <NOP>
+map <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
 
 " Don't cancel visual mode while indenting
 vnoremap > >gv

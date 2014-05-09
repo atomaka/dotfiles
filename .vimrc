@@ -199,10 +199,15 @@ function! SetColors()
   highlight CursorLine cterm=NONE ctermbg=234
   highlight CursorColumn cterm=NONE ctermbg=234
   highlight StatusLine ctermfg=white ctermbg=236
-  highlight SignColumn ctermbg=black
   highlight ColorColumn ctermbg=234
   highlight IndentGuidesOdd  ctermbg=black
   highlight IndentGuidesEven ctermbg=234
+  " fix for vimgutter
+  highlight clear SignColumn
+  highlight GitGutterAdd ctermfg=green
+  highlight GitGutterChange ctermfg=yellow
+  highlight GitGutterDelete ctermfg=red
+  highlight GitGutterChangeDelete ctermfg=yellow
 endfunction
 
 " Needs to come after SetColors definition

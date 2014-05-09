@@ -2,9 +2,13 @@
 scriptencoding utf-8
 set encoding=utf-8
 
-" Plugins
+
+" vundle bundle; not for changing
+set nocompatible          " Disable vi compatibility
+filetype off
+
 set runtimepath+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#begin()
 
 Bundle 'gmarik/vundle'
 
@@ -22,8 +26,11 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 
+call vundle#end()
+filetype plugin indent on
+" end vundle
+
 " Options
-set nocompatible          " Disable vi compatibility
 set fileformats=unix,dos  " File format prefer unix endings
 set endofline             " Add newlien at end of file
 set shellslash            " Forward slashes
@@ -53,6 +60,7 @@ set number
 set noswapfile            " Hope for the best
 set virtualedit=all       " Cursor can go anywhere
 set scrolloff=3           " Keep cursor from touching edges
+set timeoutlen=500        " Don't wait too long (ambiguous leaders)
 " Make syntax highlighting faster
 syntax sync minlines=256
 set ttyfast
@@ -62,14 +70,15 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
+set shiftround            " if at odd number spaces, make >> go to next even
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
 
+" Aliases
+command! Q q
+
 " Filetype stuff
 syntax on
-filetype on
-filetype plugin on
-filetype indent on
 
 " Keybinds
 " ctrl+s for save spam
@@ -86,7 +95,7 @@ map <Down> <Nop>
 vnoremap > >gv
 vnoremap < <gv
 
-" Leaders (whatever that means)
+" Leaders (shortcuts)
 let mapleader = ","
 
 " tab swaps
@@ -114,16 +123,17 @@ map <Leader>c "+
 map <Leader>p "+p
 map <Leader>pm :set paste!<cr>
 
-" others
-" clear search - do not put this comment to the right of ,cs
+" clear search
 map <Leader>cs :let @/ = ""<cr>
-map <Leader>fw :FixWhitespace<cr>
 " indent and return
 map <Leader>i mmgg=G`m<cr>
-map <Leader>lf :call LargeFileToggle()<cr>
 " reload all buffers
 map <Leader>ra :bufdo e!<cr>
-map <Leader>s :e ~/Source/<cr>
+" this was better when it was :Sexplore...
+map <Leader>s :Vexplore ~/Source/<cr>
+
+map <Leader>fw :FixWhitespace<cr>
+map <Leader>lf :call LargeFileToggle()<cr>
 map <Leader>sa :call RenameFile()<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>st :call SyntaxToggle()<cr>
@@ -131,7 +141,6 @@ map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
 " Set style
-set t_Co=256
 colorscheme vividchalk
 " special case colors set at end of file via function
 
@@ -194,10 +203,7 @@ function! SetColors()
   highlight ColorColumn ctermbg=234
   highlight IndentGuidesOdd  ctermbg=black
   highlight IndentGuidesEven ctermbg=234
-  highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
 endfunction
 
 " Needs to come after SetColors definition
 call SetColors()
-
-match OverLength /\%81v.*/

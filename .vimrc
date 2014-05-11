@@ -73,9 +73,6 @@ set shiftround            " if at odd number spaces, make >> go to next even
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
 
-" Aliases
-command! Q q
-
 " Filetype stuff
 syntax on
 
@@ -83,6 +80,9 @@ syntax on
 " ctrl+s for save spam
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
+
+" most common typo ever
+command! Q q
 
 " Still using arrow keys when in insert mode sometimes
 map <Left> <NOP>
@@ -101,6 +101,9 @@ vnoremap < <gv
 " Use better search highlighting
 nnoremap <silent> n   n:call HLNext(0.4)<cr>
 nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+" i don't even know what semi-colon does so steal it
+noremap ; :
 
 " Leaders (shortcuts)
 let mapleader = ","

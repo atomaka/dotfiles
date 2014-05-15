@@ -24,6 +24,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-vividchalk'
 
 call vundle#end()
 filetype plugin indent on

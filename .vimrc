@@ -61,6 +61,9 @@ set noswapfile            " Hope for the best
 set virtualedit=all       " Cursor can go anywhere
 set scrolloff=3           " Keep cursor from touching edges
 set timeoutlen=500        " Don't wait too long (ambiguous leaders)
+set showmatch             " Show matching brackets
+set hidden                " Allow unsaved buffers to be hidden
+set wildmenu              " Command line completion
 " Make syntax highlighting faster
 syntax sync minlines=256
 set ttyfast

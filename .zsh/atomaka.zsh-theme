@@ -6,21 +6,16 @@ autoload -U colors zsh/terminfo # Used in the colour alias below
 colors
 setopt prompt_subst
 
-# make some aliases for the colours: (coud use normal escap.seq's too)
+# make some aliases for the colors: (coud use normal escap.seq's too)
 for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE GRAY; do
   eval PR_$color='%{$fg[${(L)color}]%}'
 done
 eval PR_NO_COLOR="%{$terminfo[sgr0]%}"
 eval PR_BOLD="%{$terminfo[bold]%}"
 
-# Check the UID
-if [[ $UID -ge 1000 ]]; then # normal user
-  eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
-  eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
-elif [[ $UID -eq 0 ]]; then # root
-  eval PR_USER='${PR_RED}%n${PR_NO_COLOR}'
-  eval PR_USER_OP='${PR_RED}%#${PR_NO_COLOR}'
-fi
+# Username
+eval PR_USER='${PR_GREEN}%n${PR_NO_COLOR}'
+eval PR_USER_OP='${PR_GREEN}%#${PR_NO_COLOR}'
 
 # Check if we are on SSH or not
 if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then

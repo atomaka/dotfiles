@@ -24,6 +24,7 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-vividchalk'
 
 call vundle#end()
 filetype plugin indent on
@@ -60,6 +61,9 @@ set noswapfile            " Hope for the best
 set virtualedit=all       " Cursor can go anywhere
 set scrolloff=3           " Keep cursor from touching edges
 set timeoutlen=500        " Don't wait too long (ambiguous leaders)
+set showmatch             " Show matching brackets
+set hidden                " Allow unsaved buffers to be hidden
+set wildmenu              " Command line completion
 " Make syntax highlighting faster
 syntax sync minlines=256
 set ttyfast
@@ -73,9 +77,6 @@ set shiftround            " if at odd number spaces, make >> go to next even
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
 
-" Aliases
-command! Q q
-
 " Filetype stuff
 syntax on
 
@@ -84,15 +85,29 @@ syntax on
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
 
+" most common typo ever
+command! Q q
+
 " Still using arrow keys when in insert mode sometimes
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
+map <Left> <NOP>
+map <Right> <NOP>
+map <Up> <NOP>
+map <Down> <NOP>
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
 
 " Don't cancel visual mode while indenting
 vnoremap > >gv
 vnoremap < <gv
+
+" Use better search highlighting
+nnoremap <silent> n   n:call HLNext(0.4)<cr>
+nnoremap <silent> N   N:call HLNext(0.4)<cr>
+
+" i don't even know what semi-colon does so steal it
+noremap ; :
 
 " Leaders (shortcuts)
 let mapleader = ","
@@ -191,6 +206,18 @@ function! RenameFile()
     exec ':silent !rm ' . old_name
     redraw!
   endif
+endfunction
+
+" Blink current search item - from Damian Conway 'More Instantly Better Vim'
+function! HLNext (blinktime)
+  let [bufnum, lnum, col, off] = getpos('.')
+  let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
+  let target_pat = '\c\%#'.@/
+  let ring = matchadd('ErrorMsg', target_pat, 101)
+  redraw
+  exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
+  call matchdelete(ring)
+  redraw
 endfunction
 
 " Set special case colors

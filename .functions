@@ -27,3 +27,7 @@ function map-sshfs {
     sshfs -o idmap=user -o workaround=rename $USER'@'$1':'$2 $HOME'/Mounts/'$3
   fi
 }
+
+function gitignore-io {
+  curl http://www.gitignore.io/api/$@
+}

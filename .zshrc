@@ -9,10 +9,6 @@ PATH="$HOME/bin:$PATH"
 if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
-else
-  if test -d "$HOME/.rbenv/bin" ; then
-    export PATH="$HOME/.rbenv/bin:$PATH"
-  fi
 fi
 
 # add path to newer bins on cse servers (github/rmblair)

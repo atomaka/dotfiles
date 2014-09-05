@@ -7,8 +7,8 @@ ZSH_THEME="atomaka" # gnzh, candy, crunch, geoffgarside, macovsky
 PATH="$HOME/bin:$PATH"
 
 if [[ "$OSTYPE" == darwin* ]]; then
-  PATH="/opt/boxen/homebrew/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/opt/boxen/homebrew/apt/coreutils/libexec/gnubin:$MANPATH"
+  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
 # add path to newer bins on cse servers (github/rmblair)
@@ -58,10 +58,6 @@ fi
 export EDITOR='vim'
 
 # init rbenv
-if [[ "$OSTYPE" == darwin* ]]; then
-  source /opt/boxen/env.sh
-else
-  if test -d "$HOME/.rbenv/bin" ; then
-    eval "$(rbenv init -)"
-  fi
+if test -d "$HOME/.rbenv/bin" ; then
+  eval "$(rbenv init -)"
 fi

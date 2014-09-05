@@ -61,3 +61,6 @@ export EDITOR='vim'
 if test -d "$HOME/.rbenv/bin" ; then
   eval "$(rbenv init -)"
 fi
+
+export NVM_DIR="/Users/atomaka/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

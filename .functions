@@ -29,5 +29,5 @@ function map-sshfs {
 }
 
 function gitignore-io {
-  curl http://www.gitignore.io/api/$@
+  curl https://www.gitignore.io/api/$@
 }

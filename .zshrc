@@ -9,6 +9,9 @@ PATH="$HOME/bin:$PATH"
 if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+  export NVM_DIR="/Users/atomaka/.nvm"
+else
+  export NVM_DIR="/home/atomaka/.nvm"
 fi
 
 # add path to newer bins on cse servers (github/rmblair)
@@ -62,5 +65,4 @@ if test -d "$HOME/.rbenv/bin" ; then
   eval "$(rbenv init -)"
 fi
 
-export NVM_DIR="/Users/atomaka/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

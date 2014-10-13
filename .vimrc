@@ -178,6 +178,9 @@ let g:lightline = {
       \ }
       \ }
 
+" ctrl-p
+let g:ctrlp_custom_ignore = 'node_modules\|build\|\.git\|gradle'
+
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files
 function! LargeFileToggle()

@@ -48,6 +48,10 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.aliases
 source $HOME/.functions
 
+if [[ "$OSTYPE" == darwin* ]]; then
+  source $HOME/.aliases-mac
+fi
+
 # Bind insert_sudo function
 zle -N insert-sudo
 bindkey "^z" insert-sudo

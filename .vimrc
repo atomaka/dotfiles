@@ -76,6 +76,12 @@ set expandtab
 set shiftround            " if at odd number spaces, make >> go to next even
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
+" Ignore stuff
+set wildignore+=*/\.git/*
+" Java
+set wildignore+=*/build/*,*/grade/*
+" Frontend
+set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*
 
 " Filetype stuff
 syntax on
@@ -177,9 +183,6 @@ let g:lightline = {
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ }
       \ }
-
-" ctrl-p
-let g:ctrlp_custom_ignore = 'node_modules\|build\|\.git\|gradle'
 
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files

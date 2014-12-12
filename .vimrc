@@ -79,7 +79,7 @@ set list listchars=tab:\ \ ,trail:·
 " Ignore stuff
 set wildignore+=*/\.git/*
 " Java
-set wildignore+=*/build/*,*/grade/*
+set wildignore+=*/build/*,*/grade/*,*\.class
 " Frontend
 set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*
 

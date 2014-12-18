@@ -64,6 +64,7 @@ set timeoutlen=500        " Don't wait too long (ambiguous leaders)
 set showmatch             " Show matching brackets
 set hidden                " Allow unsaved buffers to be hidden
 set wildmenu              " Command line completion
+set wildignorecase        " Ignore case on commandline
 " Make syntax highlighting faster
 syntax sync minlines=256
 set ttyfast

@@ -31,3 +31,11 @@ function map-sshfs {
 function gitignore-io {
   curl https://www.gitignore.io/api/$@
 }
+
+function git-date-added {
+  if [ $# -eq 0 ]; then
+    echo Usage: git-date-added FILENAME
+  else
+    git log --format=%aD $1 | tail -1
+  fi
+}

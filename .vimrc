@@ -95,6 +95,9 @@ imap <C-s> <esc>:w<CR>
 " most common typo ever
 command! Q q
 
+" consistency is key - Y should act like C, D
+map Y y$
+
 " Still using arrow keys when in insert mode sometimes
 map <Left> <NOP>
 map <Right> <NOP>

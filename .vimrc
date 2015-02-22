@@ -155,6 +155,7 @@ map <Leader>i mmgg=G`m<cr>
 map <Leader>ra :bufdo e!<cr>
 " this was better when it was :Sexplore...
 map <Leader>s :Vexplore ~/Source/<cr>
+map <Leader>d :Vexplore .<cr>
 
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>lf :call LargeFileToggle()<cr>

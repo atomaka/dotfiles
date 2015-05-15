@@ -9,7 +9,7 @@ PATH="$HOME/bin:$PATH"
 if [[ "$OSTYPE" == darwin* ]]; then
   PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
   MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-  NVM_DIR="$(brew --prefix nvm)"
+  NVM_DIR="/usr/local/opt/nvm"
 else
   NVM_DIR="/home/atomaka/.nvm"
 fi
@@ -69,6 +69,5 @@ if test -d "$HOME/.rbenv/bin" ; then
   eval "$(rbenv init -)"
 fi
 
-if test -f "$NVM_DIR/nvm.sh"; then
-  source "$NVM_DIR/nvm.sh"
-fi
+# load nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"

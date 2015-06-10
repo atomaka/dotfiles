@@ -65,9 +65,11 @@ fi
 export EDITOR='vim'
 
 # init rbenv
-if test -d "$HOME/.rbenv/bin" ; then
+if test -d "$HOME/.rbenv/bin"; then
   eval "$(rbenv init -)"
 fi
 
 # load nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if test -d "$NVM_DIR"; then
+  source "$NVM_DIR/nvm.sh"
+fi

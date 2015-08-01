@@ -5,7 +5,6 @@ function g {
     git status
   fi
 }
-compdef g=git
 
 insert-sudo() {
   zle beginning-of-line

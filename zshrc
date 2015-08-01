@@ -1,9 +1,3 @@
-# home bin directory
-ZSH=$HOME/.oh-my-zsh
-# custom directory to load .oh-my-zsh files from
-ZSH_CUSTOM="$HOME/.zsh"
-ZSH_THEME="atomaka" # gnzh, candy, crunch, geoffgarside, macovsky
-
 PATH="$HOME/bin:$PATH"
 
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -36,13 +30,6 @@ SAVEHIST=20000
 # Make sure C-s works in vim
 stty start undef
 stty stop undef
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git rbenv)
-
-source $ZSH/oh-my-zsh.sh
 
 # Aliases/Functions files
 source $HOME/.aliases

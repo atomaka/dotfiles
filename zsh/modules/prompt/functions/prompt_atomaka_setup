@@ -1,0 +1,106 @@
+pmodload 'helper'
+
+function prompt_atomaka_pwd {
+  local pwd="${PWD/#$HOME/~}"
+
+  if [[ "$pwd" == (#m)[/~] ]]; then
+    _prompt_atomaka_pwd="$MATCH"
+    unset MATCH
+  else
+    _prompt_atomaka_pwd="${${${(@j:/:M)${(@s:/:)pwd}##.#?}:h}%/}/${pwd:t}"
+  fi
+}
+
+function prompt_atomaka_userhost {
+  eval PR_USER='%F{green}%n%f'
+  if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
+    eval PR_HOST='%F{yellow}%M%f' #SSH
+  else
+    eval PR_HOST='%F{green}%M%f' # no SSH
+  fi
+
+  _prompt_atomaka_userhost='${PR_USER}%F{cyan}@${PR_HOST}%f'
+}
+
+function prompt_atomaka_ruby {
+  if which rvm-prompt &> /dev/null; then
+    _prompt_atomaka_ruby='[%F{red}$(rvm-prompt i v g s)%f]'
+  else
+    if which rbenv &> /dev/null; then
+      _prompt_atomaka_ruby='[%F{red}$(rbenv version | sed -e "s/ (set.*$//")%f]'
+    fi
+  fi
+}
+
+function prompt_atomaka_vcs {
+  local branch_format="(%F{yellow}%b%f%u%c)"
+  local action_format="(%F{yellow}%a%f)"
+  local unstaged_format="%F{green}*%f"
+  local staged_format="%F{yellow}*%f"
+
+  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
+  zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
+  zstyle ':vcs_info:*:prompt:*' actionformats "${branch_format}${action_format}"
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+  zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
+
+  _prompt_atomaka_vcs="["'${vcs_info_msg_0_}'"]"
+}
+
+function prompt_atomaka_precmd {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+
+  # Format PWD.
+  prompt_atomaka_pwd
+
+  # vcs prompt
+  if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    branch_format="%F{yellow}%b%f%u%c%F{yellow}*%f"
+  else
+    branch_format="%F{yellow}%b%f%u%c"
+  fi
+
+  zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
+
+  vcs_info 'prompt'
+}
+
+function prompt_atomaka_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  # Load required functions.
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  # Add hook for calling git-info before each command.
+  add-zsh-hook precmd prompt_atomaka_precmd
+
+  zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
+  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
+
+  # keep this
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+  # custom stuff
+  prompt_atomaka_ruby
+  prompt_atomaka_userhost
+  prompt_atomaka_vcs
+
+  local current_time="[%B%D{%I:%M:%S}%b]"
+  local current_dir='%B%F{blue}%~%f%b'
+  local return_code="%(?..%?)"
+  local user_host=$_prompt_atomaka_userhost
+  local ruby_info=$_prompt_atomaka_ruby
+  local git_info=$_prompt_atomaka_vcs
+  local PR_PROMPT="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
+
+  PROMPT="${current_time} ${user_host} ${current_dir} ${ruby_info} ${git_info}
+|$PR_PROMPT "
+}
+
+prompt_atomaka_setup "$@"

@@ -8,7 +8,7 @@ all: install
 install: submodules $(symlinks)
 
 submodules:
-	git submodule update --init
+	git submodule update --init --recursive
 
 $(symlinks):
 	test -e `pwd`/$@ \

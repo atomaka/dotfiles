@@ -31,6 +31,11 @@ SAVEHIST=20000
 stty start undef
 stty stop undef
 
+# load zprezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
 # Aliases/Functions files
 source $HOME/.aliases
 source $HOME/.functions

@@ -46,7 +46,7 @@ function prompt_atomaka_vcs {
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  _prompt_atomaka_vcs="["'${vcs_info_msg_0_}'"]"
+  _prompt_atomaka_vcs='${vcs_info_msg_0_}'
 }
 
 function prompt_atomaka_precmd {
@@ -58,9 +58,9 @@ function prompt_atomaka_precmd {
 
   # vcs prompt
   if [[ -n $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    branch_format="%F{yellow}%b%f%u%c%F{yellow}*%f"
+    branch_format="[%F{yellow}%b%f%u%c%F{yellow}*%f]"
   else
-    branch_format="%F{yellow}%b%f%u%c"
+    branch_format="[%F{yellow}%b%f%u%c]"
   fi
 
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
@@ -81,7 +81,6 @@ function prompt_atomaka_setup {
   add-zsh-hook precmd prompt_atomaka_precmd
 
   zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
-  zstyle ':prezto:module:editor:info:keymap:primary:overwrite' format ' %F{red}♺%f'
 
   # keep this
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '

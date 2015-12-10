@@ -10,7 +10,7 @@ function prompt_pwd {
 }
 
 function prompt_userhost {
-  eval PR_USER='%F{green}%n%f'
+  eval PR_USER="%F{green}%n%f"
   if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
     eval PR_HOST='%F{yellow}%M%f' #SSH
   else
@@ -36,7 +36,7 @@ function prompt_vcs {
   local unstaged_format="%F{green}*%f"
   local staged_format="%F{yellow}*%f"
 
-  zstyle ':vcs_info:*' enable bzr git hg svn
+  zstyle ':vcs_info:*' enable git hg svn
   zstyle ':vcs_info:*:prompt:*' check-for-changes true
   zstyle ':vcs_info:*:prompt:*' unstagedstr "${unstaged_format}"
   zstyle ':vcs_info:*:prompt:*' stagedstr "${staged_format}"
@@ -50,7 +50,6 @@ function prompt_vcs {
 function prompt_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
-  setopt prompt_subst
 
   # Format PWD.
   prompt_pwd
@@ -93,12 +92,11 @@ function prompt_setup {
   local user_host=$_prompt_userhost
   local ruby_info=$_prompt_ruby
   local git_info=$_prompt_vcs
+
   local PR_PROMPT="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
 
   PROMPT="${current_time} ${user_host} ${current_dir} ${ruby_info} ${git_info}
 |$PR_PROMPT "
 }
-
-precmd () { vcs_info }
 
 prompt_setup "$@"

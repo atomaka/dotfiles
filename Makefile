@@ -5,7 +5,10 @@ symlinks = $(shell ls $(excludes) `pwd`)
 
 all: install
 
-install: submodules $(symlinks)
+install: repos submodules $(symlinks)
+
+repos:
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
 
 submodules:
 	git submodule update --init --recursive

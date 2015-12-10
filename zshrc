@@ -27,18 +27,18 @@ HISTSIZE=20000
 HISTFILE=~/.zsh_history
 SAVEHIST=20000
 
+# autocorrect
+autoload -U compinit
+compinit
+
 # Make sure C-s works in vim
 stty start undef
 stty stop undef
 
-# load zprezto
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 # Aliases/Functions files
 source $HOME/.aliases
 source $HOME/.functions
+source $HOME/.zsh/prompt
 
 if [[ "$OSTYPE" == darwin* ]]; then
   source $HOME/.aliases-mac

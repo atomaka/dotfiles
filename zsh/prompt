@@ -1,5 +1,3 @@
-pmodload 'helper'
-
 function prompt_atomaka_pwd {
   local pwd="${PWD/#$HOME/~}"
 
@@ -19,15 +17,15 @@ function prompt_atomaka_userhost {
     eval PR_HOST='%F{green}%M%f' # no SSH
   fi
 
-  _prompt_atomaka_userhost='${PR_USER}%F{cyan}@${PR_HOST}%f'
+  _prompt_atomaka_userhost="${PR_USER}%F{cyan}@${PR_HOST}%f"
 }
 
 function prompt_atomaka_ruby {
   if which rvm-prompt &> /dev/null; then
-    _prompt_atomaka_ruby='[%F{red}$(rvm-prompt i v g s)%f]'
+    _prompt_atomaka_ruby="[%F{red}$(rvm-prompt i v g s)%f]"
   else
     if which rbenv &> /dev/null; then
-      _prompt_atomaka_ruby='[%F{red}$(rbenv version | sed -e "s/ (set.*$//")%f]'
+      _prompt_atomaka_ruby="[%F{red}$(rbenv version | sed -e "s/ (set.*$//")%f]"
     fi
   fi
 }
@@ -46,12 +44,13 @@ function prompt_atomaka_vcs {
   zstyle ':vcs_info:*:prompt:*' formats "${branch_format}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  _prompt_atomaka_vcs='${vcs_info_msg_0_}'
+  _prompt_atomaka_vcs="${vcs_info_msg_0_}"
 }
 
 function prompt_atomaka_precmd {
   setopt LOCAL_OPTIONS
   unsetopt XTRACE KSH_ARRAYS
+  setopt prompt_subst
 
   # Format PWD.
   prompt_atomaka_pwd
@@ -79,8 +78,6 @@ function prompt_atomaka_setup {
 
   # Add hook for calling git-info before each command.
   add-zsh-hook precmd prompt_atomaka_precmd
-
-  zstyle ':prezto:module:editor:info:completing' format '%B%F{red}...%f%b'
 
   # keep this
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '

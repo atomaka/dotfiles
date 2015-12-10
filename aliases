@@ -1,3 +1,5 @@
+alias ..="cd .."
+alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias a="ls -l --human-readable --all --color=auto"

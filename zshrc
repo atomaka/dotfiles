@@ -23,7 +23,7 @@ stty stop undef
 # Aliases/Functions files
 source $HOME/.aliases
 source $HOME/.functions
-source $HOME/.zsh/prompt
+source $HOME/.zsh/new-prompt
 
 if [[ "$OSTYPE" == darwin* ]]; then
   source $HOME/.aliases-mac

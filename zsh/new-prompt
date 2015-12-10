@@ -1,0 +1,22 @@
+local current_time="[%B%D{%I:%M:%S}%b]"
+local current_dir='%B%F{blue}%~%f%b'
+
+# user
+local user="%F{green}%n%f"
+
+# host
+local host=""
+if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
+  eval host='%F{yellow}%M%f' #SSH
+else
+  eval host='%F{green}%M%f' # no SSH
+fi
+
+# vcs
+
+# prompt
+local return_code="%(?..%?)"
+local prompt="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
+
+PROMPT="${current_time} ${user}@${host} ${current_dir} on ${vcs}
+|$prompt "

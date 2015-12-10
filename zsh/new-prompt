@@ -1,0 +1,35 @@
+local current_time="[%B%D{%I:%M:%S}%b]"
+local current_dir='%B%F{blue}%~%f%b'
+
+# user
+local user="%F{green}%n%f"
+
+# host
+local host=""
+if [[ -n "$SSH_CLIENT"  ||  -n "$SSH2_CLIENT" ]]; then
+  host='%F{yellow}%M%f' #SSH
+else
+  host='%F{green}%M%f' # no SSH
+fi
+
+# vcs
+precmd() {
+  setopt promptsubst
+  autoload -Uz vcs_info
+
+  zstyle ':vcs_info:*' enable git hg svn
+  zstyle ':vcs_info:*:prompt:*' nvcsformats  ""
+  zstyle ':vcs_info:*:prompt:*' check-for-changes true
+  zstyle ':vcs_info:*:prompt:*' unstagedstr "*"
+  zstyle ':vcs_info:*:prompt:*' stagedstr "*"
+  zstyle ':vcs_info:*:prompt:*' formats "[%F{yellow}%b%f%u%c]"
+  vcs_info 'prompt'
+}
+local vcs='${vcs_info_msg_0_}'
+
+# prompt
+local return_code="%(?..%?)"
+local prompt="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
+
+PROMPT="${current_time} ${user}@${host} ${current_dir} ${vcs}
+|$prompt "

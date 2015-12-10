@@ -1,26 +1,14 @@
-PATH="$HOME/bin:$PATH"
-
 if [[ "$OSTYPE" == darwin* ]]; then
-  PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-  MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
   NVM_DIR="/usr/local/opt/nvm"
 else
   NVM_DIR="/home/atomaka/.nvm"
 fi
 
-# add path to newer bins on cse servers (github/rmblair)
-if test -d /soft/linux/pkg/bin ; then
-  export PATH=/soft/linux/pkg/bin:${PATH};
-  export PATH=/soft/lus/linux/vim/7.4-$(uname -m)/bin:$PATH;
-fi
+[[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
+[[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 
 # clean up duplicate paths
 typeset -U PATH
-
-# List directory when changing (github/r00k)
-chpwd() {
-  ls -lvh --color=auto
-}
 
 # Larger history
 HISTSIZE=20000
@@ -38,7 +26,7 @@ stty stop undef
 # Aliases/Functions files
 source $HOME/.aliases
 source $HOME/.functions
-source $HOME/.zsh/prompt
+source $HOME/.zsh/new-prompt
 
 if [[ "$OSTYPE" == darwin* ]]; then
   source $HOME/.aliases-mac

@@ -10,21 +10,21 @@ filetype off
 set runtimepath+=~/.vim/bundle/vundle/
 call vundle#begin()
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-Bundle 'airblade/vim-gitgutter'
-Bundle 'bronson/vim-trailing-whitespace'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'itchyny/lightline.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'rodjek/vim-puppet'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-markdown'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-vividchalk'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'itchyny/lightline.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'rodjek/vim-puppet'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-vividchalk'
 
 call vundle#end()
 filetype plugin indent on
@@ -139,8 +139,8 @@ map <Leader>t> :Tabularize /=><cr>
 map <Leader>te :Tabularize /=<cr>
 
 " vundle
-map <Leader>bi :BundleInstall<cr>
-map <Leader>bu :BundleInstall!<cr>
+map <Leader>bi :PluginInstall<cr>
+map <Leader>bu :PluginInstall!<cr>
 
 " copy and paste - for Linux
 map <Leader>c "+

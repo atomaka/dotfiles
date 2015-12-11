@@ -24,6 +24,11 @@ precmd() {
 }
 local vcs='${vcs_info_msg_0_}'
 
+# autocorrect
+autoload -U compinit
+compinit
+setopt correct_all
+
 # prompt
 local return_code="%(?..%?)"
 local prompt="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"

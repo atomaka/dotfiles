@@ -15,10 +15,6 @@ HISTSIZE=20000
 HISTFILE=~/.zsh_history
 SAVEHIST=20000
 
-# autocorrect
-autoload -U compinit
-compinit
-
 # Make sure C-s works in vim
 stty start undef
 stty stop undef

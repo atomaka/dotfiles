@@ -19,7 +19,7 @@ precmd() {
 
   zstyle ':vcs_info:*' enable git hg svn
   zstyle ':vcs_info:*:prompt:*' nvcsformats  ""
-  zstyle ':vcs_info:*:prompt:*' formats "[%F{yellow}%b%f%u%c]"
+  zstyle ':vcs_info:*:prompt:*' formats "[%F{cyan}%b%f%u%c]"
   vcs_info 'prompt'
 }
 local vcs='${vcs_info_msg_0_}'

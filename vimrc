@@ -19,12 +19,16 @@ Plugin 'godlygeek/tabular'
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rodjek/vim-puppet'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-endwise'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vividchalk'
+Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()
 filetype plugin indent on
@@ -134,7 +138,6 @@ map <Leader>k :wincmd k<cr>
 map <Leader>l :wincmd l<cr>
 
 " auto character alignment
-map <Leader>t :Tabularize /
 map <Leader>t> :Tabularize /=><cr>
 map <Leader>te :Tabularize /=<cr>
 
@@ -165,9 +168,19 @@ map <Leader>st :call SyntaxToggle()<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
+" rspec
+map <Leader>t :w<cr>:call RunNearestSpec()<cr>
+
 " Set style
 colorscheme vividchalk
 " special case colors set at end of file via function
+
+" dispatch fix for bundle exec rspec always quickfixing
+let g:dispatch_compilers = {
+      \ 'bundle exec': ''}
+
+" rspec
+let g:rspec_command = "Dispatch bundle exec rspec {spec}"
 
 " Indentation
 let g:indent_guides_guide_size=1

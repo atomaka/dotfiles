@@ -19,6 +19,8 @@ Plugin 'godlygeek/tabular'
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rodjek/vim-puppet'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-rails'
@@ -165,9 +167,14 @@ map <Leader>st :call SyntaxToggle()<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>ts :sp ~/tool-sharpener.txt<cr>
 
+map <Leader>y :!rspec --drb %<cr>
+
 " Set style
 colorscheme vividchalk
 " special case colors set at end of file via function
+
+" rspec
+let g:rspec_command = "Dispatch bin/rspec {spec}"
 
 " Indentation
 let g:indent_guides_guide_size=1

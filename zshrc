@@ -41,7 +41,7 @@ fi
 export EDITOR='vim'
 
 # init rbenv
-if test -d "$HOME/.rbenv/bin"; then
+if test -d "$HOME/.rbenv"; then
   eval "$(rbenv init -)"
 fi
 

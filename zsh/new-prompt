@@ -1,3 +1,5 @@
+autoload -Uz vcs_info
+
 local current_time="[%B%D{%I:%M:%S}%b]"
 local current_dir='%B%F{blue}%~%f%b'
 
@@ -13,10 +15,60 @@ else
 fi
 
 # vcs
+setopt promptsubst
+autoload -Uz vcs_info
+autoload -U add-zsh-hook
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' get-revision true
+FORCE_RUN_VCS_INFO=1
+zstyle ':vcs_info:*+pre-get-data:*' hooks pre-get-data
++vi-pre-get-data() {
+    # Only Git and Mercurial support and need caching. Abort if any other
+    # VCS is used.
+    [[ "$vcs" != git && "$vcs" != hg ]] && return
+
+    # If the shell just started up or we changed directories (or for other
+    # custom reasons) we must run vcs_info.
+    if [[ -n $FORCE_RUN_VCS_INFO ]]; then
+        FORCE_RUN_VCS_INFO=
+        return
+    fi
+
+    # If we got to this point, running vcs_info was not forced, so now we
+    # default to not running it and selectively choose when we want to run
+    # it (ret=0 means run it, ret=1 means don't).
+    ret=1
+    # If a git/hg command was run then run vcs_info as the status might
+    # need to be updated.
+    case "$(fc -ln $(($HISTCMD-1)))" in
+        git*)
+            ret=0
+            ;;
+        hg*)
+            ret=0
+            ;;
+    esac
+}
+# Call vcs_info as precmd before every prompt.
+prompt_precmd() {
+    vcs_info
+}
+add-zsh-hook precmd prompt_precmd
+
+# Must run vcs_info when changing directories.
+prompt_chpwd() {
+    FORCE_RUN_VCS_INFO=1
+}
+add-zsh-hook chpwd prompt_chpwd
+
+# Display the VCS information in the right prompt. The {..:- } is a
+# workaround for Zsh below 4.3.9.
+RPROMPT='${vcs_info_msg_0_:- }'
+
 
 # prompt
 local return_code="%(?..%?)"
 local prompt="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
 
-PROMPT="${current_time} ${user}@${host} ${current_dir} on ${vcs}
+PROMPT="${current_time} ${user}@${host} ${current_dir} on ${vcs_info_msg_0_}
 |$prompt "

@@ -4,6 +4,9 @@ else
   NVM_DIR="/home/atomaka/.nvm"
 fi
 
+[[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
+[[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
+
 # clean up duplicate paths
 typeset -U PATH
 

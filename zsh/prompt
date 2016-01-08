@@ -28,6 +28,7 @@ local vcs='${vcs_info_msg_0_}'
 autoload -U compinit
 compinit
 setopt correct_all
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # prompt
 local return_code="%(?..%?)"

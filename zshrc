@@ -49,3 +49,8 @@ fi
 if test -d "$NVM_DIR"; then
   source "$NVM_DIR/nvm.sh"
 fi
+
+# load docker-machine
+if hash docker-machine 2>/dev/null; then
+  eval "$(docker-machine env default)"
+fi

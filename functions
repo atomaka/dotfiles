@@ -38,3 +38,15 @@ function git-date-added {
     git log --format=%aD $1 | tail -1
   fi
 }
+
+function run {
+  if [ $# -lt 2 ]; then
+    echo Usage: run NUMBER COMMAND
+  else
+    number=$1; shift
+
+    for i in `seq $number`; do
+      $@
+    done
+  fi
+}

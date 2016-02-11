@@ -32,6 +32,8 @@
     autocrlf = input
     editor = vim
     filemode = false
+[init]
+  templatedir = ~/.git_template
 [merge]
     tool = vimdiff
 [push]

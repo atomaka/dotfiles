@@ -18,6 +18,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'itchyny/lightline.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'rbgrouleff/bclose.vim'
 Plugin 'rodjek/vim-puppet'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-dispatch'
@@ -159,6 +160,11 @@ map <Leader>ra :bufdo e!<cr>
 " this was better when it was :Sexplore...
 map <Leader>s :Vexplore ~/Source/<cr>
 map <Leader>d :Vexplore .<cr>
+
+" bclose
+nnoremap <silent> <Leader>bd :Bclose<CR>
+nnoremap <silent> <Leader>bD :Bclose!<CR>
+nnoremap <silent> <Leader>BD :Bclose!<CR>
 
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>lf :call LargeFileToggle()<cr>

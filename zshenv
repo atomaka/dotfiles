@@ -22,4 +22,4 @@ APACHE_MAVEN_PATH="$HOME/bin/apache-maven-3.3.9/bin"
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 
 export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
-export GOPATH="$HOME/.go/"
+export GOPATH="$HOME/go-workspace/"

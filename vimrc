@@ -1,7 +1,5 @@
-" Fix for CSE servers
 scriptencoding utf-8
 set encoding=utf-8
-
 
 " vundle bundle; not for changing
 set nocompatible          " Disable vi compatibility
@@ -14,6 +12,7 @@ Plugin 'gmarik/vundle'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'chip/vim-fat-finger'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'itchyny/lightline.vim'
@@ -36,40 +35,45 @@ filetype plugin indent on
 " end vundle
 
 " Options
-set fileformats=unix,dos  " File format prefer unix endings
-set endofline             " Add newlien at end of file
-set shellslash            " Forward slashes
-set nobackup              " No backup files
+set fileformats=unix,mac,dos      " File format prefer unix endings
+set endofline                     " Add newlien at end of file
+set shellslash                    " Forward slashes
+set nobackup                      " No backup files
 set formatoptions=crq
 set textwidth=80
-set cpoptions+=$          " delimit end of change text
-set laststatus=2          " Always show status line
-set showmode              " Show current mode
-set history=100           " History length
-set cursorline            " Highlight current line
-set cursorcolumn          " Highlight current column
-set nowrap                " Disable wrapping by default
-set backspace=2           " Backspace over indent, eol, start of insert
-set hlsearch              " Search highlights
-set wrapscan              " Wraped search
-set incsearch             " Search as yuo type
-set ignorecase            " Ignore case with search
-set smartcase             " Search will not ignore uppercase
-set showcmd               " Show command as you type
-set ruler                 " Show cursor position
-set autoindent
-set colorcolumn=80        " Ruler at line 80
+set cpoptions+=$                  " delimit end of change text
+set laststatus=2                  " Always show status line
+set showmode                      " Show current mode
+set history=100                   " History length
+set cursorline                    " Highlight current line
+set cursorcolumn                  " Highlight current column
+set nowrap                        " Disable wrapping by default
+set backspace=2                   " Backspace over indent, eol, start of insert
+set hlsearch                      " Search highlights
+set wrapscan                      " Wraped search
+set incsearch                     " Search as yuo type
+set ignorecase                    " Ignore case with search
+set smartcase                     " Search will not ignore uppercase
+set showcmd                       " Show command as you type
+set ruler                         " Show cursor position
+set autoindent                    " autoindent AND be smart about it
+set smartindent
+set colorcolumn=80                " Ruler at line 80
 set nomodeline
-set relativenumber        " Relative line numbers
+set relativenumber                " Relative line numbers
 set number
-set noswapfile            " Hope for the best
-set virtualedit=all       " Cursor can go anywhere
-set scrolloff=3           " Keep cursor from touching edges
-set timeoutlen=500        " Don't wait too long (ambiguous leaders)
-set showmatch             " Show matching brackets
-set hidden                " Allow unsaved buffers to be hidden
-set wildmenu              " Command line completion
-set wildignorecase        " Ignore case on commandline
+set noswapfile                    " Hope for the best
+set virtualedit=all               " Cursor can go anywhere
+set scrolloff=3                   " Keep cursor from touching edges
+set timeoutlen=500                " Don't wait too long (ambiguous leaders)
+set showmatch                     " Show matching brackets
+set hidden                        " Allow unsaved buffers to be hidden
+set wildmenu                      " Command line completion
+set wildmode=list:longest,full    " Better file completion
+set infercase                     " Adjust completions to match case
+set noshowmode                    " Already tracking mode with plugin
+set wildignorecase                " Ignore case on commandline
+set autowrite                     " Save file when focus is lost
 " Make syntax highlighting faster
 syntax sync minlines=256
 set ttyfast
@@ -79,7 +83,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set shiftround            " if at odd number spaces, make >> go to next even
+set shiftround                " if at odd number spaces, make >> go to next even
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
 " Ignore stuff
@@ -88,6 +92,12 @@ set wildignore+=*/\.git/*
 set wildignore+=*/build/*,*/grade/*,*\.class
 " Frontend
 set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*
+" Persistent undo stuff
+if has('persistent_undo')
+  set undolevels=5000
+  set undodir=$HOME/.vim/undo
+  set undofile
+endif
 
 " Filetype stuff
 syntax on
@@ -97,8 +107,8 @@ syntax on
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
 
-" most common typo ever
-command! Q q
+" quick replaceement
+nmap S :%s//g<LEFT><LEFT>
 
 " consistency is key - Y should act like C, D
 map Y y$

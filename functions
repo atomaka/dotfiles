@@ -6,7 +6,7 @@ function g {
   fi
 }
 
-insert-sudo() {
+function insert-sudo {
   zle beginning-of-line
   zle -U "sudo "
 }

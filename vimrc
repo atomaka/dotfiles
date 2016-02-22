@@ -12,7 +12,6 @@ Plugin 'gmarik/vundle'
 
 Plugin 'airblade/vim-gitgutter'
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'chip/vim-fat-finger'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'fatih/vim-go'
 Plugin 'godlygeek/tabular'

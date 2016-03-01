@@ -1,6 +1,9 @@
 scriptencoding utf-8
 set encoding=utf-8
 
+" fix colors in some ubuntu terminals
+set background=dark
+
 " vundle bundle; not for changing
 set nocompatible          " Disable vi compatibility
 filetype off

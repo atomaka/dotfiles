@@ -26,5 +26,5 @@ fi
 # MAN
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 
-export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export GOPATH="$HOME/go-workspace/"

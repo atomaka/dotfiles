@@ -31,6 +31,7 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-vividchalk'
+Plugin 'posva/vim-vue'
 Plugin 'vim-ruby/vim-ruby'
 
 call vundle#end()

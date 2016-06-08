@@ -226,6 +226,9 @@ let g:lightline = {
 " go
 let g:go_fmt_command = "goimports"
 
+" editorconfig with fugitive
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
 " Functions
 " Toggle relative line numbers and cursorline; useful for long line files
 function! LargeFileToggle()

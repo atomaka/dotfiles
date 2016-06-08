@@ -1,3 +1,11 @@
+function aws-profile {
+  if [ $# -eq 0 ]; then
+    echo Current AWS Profile: $AWS_DEFAULT_PROFILE
+  else
+    export AWS_DEFAULT_PROFILE=$1
+  fi
+}
+
 function g {
   if [[ $# > 0 ]]; then
     git $@

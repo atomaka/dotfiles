@@ -3,3 +3,4 @@
 *.exe
 *.stackdump
 *.out
+*.DS_Store

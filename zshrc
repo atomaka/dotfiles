@@ -18,7 +18,6 @@ source $HOME/.aliases
 source $HOME/.functions
 
 source $HOME/.zsh/prompt
-source $HOME/.zsh/completion
 
 if [[ "$OSTYPE" == darwin* ]]; then
   source $HOME/.aliases-mac
@@ -27,11 +26,6 @@ fi
 # Bind insert_sudo function
 zle -N insert-sudo
 bindkey "^z" insert-sudo
-
-# make 256colors work maybe
-if [ $TERM="xterm" ]; then
-  export TERM=xterm-256color
-fi
 
 # default editor is vim
 export EDITOR='vim'
@@ -45,3 +39,15 @@ fi
 if test -d "$NVM_DIR"; then
   source "$NVM_DIR/nvm.sh"
 fi
+
+# temporary fix for tmux
+bindkey "^a" beginning-of-line
+bindkey "^e" end-of-line
+
+# completion
+autoload -U compinit
+compinit
+setopt completeinword
+
+# directory
+setopt auto_cd

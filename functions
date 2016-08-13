@@ -27,14 +27,6 @@ function port-forward {
   fi
 }
 
-function map-sshfs {
-  if [ $# -eq 0 ]; then
-    echo Usage: map-sshfs HOST DIRECTORY MOUNT
-  else
-    sshfs -o idmap=user -o workaround=rename $USER'@'$1':'$2 $HOME'/Mounts/'$3
-  fi
-}
-
 function gitignore-io {
   curl https://www.gitignore.io/api/$@
 }

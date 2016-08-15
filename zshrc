@@ -27,9 +27,6 @@ fi
 zle -N insert-sudo
 bindkey "^z" insert-sudo
 
-# default editor is vim
-export EDITOR='vim'
-
 # init rbenv
 if test -d "$HOME/.rbenv"; then
   eval "$(rbenv init -)"
@@ -39,10 +36,6 @@ fi
 if test -d "$NVM_DIR"; then
   source "$NVM_DIR/nvm.sh"
 fi
-
-# temporary fix for tmux
-bindkey "^a" beginning-of-line
-bindkey "^e" end-of-line
 
 # completion
 autoload -U compinit

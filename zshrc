@@ -41,6 +41,11 @@ fi
 autoload -U compinit
 compinit
 setopt completeinword
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # directory
 setopt auto_cd
+
+# better word definition
+autoload -U select-word-style
+select-word-style bash

@@ -8,11 +8,11 @@ Plug 'nanotech/jellybeans.vim'
 " keepers
 Plug 'airblade/vim-gitgutter'
 Plug 'atomaka/renamefile.vim'
+Plug 'atomaka/ZoomWin'            " vim-scripts not up to date
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/ZoomWin'
 
 " languages
 Plug 'fatih/vim-go'
@@ -30,7 +30,7 @@ call plug#end()
 filetype plugin indent on
 
 " STATUS LINE
-set statusline=%<\ %f\ %m%r%y%w%=%l\/%-6L\ %3c\ 
+set statusline=%<\ %{GitState()}%f%{ZoomState()}\ %m%r%y%w%=%l\/%-6L\ %3c\ 
 
 " OPTIONS
 set fileformats=unix,mac,dos      " File format prefer unix endings
@@ -71,6 +71,7 @@ set wildmode=list:longest,full    " Better file completion
 set infercase                     " Adjust completions to match case
 set wildignorecase                " Ignore case on commandline
 set autowrite                     " Save file when focus is lost
+set updatetime=250                " Make gitgutter autoupdate
 " Tabs are 2 spaces
 set tabstop=2
 set softtabstop=2
@@ -132,6 +133,7 @@ map <Leader>fw :FixWhitespace<cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :RenameFile<cr>
 map <Leader>se :e ~/.vimrc<cr>
+map <Leader>sc :pclose<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 
 " PLUGIN CONFIGURATION
@@ -139,5 +141,30 @@ map <Leader>sz :so ~/.vimrc<cr>
 colorscheme jellybeans
 syntax enable
 
+" fugitive
+function! GitState()
+  return system("[[ -n \"$(git status --porcelain " . shellescape(expand("%")) . ")\" ]] && echo -n +")
+endfunction
+
 " go
 let g:go_fmt_command = "goimports"
+
+" ZoomWin
+function! ZWStatline(state)
+  if a:state
+    let t:zoomed = 1
+  else
+    let t:zoomed = 0
+  endif
+endfunction
+if !exists("g:ZoomWin_funcref")
+ let g:ZoomWin_funcref= function("ZWStatline")
+endif
+
+function! ZoomState()
+  if exists('t:zoomed') && t:zoomed
+    return 'Z'
+  else
+    return ''
+  endif
+endfunction

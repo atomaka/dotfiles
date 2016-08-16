@@ -7,6 +7,7 @@ Plug 'nanotech/jellybeans.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
+Plug 'atomaka/renamefile.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rbgrouleff/bclose.vim'
@@ -114,8 +115,9 @@ map <Leader>4 :set tabstop=4 softtabstop=4 shiftwidth=4 expandtab<cr>
 map <Leader>a :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<cr>
 
 " plugin
-map <Leader>bi :PlugInstall<cr>
-map <Leader>bu :PlugUpdate<cr>
+map <Leader>pc :PlugClean<cr>
+map <Leader>pi :PlugInstall<cr>
+map <Leader>pu :PlugUpdate<cr>
 
 " clear search
 map <Leader>cs :let @/ = ""<cr>
@@ -128,7 +130,7 @@ nnoremap <silent> <Leader>BD :Bclose!<CR>
 " other
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>pm :set paste!<cr>
-map <Leader>sa :call RenameFile()<cr>
+map <Leader>sa :RenameFile<cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 
@@ -139,15 +141,3 @@ syntax enable
 
 " go
 let g:go_fmt_command = "goimports"
-
-" FUNCTIONS
-" Rename current file - from github/garybernhardt
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
-endfunction

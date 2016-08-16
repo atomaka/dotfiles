@@ -26,6 +26,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 
 call plug#end()
+filetype plugin indent on
 
 " STATUS LINE
 set statusline=%<\ %f\ %m%r%y%w%=%l\/%-6L\ %3c\ 

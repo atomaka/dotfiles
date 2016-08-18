@@ -7,11 +7,12 @@ Plug 'nanotech/jellybeans.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
-Plug 'atomaka/renamefile.vim'
 Plug 'atomaka/ZoomWin'            " vim-scripts not up to date
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-surround'
 
 " languages
@@ -30,11 +31,11 @@ call plug#end()
 filetype plugin indent on
 
 " STATUS LINE
-set statusline=%<\ %{GitState()}%f%{ZoomState()}\ %m%r%y%w%=%l\/%-6L\ %3c\ 
+set statusline=%<\ %f%{ZoomState()}\ %m%r%y%w%=\ Line:\ %l\/%L\ [%p%%]\ Col:\ %c\ Buf:\ #%n\ 
 
 " OPTIONS
 set fileformats=unix,mac,dos      " File format prefer unix endings
-set endofline                     " Add newlien at end of file
+set endofline                     " Add newline at end of file
 set shellslash                    " Forward slashes
 set nobackup                      " No backup files
 set noswapfile                    " Hope for the best
@@ -66,6 +67,7 @@ set scrolloff=3                   " Keep cursor from touching edges
 set timeoutlen=500                " Don't wait too long (ambiguous leaders)
 set showmatch                     " Show matching brackets
 set hidden                        " Allow unsaved buffers to be hidden
+set wildcharm=<tab>               " Allow use of tab in macros
 set wildmenu                      " Command line completion
 set wildmode=list:longest,full    " Better file completion
 set infercase                     " Adjust completions to match case
@@ -78,6 +80,10 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set shiftround                    " make >> go to next tab
+" some performance stuff
+set lazyredraw
+set ttyfast
+set synmaxcol=256
 " Show whitespace markers before cursor in insert mode
 set list listchars=tab:\ \ ,trail:·
 " Ignore stuff
@@ -131,20 +137,16 @@ nnoremap <silent> <Leader>BD :Bclose!<CR>
 " other
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>pm :set paste!<cr>
-map <Leader>sa :RenameFile<cr>
+map <Leader>sa :Move %<tab>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sc :pclose<cr>
+map <Leader>sw :SudoWrite<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 
 " PLUGIN CONFIGURATION
 " style
 colorscheme jellybeans
 syntax enable
-
-" fugitive
-function! GitState()
-  return system("[[ -n \"$(git status --porcelain " . shellescape(expand("%")) . ")\" ]] && echo -n +")
-endfunction
 
 " go
 let g:go_fmt_command = "goimports"

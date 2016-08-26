@@ -135,6 +135,7 @@ nnoremap <silent> <Leader>bD :Bclose!<CR>
 nnoremap <silent> <Leader>BD :Bclose!<CR>
 
 " other
+map <Leader>fj :%!python -m json.tool<cr>
 map <Leader>fw :FixWhitespace<cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :Move %<tab>

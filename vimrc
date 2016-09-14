@@ -13,6 +13,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 
 " languages
@@ -39,7 +40,7 @@ set endofline                     " Add newline at end of file
 set shellslash                    " Forward slashes
 set nobackup                      " No backup files
 set noswapfile                    " Hope for the best
-set formatoptions=crqt
+set formatoptions=crq
 set textwidth=80
 set cpoptions+=$                  " delimit end of change text
 set laststatus=2                  " Always show status line

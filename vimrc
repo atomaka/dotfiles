@@ -145,6 +145,9 @@ map <Leader>sw :SudoWrite<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 
 " PLUGIN CONFIGURATION
+" vim-fugitive should do this, but it isn't working
+au FileType gitcommit set tw=72
+
 " style
 colorscheme jellybeans
 syntax enable

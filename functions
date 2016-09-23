@@ -50,3 +50,7 @@ function run {
     done
   fi
 }
+
+function npm-exec {
+  (PATH=$(npm bin):$PATH; eval $@;)
+}

@@ -3,6 +3,7 @@ function aws-profile {
     echo Current AWS Profile: $AWS_DEFAULT_PROFILE
   else
     export AWS_DEFAULT_PROFILE=$1
+    export AWS_PROFILE=$1
   fi
 }
 

@@ -1,3 +1,4 @@
+LOCAL_SBIN_PATH="/usr/local/sbin"
 PERSONAL_BIN_PATH="$HOME/bin"
 RBENV_PATH="$HOME/.rbenv/bin"
 GNU_TOOLS_PATH="/usr/local/opt/coreutils/libexec/gnubin"
@@ -22,6 +23,7 @@ fi
 [[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
 [[ -d "$APACHE_MAVEN_PATH" ]] && PATH="$APACHE_MAVEN_PATH:$PATH"
 [[ -d "$GO_DIR" ]] && PATH="$GO_DIR:$PATH"
+[[ -d "$LOCAL_SBIN_PATH" ]] && PATH="$LOCAL_SBIN_PATH:$PATH"
 
 # MAN
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"

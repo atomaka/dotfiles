@@ -150,6 +150,10 @@ map <Leader>sz :so ~/.vimrc<cr>
 colorscheme jellybeans
 syntax enable
 
+highlight ColorColumn ctermbg=236
+highlight CursorColumn ctermbg=236
+highlight CursorLine ctermbg=236
+
 " go
 let g:go_fmt_command = "goimports"
 

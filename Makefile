@@ -1,5 +1,5 @@
 excludes = -I Makefile -I README.md
-symlinks = $(shell ls $(excludes) `pwd`)
+symlinks = $(shell find . \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -path "./.git/*" ! -path "./zsh/*"  \) | sed 's|./||')
 
 .PHONY: $(symlinks)
 

@@ -32,9 +32,9 @@ if test -d "$HOME/.rbenv"; then
   eval "$(rbenv init -)"
 fi
 
-# load nvm
-if test -d "$NVM_DIR"; then
-  source "$NVM_DIR/nvm.sh"
+# init nodenv
+if which nodenv > /dev/null; then
+  eval "$(nodenv init -)";
 fi
 
 # completion

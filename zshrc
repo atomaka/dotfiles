@@ -27,6 +27,16 @@ fi
 zle -N insert-sudo
 bindkey "^z" insert-sudo
 
+# init rbenv
+if test -d "$HOME/.rbenv"; then
+  eval "$(rbenv init -)"
+fi
+
+# init nodenv
+if which nodenv > /dev/null; then
+  eval "$(nodenv init -)";
+fi
+
 # completion
 autoload -U compinit
 compinit

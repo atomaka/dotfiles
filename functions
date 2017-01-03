@@ -55,3 +55,20 @@ function run {
 function npm-exec {
   (PATH=$(npm bin):$PATH; eval $@;)
 }
+
+# lazy loading
+function rbenv {
+  eval "$(command rbenv init -)"
+  rbenv "$@"
+}
+
+function nodeenv {
+  eval "$(command nodenv init -)"
+  nodenv "$@"
+}
+
+function pyenv {
+  eval "$(command pyenv init -)"
+  eval "$(command pyenv virtualenv-init -)"
+  pyenv "$@"
+}

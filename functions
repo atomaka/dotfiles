@@ -55,3 +55,15 @@ function run {
 function npm-exec {
   (PATH=$(npm bin):$PATH; eval $@;)
 }
+
+function yarn-exec {
+  (PATH=$(yarn bin):$PATH; eval $@;)
+}
+
+function yarn-install-like-bundle {
+  if [ -f yarn.lock ]; then
+    yarn install --pure-lockfile
+  else
+    yarn install
+  fi
+}

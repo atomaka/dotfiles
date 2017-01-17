@@ -28,13 +28,15 @@ zle -N insert-sudo
 bindkey "^z" insert-sudo
 
 # init rbenv
-if test -d "$HOME/.rbenv"; then
-  eval "$(rbenv init -)"
+if which rbenv > /dev/null; then
+  eval "$(rbenv init --no-rehash -)"
+  (rbenv rehash &) 2> /dev/null
 fi
 
 # init nodenv
 if which nodenv > /dev/null; then
-  eval "$(nodenv init -)";
+  eval "$(nodenv init --no-rehash -)"
+  (nodenv rehash &) 2> /dev/null
 fi
 
 # completion

@@ -12,6 +12,7 @@ alias bet="bundle exec rspec"
 alias betd="bundle exec rspec --format documentation"
 alias c="clear"
 alias dc="docker-compose"
+alias dft="docker run --rm --privileged alpine hwclock -s"
 alias g="g" # overwrite g alias in git plugin so function will work
 alias ga="git add"
 alias gaa="git add --all"

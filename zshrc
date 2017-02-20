@@ -1,6 +1,9 @@
 [[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 
+GPG_TTY=$(tty)
+export GPG_TTY
+
 # clean up duplicate paths
 typeset -U PATH
 

@@ -1,7 +1,7 @@
 [user]
   name = Andrew Tomaka
   email = atomaka@gmail.com
-	signingkey = 582BAC86
+  signingkey = 582BAC86
 [github]
   user = atomaka
 
@@ -37,3 +37,5 @@
   tool = vimdiff
 [push]
   default = upstream
+[commit]
+  gpgsign = true

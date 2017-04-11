@@ -1,1 +1,2 @@
 alias google-chrome="open -a Google\ Chrome"
+alias fixbar="killall ControlStrip"

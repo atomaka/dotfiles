@@ -36,6 +36,8 @@
   editor = vim
   excludesfile = ~/.gitignore_global
   filemode = false
+[gpg]
+	program = gpg2
 [merge]
   tool = vimdiff
 [push]

@@ -1,2 +1,3 @@
 alias google-chrome="open -a Google\ Chrome"
 alias fixbar="killall ControlStrip"
+alias subl="reattach-to-user-namespace subl"

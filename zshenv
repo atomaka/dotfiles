@@ -28,4 +28,12 @@ fi
 # MAN
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 
+# EDITOR
+if [[ -x "$(command -v nvim)" ]]; then
+  export {EDITOR,GIT_EDITOR}=nvim
+else
+  export {EDITOR,GIT_EDITOR}=vim
+fi
+
+
 export GOPATH="$HOME/go-workspace/"

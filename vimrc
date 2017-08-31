@@ -2,8 +2,8 @@
 call plug#begin('~/.vim/plugged')
 
 " colors
-Plug 'alessandroyorba/alduin'
 Plug 'nanotech/jellybeans.vim'
+Plug 'joshdick/onedark.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
@@ -46,8 +46,6 @@ set cpoptions+=$                  " delimit end of change text
 set laststatus=2                  " Always show status line
 set showmode                      " Show current mode
 set history=100                   " History length
-set cursorline                    " Highlight current line
-set cursorcolumn                  " Highlight current column
 set nowrap                        " Disable wrapping by default
 set backspace=2                   " Backspace over indent, eol, start of insert
 set hlsearch                      " Search highlights
@@ -147,12 +145,17 @@ map <Leader>sz :so ~/.vimrc<cr>
 
 " PLUGIN CONFIGURATION
 " style
-colorscheme jellybeans
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
+if has('nvim')
+  set termguicolors
+  set cursorline                    " Highlight current line
+  set cursorcolumn                  " Highlight current column
+  colorscheme onedark
+else
+  colorscheme jellybeans
+endif
 syntax enable
-
-highlight ColorColumn ctermbg=236
-highlight CursorColumn ctermbg=236
-highlight CursorLine ctermbg=236
 
 " go
 let g:go_fmt_command = "goimports"

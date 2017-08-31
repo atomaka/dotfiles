@@ -33,7 +33,6 @@
   gpgsign = true
 [core]
   autocrlf = input
-  editor = vim
   excludesfile = ~/.gitignore_global
   filemode = false
 [gpg]

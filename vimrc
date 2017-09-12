@@ -8,31 +8,26 @@ Plug 'joshdick/onedark.vim'
 " keepers
 Plug 'airblade/vim-gitgutter'
 Plug 'atomaka/ZoomWin'            " vim-scripts not up to date
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-eunuch'           " move files
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 
 " languages
-Plug 'fatih/vim-go'
 Plug 'posva/vim-vue'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
-" maybe
-Plug 'tommcdo/vim-lion'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
-
 call plug#end()
 filetype plugin indent on
 
 " STATUS LINE
-set statusline=%<\ %f%{ZoomState()}\ %m%r%y%w%=\ Line:\ %l\/%L\ [%p%%]\ Col:\ %c\ Buf:\ #%n\ 
+set statusline=%<\ %f%{ZoomState()}\ %m%r%y%w%=\ Line:\ %l\/%L\ [%p%%]\ Col:\ %c\ Buf:\ #%n\
 
 " OPTIONS
 set fileformats=unix,mac,dos      " File format prefer unix endings
@@ -135,7 +130,7 @@ nnoremap <silent> <Leader>BD :Bclose!<CR>
 
 " other
 map <Leader>fj :%!python -m json.tool<cr>
-map <Leader>fw :FixWhitespace<cr>
+map <Leader>fw :StripWhitespace<cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :Move %<tab>
 map <Leader>se :e ~/.vimrc<cr>
@@ -157,8 +152,7 @@ else
 endif
 syntax enable
 
-" go
-let g:go_fmt_command = "goimports"
+highlight ExtraWhitespace ctermbg=196
 
 " ZoomWin
 function! ZWStatline(state)

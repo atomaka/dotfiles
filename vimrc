@@ -28,7 +28,13 @@ call plug#end()
 filetype plugin indent on
 
 " STATUS LINE
-set statusline=%<\ %f%{ZoomState()}\ %m%r%y%w%=\ Line:\ %l\/%L\ [%p%%]\ Col:\ %c\ Buf:\ #%n\
+set statusline=
+set statusline+=%<\ %f%{ZoomState()}
+set statusline+=\ %m%r%y%w%=            " what am i doing here
+set statusline+=\ Line:\ %l\/%L\ [%p%%]
+set statusline+=\ Col:\ %c
+set statusline+=\ Buf:\ #%n
+set statusline+=\                       " trailing space is with purpose
 
 " OPTIONS
 set fileformats=unix,mac,dos      " File format prefer unix endings

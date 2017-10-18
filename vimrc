@@ -7,7 +7,6 @@ Plug 'joshdick/onedark.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
-Plug 'atomaka/ZoomWin'            " vim-scripts not up to date
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
@@ -17,6 +16,7 @@ Plug 'tpope/vim-eunuch'           " move files
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
+Plug 'troydm/zoomwintab.vim'
 
 " languages
 Plug 'posva/vim-vue'
@@ -109,7 +109,8 @@ vnoremap < <gv
 nnoremap <C-p> :Files<CR>
 
 " ZoomWin
-nmap <c-w>z <Plug>ZoomWin
+nnoremap <C-w>z :ZoomWinTabToggle<CR>
+nnoremap <C-w><C-z> :ZoomWinTabToggle<CR>
 
 " LEADERS
 let mapleader = ","
@@ -159,19 +160,8 @@ syntax enable
 highlight ExtraWhitespace ctermbg=196
 
 " ZoomWin
-function! ZWStatline(state)
-  if a:state
-    let t:zoomed = 1
-  else
-    let t:zoomed = 0
-  endif
-endfunction
-if !exists("g:ZoomWin_funcref")
- let g:ZoomWin_funcref= function("ZWStatline")
-endif
-
 function! ZoomState()
-  if exists('t:zoomed') && t:zoomed
+  if exists('t:zoomwintab')
     return 'Z'
   else
     return ''

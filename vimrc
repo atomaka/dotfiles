@@ -8,7 +8,8 @@ Plug 'joshdick/onedark.vim'
 " keepers
 Plug 'airblade/vim-gitgutter'
 Plug 'atomaka/ZoomWin'            " vim-scripts not up to date
-Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbgrouleff/bclose.vim'
 Plug 'tpope/vim-endwise'
@@ -103,6 +104,9 @@ map Y y$
 " Don't cancel visual mode while indenting
 vnoremap > >gv
 vnoremap < <gv
+
+" Make fzf act like ctrlp
+nnoremap <C-p> :Files<CR>
 
 " ZoomWin
 nmap <c-w>z <Plug>ZoomWin

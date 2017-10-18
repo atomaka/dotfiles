@@ -7,6 +7,7 @@
 * [zsh](https://github.com/zsh-users/zsh)
 * [neovim](https://github.com/neovim/neovim)
 * [fzf](https://github.com/junegunn/fzf)
+* [ag](https://github.com/ggreer/the_silver_searcher)
 
 ## Setup
 

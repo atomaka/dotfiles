@@ -165,6 +165,9 @@ syntax enable
 
 highlight ExtraWhitespace ctermbg=196
 
+" fzf
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
 " ZoomWin
 function! ZoomState()
   if exists('t:zoomwintab')

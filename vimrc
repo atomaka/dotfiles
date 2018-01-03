@@ -24,6 +24,9 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
+" Testing
+" Plug 'w0rp/ale'
+
 call plug#end()
 filetype plugin indent on
 
@@ -59,7 +62,7 @@ set showcmd                       " Show command as you type
 set ruler                         " Show cursor position
 set autoindent                    " autoindent AND be smart about it
 set smartindent
-set colorcolumn=80                " Ruler at line 80
+set colorcolumn=80,120            " Ruler at line 80, 120
 set nomodeline
 set relativenumber                " Relative line numbers
 set number
@@ -90,7 +93,7 @@ set list listchars=tab:\ \ ,trail:·
 " Ignore stuff
 set wildignore+=*/\.git/*
 " Java
-set wildignore+=*/build/*,*/grade/*,*\.class
+" set wildignore+=*/build/*,*/grade/*,*\.class
 " Frontend
 set wildignore+=*/node_modules/*,*/bower_components/*,*/dist/*
 " Persistent undo stuff

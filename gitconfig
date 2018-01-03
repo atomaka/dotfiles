@@ -45,5 +45,5 @@
   showUntrackedFiles = all
   # show all files instead of just directories
 [transfer]
-  fsckobjects = true
+  fsckobjects = false
   # https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0

@@ -1,7 +1,7 @@
 [user]
   email = atomaka@gmail.com
   name = Andrew Tomaka
-  signingkey = 582BAC86
+  signingkey = 61209BF70A5B18BE
 [github]
   user = atomaka
 
@@ -36,7 +36,7 @@
   excludesfile = ~/.gitignore_global
   filemode = false
 [gpg]
-	program = gpg2
+	program = gpg
 [merge]
   tool = vimdiff
 [push]

@@ -54,10 +54,3 @@ setopt auto_cd
 # better word definition
 autoload -U select-word-style
 select-word-style bash
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/atomaka/Source/tweet-africa/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/atomaka/Source/tweet-africa/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/atomaka/Source/tweet-africa/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/atomaka/Source/tweet-africa/node_modules/tabtab/.completions/sls.zsh

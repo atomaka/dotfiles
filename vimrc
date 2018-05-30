@@ -7,6 +7,7 @@ Plug 'joshdick/onedark.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
+Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
@@ -136,7 +137,6 @@ map <Leader>pu :PlugUpdate<cr>
 
 " clear search
 map <Leader>cs :let @/ = ""<cr>
-
 " bclose
 nnoremap <silent> <Leader>bd :Bclose<CR>
 nnoremap <silent> <Leader>bD :Bclose!<CR>
@@ -170,6 +170,9 @@ highlight ExtraWhitespace ctermbg=196
 
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" terraform
+let g:terraform_align=1
 
 " ZoomWin
 function! ZoomState()

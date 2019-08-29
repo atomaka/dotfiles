@@ -34,6 +34,7 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore_global
+  attributesfile = ~/.gitattributes_global
   filemode = false
 [gpg]
 	program = gpg
@@ -47,3 +48,6 @@
 [transfer]
   fsckobjects = false
   # https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
+[diff "enc"]
+  textconv = bundle exec rails encrypted:show
+  cachetextconv = false

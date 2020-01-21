@@ -20,6 +20,7 @@ Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
 
 " languages
+Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'

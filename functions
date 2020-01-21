@@ -103,6 +103,14 @@ function stopwatch {
    done
 }
 
+function test-rails {
+  if bundle exec rspec --help > /dev/null 2>&1; then
+    bundle exec rspec
+  else
+    bundle exec rails test
+  fi
+}
+
 function yarn-exec {
   (PATH=$(yarn bin):$PATH; eval $@;)
 }

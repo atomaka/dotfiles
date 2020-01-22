@@ -105,9 +105,9 @@ function stopwatch {
 
 function test-rails {
   if bundle exec rspec --help > /dev/null 2>&1; then
-    bundle exec rspec
+    bundle exec rspec $@
   else
-    bundle exec rails test
+    bundle exec rails test $@
   fi
 }
 

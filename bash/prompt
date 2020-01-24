@@ -1,0 +1,43 @@
+PROMPT_COMMAND=set_prompt
+
+function set_prompt() {
+  local status=$?
+
+  local FG_RED=$(tput setaf 1)
+  local FG_GREEN=$(tput setaf 2)
+  local FG_YELLOW=$(tput setaf 3)
+  local FG_BLUE=$(tput setaf 4)
+  local HIGHLIGHT=$(tput bold)
+  local RESET=$(tput sgr0)
+
+  # prompt
+  local prompt=""
+  if [ $status -eq 0 ]; then
+    prompt="|$FG_GREEN->$RESET"
+  else
+    prompt="|$FG_RED-$HIGHLIGHT$status$RESET$FG_RED->$RESET"
+  fi
+
+  # time
+  local current_time="$HIGHLIGHT$(date +'%H:%M:%S')$RESET"
+
+  # user
+  local user="$FG_GREEN$USER$RESET"
+
+  # host
+  local host=""
+  if [[ -n "$SSH_CLIENT" || -n "$SSH2_CLIENT" ]]; then
+    host="$FG_YELLOW$(hostname)$RESET"
+  else
+    host="$FG_GREEN$(hostname)$RESET"
+  fi
+
+  # directory
+  local current_dir="$FG_BLUE$HIGHLIGHT$(dirs +0)$RESET"
+
+  # git
+  local git_branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
+
+  export PS1="[${current_time}] ${user}@${host} ${current_dir} [${git_branch}]
+${prompt} "
+}

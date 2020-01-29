@@ -1,6 +1,7 @@
 PROMPT_COMMAND=set_prompt
 
 function set_prompt() {
+  # must be first
   local status=$?
 
   local FG_RED=$(tput setaf 1)
@@ -38,6 +39,5 @@ function set_prompt() {
   # git
   local git_branch="$(git branch 2>/dev/null | grep '^*' | colrm 1 2)"
 
-  export PS1="[${current_time}] ${user}@${host} ${current_dir} [${git_branch}]
-${prompt} "
+  export PS1="[${current_time}] ${user}@${host} ${current_dir} [${git_branch}]\n${prompt} "
 }

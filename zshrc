@@ -54,3 +54,5 @@ setopt auto_cd
 # better word definition
 autoload -U select-word-style
 select-word-style bash
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

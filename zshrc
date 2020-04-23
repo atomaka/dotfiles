@@ -42,6 +42,11 @@ if which nodenv > /dev/null; then
   (nodenv rehash &) 2> /dev/null
 fi
 
+# init direnv
+if which direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
 # completion
 autoload -U compinit
 compinit

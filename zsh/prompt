@@ -1,4 +1,4 @@
-local current_time="[%B%D{%T:%M:%S}%b]"
+local current_time="[%B%D{%T}%b]"
 local current_dir='%B%F{blue}%~%f%b'
 
 # user

@@ -149,7 +149,7 @@ map <Leader>fj :%!python -m json.tool<cr>
 map <Leader>fw :StripWhitespace<cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :Move %<tab>
-map <Leader>sb :!subl %:p<CR>
+map <Leader>sb :exe "!subl %:p:" . line(".")<cr><cr>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sc :pclose<cr>
 map <Leader>sw :SudoWrite<cr>

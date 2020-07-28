@@ -12,6 +12,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rbgrouleff/bclose.vim'
+Plug 'ruanyl/vim-gh-line'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'           " move files
 Plug 'tpope/vim-fugitive'
@@ -148,6 +149,7 @@ map <Leader>fj :%!python -m json.tool<cr>
 map <Leader>fw :StripWhitespace<cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :Move %<tab>
+map <Leader>sb :!subl %:p<CR>
 map <Leader>se :e ~/.vimrc<cr>
 map <Leader>sc :pclose<cr>
 map <Leader>sw :SudoWrite<cr>

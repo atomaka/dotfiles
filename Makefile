@@ -5,7 +5,10 @@ symlinks = $(shell find . \( ! -iname "Makefile" ! -iname "README.md" ! -iname "
 
 all: install
 
-install: plug-vim $(symlinks)
+install: install-bin plug-vim $(symlinks)
+
+install-bin:
+	cp bin/* $$HOME/bin
 
 nvim:
 	mkdir -p ~/.config/nvim

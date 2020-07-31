@@ -49,6 +49,7 @@ fi
 
 # completion
 autoload -U compinit
+autoload bashcompinit && bashcompinit
 compinit
 setopt completeinword
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'

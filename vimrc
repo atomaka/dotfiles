@@ -147,6 +147,7 @@ nnoremap <silent> <Leader>BD :Bclose!<CR>
 " other
 map <Leader>fj :%!python -m json.tool<cr>
 map <Leader>fw :StripWhitespace<cr>
+map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
 map <Leader>pm :set paste!<cr>
 map <Leader>sa :Move %<tab>
 map <Leader>sb :exe "!subl %:p:" . line(".")<cr><cr>

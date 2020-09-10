@@ -122,3 +122,13 @@ function yarn-install-like-bundle {
     yarn install
   fi
 }
+
+function ag-count {
+  if [ $# -lt 1 ]; then
+    echo Usage: ag-count SEARCHTERM
+  else
+    searchterm=$1; shift
+
+    ag --stats $searchterm | tail -n5
+  fi
+}

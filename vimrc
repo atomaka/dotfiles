@@ -28,6 +28,8 @@ Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
 " Testing
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'dense-analysis/ale'
 " Plug 'w0rp/ale'
 
 call plug#end()

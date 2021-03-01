@@ -1,10 +1,12 @@
 LOCAL_SBIN_PATH="/usr/local/sbin"
 PERSONAL_BIN_PATH="$HOME/bin"
+LOCAL_HOME_BIN_PATH="$HOME/.local/bin"
 RBENV_PATH="$HOME/.rbenv/bin"
 GNU_TOOLS_PATH="/usr/local/opt/coreutils/libexec/gnubin"
 GNU_TOOLS_MAN_PATH="/usr/local/opt/coreutils/libexec/gnuman"
 APACHE_MAVEN_PATH="$HOME/bin/apache-maven-3.3.9/bin"
 GO_HOME_PATH="$HOME/go-workspace/bin"
+NODENV_PATH="$HOME/.nodenv/bin"
 
 if [[ "$OSTYPE" == darwin* ]]; then
   GO_DIR="/usr/local/opt/go/libexec"
@@ -26,6 +28,8 @@ fi
 [[ -d "$GO_DIR" ]] && PATH="$GO_DIR:$PATH"
 [[ -d "$LOCAL_SBIN_PATH" ]] && PATH="$LOCAL_SBIN_PATH:$PATH"
 [[ -d "$GO_HOME_PATH" ]] && PATH="$GO_HOME_PATH:$PATH"
+[[ -d "$LOCAL_HOME_BIN_PATH" ]] && PATH="$LOCAL_HOME_BIN_PATH:$PATH"
+[[ -d "$NODENV_PATH" ]] && PATH="$NODENV_PATH:$PATH"
 
 # MAN
 [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"

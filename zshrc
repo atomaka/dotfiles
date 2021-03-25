@@ -48,6 +48,7 @@ if which direnv > /dev/null; then
 fi
 
 # completion
+fpath=($HOME/completions $fpath)
 autoload -U compinit
 autoload bashcompinit && bashcompinit
 compinit

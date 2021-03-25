@@ -51,3 +51,5 @@
 [diff "enc"]
   textconv = bundle exec rails encrypted:show
   cachetextconv = false
+[pull]
+	ff = only

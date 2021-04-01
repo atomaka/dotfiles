@@ -1,5 +1,5 @@
 excludes = -I Makefile -I README.md
-symlinks = $(shell find . \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -name "bin" ! -iname "nvim" \) -maxdepth 1 | sed 's|./||')
+symlinks = $(shell find . -maxdepth 1 \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -name "bin" ! -iname "nvim" \) | sed 's|./||')
 
 .PHONY: $(symlinks) nvim
 

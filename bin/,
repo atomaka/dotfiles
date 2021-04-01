@@ -8,13 +8,13 @@ function find-local-bin {
   current_dir=$(pwd)
   found_bin_dir=$current_dir/$bin_dir
   while [ ! -d $found_bin_dir ]; do
-    current_dir=$(realpath "$current_dir/..")
-    found_bin_dir=$current_dir/$bin_dir
-
     if [[ $current_dir == $HOME ]]; then
       found_bin_dir=$HOME/bin
       break
     fi
+
+    current_dir=$(realpath "$current_dir/..")
+    found_bin_dir=$current_dir/$bin_dir
   done
 
   echo $found_bin_dir

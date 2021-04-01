@@ -11,7 +11,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rbgrouleff/bclose.vim'
+Plug 'moll/vim-bbye'
 Plug 'ruanyl/vim-gh-line'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'           " move files
@@ -142,9 +142,7 @@ map <Leader>pu :PlugUpdate<cr>
 " clear search
 map <Leader>cs :let @/ = ""<cr>
 " bclose
-nnoremap <silent> <Leader>bd :Bclose<CR>
-nnoremap <silent> <Leader>bD :Bclose!<CR>
-nnoremap <silent> <Leader>BD :Bclose!<CR>
+nnoremap <silent> <Leader>bd :Bdelete<CR>
 
 " other
 map <Leader>fj :%!python -m json.tool<cr>

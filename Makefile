@@ -1,11 +1,15 @@
 excludes = -I Makefile -I README.md
-symlinks = $(shell find . \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -path "./.git/*" ! -path "./zsh/*" ! -path "./nvim/*" ! -iname "nvim"  \) | sed 's|./||')
+symlinks = $(shell find . -maxdepth 1 \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -name "bin" ! -iname "nvim" \) | sed 's|./||')
 
 .PHONY: $(symlinks) nvim
 
 all: install
 
-install: plug-vim $(symlinks)
+install: install-bin plug-vim $(symlinks)
+
+install-bin:
+	mkdir -p $$HOME/bin
+	cp bin/* $$HOME/bin
 
 nvim:
 	mkdir -p ~/.config/nvim

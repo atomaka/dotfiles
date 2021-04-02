@@ -24,9 +24,7 @@ precmd() {
 }
 local vcs='${vcs_info_msg_0_}'
 
-# prompt
-local return_code="%(?..%?)"
-local prompt="%(?.%F{green}->.%F{red}-%B${return_code}%b%F{red}->%{%})%f"
+local prompt="%B%(?.%F{green}✓%b.%F{red}✗)%b%f"
 
 PROMPT="${current_time} ${user}@${host} ${current_dir} ${vcs}
-|$prompt "
+ $prompt "

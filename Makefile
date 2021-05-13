@@ -1,19 +1,7 @@
-excludes = -I Makefile -I README.md
-symlinks = $(shell find . -maxdepth 1 \( ! -iname "Makefile" ! -iname "README.md" ! -iname ".*" ! -name "bin" ! -iname "nvim" \) | sed 's|./||')
-
-.PHONY: $(symlinks) nvim
-
 all: install
 
-install: install-bin plug-vim $(symlinks)
-
-install-bin:
-	mkdir -p $$HOME/bin
-	cp bin/* $$HOME/bin
-
-nvim:
-	mkdir -p ~/.config/nvim
-	cp nvim/init.vim ~/.config/nvim/
+install: plug-vim
+	stow bin git nvim ruby tmux vim zsh
 
 plug-vim:
 	if test ! -f ~/.vim/autoload/plug.vim ; then \
@@ -33,15 +21,7 @@ rbenv-build:
 		git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build ; \
 	fi
 
-$(symlinks):
-	test -e `pwd`/$@ \
-		&& ln -sfn `pwd`/$@ ~/.$@
-
-update: update-repo $(symlinks)
+update: update-repo
 
 update-repo:
 	git pull --rebase
-	git submodule update
-
-clean:
-	for file in $(symlinks); do rm ~/.$$file; done

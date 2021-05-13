@@ -36,13 +36,18 @@ if which rbenv > /dev/null; then
   (rbenv rehash &) 2> /dev/null
 fi
 
-# init nodenv
+# # init nodenv
 if which nodenv > /dev/null; then
   eval "$(nodenv init --no-rehash -)"
   (nodenv rehash &) 2> /dev/null
 fi
 
-# init direnv
+if [ -d $HOME/.asdf ]; then
+  source $HOME/.asdf/asdf.sh
+fi
+. ~/.asdf/plugins/java/set-java-home.zsh
+
+#  init direnv
 if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi

@@ -3,6 +3,7 @@
 
 ## Dependencies
 
+* [stow](https://www.gnu.org/software/stow/)
 * [tmux](https://github.com/tmux/tmux)
 * [zsh](https://github.com/zsh-users/zsh)
 * [neovim](https://github.com/neovim/neovim)
@@ -14,12 +15,11 @@
 * Install dependencies
 * Clone this repository
 * Run `make`
-  * Will symlink files into parent
-  * Will overwrite existing files
+  * Uses GNU stow to generate symlinks
+  * Config files must already exist
 * Install vim plugins
 
 ```
-make nvim
 nvim
 ,pi
 ```

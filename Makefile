@@ -25,3 +25,6 @@ update: update-repo
 
 update-repo:
 	git pull --rebase
+
+clean:
+	bash remove-symlinks

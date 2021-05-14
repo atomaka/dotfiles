@@ -27,4 +27,5 @@ update-repo:
 	git pull --rebase
 
 clean:
+	rm -f $$HOME/bin/,
 	bash remove-symlinks

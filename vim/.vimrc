@@ -174,7 +174,7 @@ syntax enable
 highlight ExtraWhitespace ctermbg=196
 
 " fzf
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
 " terraform
 let g:terraform_align=1

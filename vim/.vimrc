@@ -126,6 +126,9 @@ nnoremap <C-p> :Files<CR>
 nnoremap <C-w>z :ZoomWinTabToggle<CR>
 nnoremap <C-w><C-z> :ZoomWinTabToggle<CR>
 
+" Fugitive
+autocmd FileType fugitiveblame nmap <buffer> q gq
+
 " LEADERS
 let mapleader = ","
 

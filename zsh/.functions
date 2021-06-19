@@ -111,9 +111,19 @@ function stopwatch {
 
 function test-rails {
   if bundle exec rspec --help > /dev/null 2>&1; then
-    bundle exec rspec $@
-  else
+    if [ -d spec ]; then
+      bundle exec rspec $@
+    else
+      ruby *_test.rb
+    fi
+  elif bundle exec rails version > /dev/null 2>&1; then
     bundle exec rails test $@
+  else
+    if [[ $# > 0 ]]; then
+      ruby $@
+    else
+      ruby *_test.rb
+    fi
   fi
 }
 

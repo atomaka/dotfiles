@@ -42,14 +42,6 @@ if which nodenv > /dev/null; then
   (nodenv rehash &) 2> /dev/null
 fi
 
-if [ -f $HOME/.asdf ]; then
-  source $HOME/.asdf/asdf.sh
-fi
-
-if [ -f $HOME/.asdf/plugins/java/set-java-home.zsh ]; then
-  source $HOME/.asdf/plugins/java/set-java-home.zsh
-fi
-
 #  init direnv
 if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"

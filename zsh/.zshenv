@@ -2,11 +2,20 @@ LOCAL_SBIN_PATH="/usr/local/sbin"
 PERSONAL_BIN_PATH="$HOME/bin"
 LOCAL_HOME_BIN_PATH="$HOME/.local/bin"
 RBENV_PATH="$HOME/.rbenv/bin"
-GNU_TOOLS_PATH="/usr/local/opt/coreutils/libexec/gnubin"
-GNU_TOOLS_MAN_PATH="/usr/local/opt/coreutils/libexec/gnuman"
+GNU_TOOLS_PATH="/opt/homebrew/opt/coreutils/libexec/gnubin"
+GNU_TOOLS_MAN_PATH="/opt/homebrew/opt/coreutils/libexec/gnuman"
 APACHE_MAVEN_PATH="$HOME/bin/apache-maven-3.3.9/bin"
 GO_HOME_PATH="$HOME/go-workspace/bin"
 NODENV_PATH="$HOME/.nodenv/bin"
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  export HOMEBREW_PREFIX="/opt/homebrew";
+  export HOMEBREW_CELLAR="/opt/homebrew/Cellar";
+  export HOMEBREW_REPOSITORY="/opt/homebrew";
+  export PATH="/opt/homebrew/bin:/opt/homebrew/sbin${PATH+:$PATH}";
+  export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
+  export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
+fi
 
 if [[ "$OSTYPE" == darwin* ]]; then
   GO_DIR="/usr/local/opt/go/libexec"

@@ -7,7 +7,6 @@ Plug 'joshdick/onedark.vim'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
-Plug 'hashivim/vim-terraform'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
@@ -26,11 +25,10 @@ Plug 'posva/vim-vue'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'hashivim/vim-terraform'
 
 " Testing
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" Plug 'dense-analysis/ale'
-" Plug 'w0rp/ale'
 
 call plug#end()
 filetype plugin indent on
@@ -40,7 +38,7 @@ set statusline=
 set statusline+=%<\ %f%{ZoomState()}
 set statusline+=\ %m%r%y%w%=            " what am i doing here
 set statusline+=\ Line:\ %l\/%L\ [%p%%]
-set statusline+=\ Col:\ %c
+set statusline+=\ Col:\ %v
 set statusline+=\ Buf:\ #%n
 set statusline+=\                       " trailing space is with purpose
 
@@ -149,6 +147,8 @@ map <Leader>cs :let @/ = ""<cr>
 nnoremap <silent> <Leader>bd :Bdelete<CR>
 
 " other
+map <Leader>cp "+y
+map <Leader>pa "+p
 map <Leader>fj :%!python -m json.tool<cr>
 map <Leader>fw :StripWhitespace<cr>
 map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
@@ -179,6 +179,7 @@ highlight ExtraWhitespace ctermbg=196
 
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+let g:fzf_preview_window = []
 
 " terraform
 let g:terraform_align=1

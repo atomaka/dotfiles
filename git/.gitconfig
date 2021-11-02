@@ -53,3 +53,5 @@
   cachetextconv = false
 [pull]
 	ff = only
+[init]
+	defaultBranch = master

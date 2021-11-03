@@ -1,9 +1,10 @@
-function aws-profile {
-  if [ $# -eq 0 ]; then
-    echo Current AWS Profile: $AWS_DEFAULT_PROFILE
+function ag-count {
+  if [ $# -lt 1 ]; then
+    echo Usage: ag-count SEARCHTERM
   else
-    export AWS_DEFAULT_PROFILE=$1
-    export AWS_PROFILE=$1
+    searchterm=$1; shift
+
+    ag --stats $searchterm | tail -n5
   fi
 }
 
@@ -11,6 +12,15 @@ function aet-bin-exec {
   local readonly script=$1; shift
 
   ./aet-bin/$script $@
+}
+
+function aws-profile {
+  if [ $# -eq 0 ]; then
+    echo Current AWS Profile: $AWS_DEFAULT_PROFILE
+  else
+    export AWS_DEFAULT_PROFILE=$1
+    export AWS_PROFILE=$1
+  fi
 }
 
 function fix-permissions {
@@ -26,37 +36,23 @@ function g {
   fi
 }
 
-function insert-sudo {
-  zle beginning-of-line
-  zle -U "sudo "
-}
-
-function true-colors {
-  awk 'BEGIN{
-    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
-    for (colnum = 0; colnum<77; colnum++) {
-        r = 255-(colnum*255/76);
-        g = (colnum*510/76);
-        b = (colnum*255/76);
-        if (g>255) g = 510-g;
-        printf "\033[48;2;%d;%d;%dm", r,g,b;
-        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
-        printf "%s\033[0m", substr(s,colnum+1,1);
-    }
-    printf "\n";
-  }'
-}
-
-function port-forward {
-  if [ $# -lt 2 ]; then
-    echo Usage: port-forward HOST LOCAL_PORT \[REMOTE_PORT\]
+function git-branch-cleanup {
+  if [ $# -eq 0 ]; then
+    branch=master
   else
-    ssh $1 -R ${3:-$2}":localhost:"$2 -g
+    branch=$1
   fi
+
+  git branch --merged $branch | grep -v $branch | xargs git branch -d
 }
 
-function gitignore-io {
-  curl https://www.gitignore.io/api/$@
+function git-branch-delete-merged {
+  git branch --merged \
+    | grep -v "\*" \
+    | grep -v master \
+    | grep -v staging \
+    | grep -v development \
+    | xargs -n 1 git branch -d
 }
 
 function git-date-added {
@@ -67,16 +63,13 @@ function git-date-added {
   fi
 }
 
-function run {
-  if [ $# -lt 2 ]; then
-    echo Usage: run NUMBER COMMAND
-  else
-    number=$1; shift
+function gitignore-io {
+  curl https://www.gitignore.io/api/$@
+}
 
-    for i in `seq $number`; do
-      eval "$@"
-    done
-  fi
+function insert-sudo {
+  zle beginning-of-line
+  zle -U "sudo "
 }
 
 function npm-exec {
@@ -99,6 +92,26 @@ function password-generator {
   fi
 
   echo $password
+}
+
+function port-forward {
+  if [ $# -lt 2 ]; then
+    echo Usage: port-forward HOST LOCAL_PORT \[REMOTE_PORT\]
+  else
+    ssh $1 -R ${3:-$2}":localhost:"$2 -g
+  fi
+}
+
+function run {
+  if [ $# -lt 2 ]; then
+    echo Usage: run NUMBER COMMAND
+  else
+    number=$1; shift
+
+    for i in `seq $number`; do
+      eval "$@"
+    done
+  fi
 }
 
 function stopwatch {
@@ -127,6 +140,22 @@ function test-rails {
   fi
 }
 
+function true-colors {
+  awk 'BEGIN{
+    s="/\\/\\/\\/\\/\\"; s=s s s s s s s s;
+    for (colnum = 0; colnum<77; colnum++) {
+        r = 255-(colnum*255/76);
+        g = (colnum*510/76);
+        b = (colnum*255/76);
+        if (g>255) g = 510-g;
+        printf "\033[48;2;%d;%d;%dm", r,g,b;
+        printf "\033[38;2;%d;%d;%dm", 255-r,255-g,255-b;
+        printf "%s\033[0m", substr(s,colnum+1,1);
+    }
+    printf "\n";
+  }'
+}
+
 function yarn-exec {
   (PATH=$(yarn bin):$PATH; eval $@;)
 }
@@ -136,15 +165,5 @@ function yarn-install-like-bundle {
     yarn install --pure-lockfile
   else
     yarn install
-  fi
-}
-
-function ag-count {
-  if [ $# -lt 1 ]; then
-    echo Usage: ag-count SEARCHTERM
-  else
-    searchterm=$1; shift
-
-    ag --stats $searchterm | tail -n5
   fi
 }

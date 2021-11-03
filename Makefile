@@ -1,7 +1,12 @@
+STOWED = bin git ruby tmux vim zsh
+
 all: install
 
 install: plug-vim
-	stow bin git nvim ruby tmux vim zsh
+	stow $(STOWED)
+
+uninstall:
+	stow -D $(STOWED)
 
 plug-vim:
 	if test ! -f ~/.vim/autoload/plug.vim ; then \

@@ -37,7 +37,7 @@
   attributesfile = ~/.gitattributes_global
   filemode = false
 [gpg]
-	program = gpg
+  program = gpg
 [merge]
   tool = vimdiff
 [push]
@@ -52,6 +52,6 @@
   textconv = bundle exec rails encrypted:show
   cachetextconv = false
 [pull]
-	ff = only
+	rebase = false
 [init]
-	defaultBranch = master
+  defaultBranch = master

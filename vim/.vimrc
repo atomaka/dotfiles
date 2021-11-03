@@ -2,7 +2,6 @@
 call plug#begin('~/.vim/plugged')
 
 " colors
-Plug 'nanotech/jellybeans.vim'
 Plug 'joshdick/onedark.vim'
 
 " keepers
@@ -11,17 +10,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'moll/vim-bbye'
-Plug 'ruanyl/vim-gh-line'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'           " move files
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
+Plug 'chrisbra/matchit'
 
 " languages
 Plug 'leafgarland/typescript-vim'
-Plug 'posva/vim-vue'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
@@ -165,14 +162,12 @@ map <Leader>sz :so ~/.vimrc<cr>
 " style
 set t_8f=[38;2;%lu;%lu;%lum
 set t_8b=[48;2;%lu;%lu;%lum
-if has('nvim')
-  set cursorline                    " Highlight current line
-  set cursorcolumn                  " Highlight current column
-  set termguicolors
-  colorscheme onedark
-else
-  colorscheme jellybeans
-endif
+
+set cursorline                    " Highlight current line
+set cursorcolumn                  " Highlight current column
+
+set termguicolors
+colorscheme onedark
 syntax enable
 
 highlight ExtraWhitespace ctermbg=196

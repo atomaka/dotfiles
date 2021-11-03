@@ -1,6 +1,3 @@
-[[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
-[[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
-
 GPG_TTY=$(tty)
 export GPG_TTY
 
@@ -48,7 +45,6 @@ if which direnv > /dev/null; then
 fi
 
 # completion
-fpath=($HOME/.zsh-completions $fpath)
 autoload -U compinit
 autoload bashcompinit && bashcompinit
 compinit

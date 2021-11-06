@@ -17,6 +17,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
   export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+  [[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
+  [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
+
   GO_DIR="/usr/local/opt/go/libexec"
 else
   GO_DIR="/usr/local/go/bin"
@@ -28,9 +31,6 @@ fi
 
 [[ -d "$LOCAL_HOME_BIN_PATH" ]] && PATH="$LOCAL_HOME_BIN_PATH:$PATH"
 [[ -d "$PERSONAL_BIN_PATH" ]] && PATH="$PERSONAL_BIN_PATH:$PATH"
-
-[[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
-[[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 [[ -d "$PERSONAL_COMPLETIONS_PATH" ]] && fpath=($PERSONAL_COMPLETIONS_PATH $fpath)
 
 # EDITOR

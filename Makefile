@@ -34,3 +34,6 @@ update-repo:
 clean:
 	rm -f $$HOME/bin/,
 	bash remove-symlinks
+
+mac:
+	sudo mv /etc/{zprofile,zprofile.old}

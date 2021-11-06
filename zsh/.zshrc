@@ -47,7 +47,16 @@ fi
 # completion
 autoload -U compinit
 autoload bashcompinit && bashcompinit
-compinit
+
+autoload compinit -Uz
+setopt EXTENDEDGLOB
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+unsetopt EXTENDEDGLOB
+
 setopt completeinword
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 

@@ -1,4 +1,4 @@
-STOWED = bin git ruby tmux vim zsh
+STOWED = bin git ruby tmux vim zsh alacritty
 
 all: install
 

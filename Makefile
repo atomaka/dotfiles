@@ -1,8 +1,8 @@
-STOWED = bin git ruby tmux vim zsh alacritty
+STOWED = bin git ruby tmux vim zsh alacritty atomaka
 
 all: install
 
-install: plug-vim
+install: plug-vim initialize-colors
 	stow $(STOWED)
 
 uninstall:
@@ -13,6 +13,10 @@ plug-vim:
 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ; \
 	fi
+
+initialize-colors:
+	cat alacritty/.config/alacritty/alacritty-base.yml alacritty/.config/alacritty/themes/dark.yml > alacritty/.config/alacritty/alacritty.yml
+	cp atomaka/.config/atomaka/color.sample.yml atomaka/.config/atomaka/color.yml
 
 rbenv: rbenv-base rbenv-build
 

@@ -2,7 +2,7 @@
 call plug#begin('~/.vim/plugged')
 
 " colors
-Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
@@ -167,8 +167,8 @@ set cursorline                    " Highlight current line
 set cursorcolumn                  " Highlight current column
 
 set termguicolors
-colorscheme onedark
 syntax enable
+colorscheme solarized
 
 highlight ExtraWhitespace ctermbg=196
 
@@ -187,3 +187,9 @@ function! ZoomState()
     return ''
   endif
 endfunction
+
+" colors
+function! ChangeBackground()
+  let &background=readfile(glob("~/.config/atomaka/color.yml"))[0]
+endfunction
+call ChangeBackground()

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+color_file=$HOME/.config/atomaka/color.yml
+old_color=$(cat $color_file)
+
+if [[ $old_color == "dark" ]]; then
+  new_color=light
+else
+  new_color=dark
+fi
+
+alacritty_header=" # Dynamically generated. Edit $HOME/.config/alacritty/alacritty-base.yml"
+
+alacritty=$HOME/.config/alacritty/
+echo $alacritty_header > $alacritty/alacritty.yml
+cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty/alacritty.yml
+
+echo $new_color > $color_file
+
+for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); do
+  IFS=- read pane cmd <<< "$pane_info"
+
+  if [[ $cmd == "vim" ]]; then
+    echo "sending to $pane"
+    tmux send-keys -t $pane ":call ChangeBackground()" ENTER
+  fi
+done

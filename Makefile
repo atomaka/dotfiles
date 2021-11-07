@@ -42,3 +42,6 @@ clean:
 
 mac:
 	sudo mv /etc/{zprofile,zprofile.old}
+	infocmp -x tmux-256color > ~/tmux-256color.src
+	sed -i "" -e "s/pairs#0x10000/pairs#0x1000/" ~/tmux-256color.src
+	/usr/bin/tic -x ~/tmux-256color.src

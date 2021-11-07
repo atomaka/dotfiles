@@ -23,6 +23,9 @@ if [[ "$OSTYPE" == darwin* ]]; then
   source $HOME/.aliases-mac
 fi
 
+# vim mode
+bindkey -v
+
 # Bind insert_sudo function
 zle -N insert-sudo
 bindkey "^z" insert-sudo

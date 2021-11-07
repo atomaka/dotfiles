@@ -3,6 +3,7 @@ call plug#begin('~/.vim/plugged')
 
 " colors
 Plug 'altercation/vim-colors-solarized'
+Plug 'rakr/vim-one'
 
 " keepers
 Plug 'airblade/vim-gitgutter'
@@ -162,9 +163,11 @@ map <Leader>sz :so ~/.vimrc<cr>
 set cursorline                    " Highlight current line
 set cursorcolumn                  " Highlight current column
 
+let &t_8f = "\<Esc>[38:2:%lu:%lu:%lum"
+let &t_8b = "\<Esc>[48:2:%lu:%lu:%lum"
 set termguicolors
 syntax enable
-colorscheme solarized
+colorscheme one
 
 highlight ExtraWhitespace ctermbg=196
 
@@ -183,9 +186,3 @@ function! ZoomState()
     return ''
   endif
 endfunction
-
-" colors
-function! ChangeBackground()
-  let &background=readfile(glob("~/.config/atomaka/color.yml"))[0]
-endfunction
-call ChangeBackground()

@@ -18,14 +18,5 @@ cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty
 echo $new_color > $color_file
 
 if [[ $TMUX ]]; then
-  for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); do
-    IFS=- read pane cmd <<< "$pane_info"
-
-    if [[ $cmd == "vim" ]]; then
-      echo "sending to $pane"
-      tmux send-keys -t $pane ":call ChangeBackground()" ENTER
-    fi
-  done
-
   tmux source-file $HOME/.tmux/${new_color}.conf
 fi

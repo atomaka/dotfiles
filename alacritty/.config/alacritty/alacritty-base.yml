@@ -3,3 +3,5 @@ key_bindings:
   - { key: Return, mods: Command, action: ToggleFullscreen }
 font:
   size: 14
+env:
+  TERM: xterm-256color

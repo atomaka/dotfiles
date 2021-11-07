@@ -159,10 +159,6 @@ map <Leader>sw :SudoWrite<cr>
 map <Leader>sz :so ~/.vimrc<cr>
 
 " PLUGIN CONFIGURATION
-" style
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
-
 set cursorline                    " Highlight current line
 set cursorcolumn                  " Highlight current column
 

@@ -2,13 +2,14 @@ STOWED = bin git ruby tmux vim zsh alacritty atomaka
 
 all: install
 
-install: plug-vim initialize-colors
+install: vim-setup initialize-colors
 	stow $(STOWED)
 
 uninstall:
 	stow -D $(STOWED)
 
-plug-vim:
+vim-setup:
+	mkdir -p $$HOME/.vim/undo
 	if test ! -f ~/.vim/autoload/plug.vim ; then \
 		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ; \

@@ -5,6 +5,9 @@
 [github]
   user = atomaka
 
+[includeIf "gitdir:~/Source/benefitbay/"]
+  path = ~/.gitconfig_work
+
 [apply]
   whitespace = fix
 [alias]

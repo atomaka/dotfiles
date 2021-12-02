@@ -1,4 +1,4 @@
-STOWED = alacritty zsh
+STOWED = alacritty tmux zsh
 
 all: install
 

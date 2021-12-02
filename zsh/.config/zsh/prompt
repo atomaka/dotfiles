@@ -1,0 +1,4 @@
+local current_dir='%~%f'
+local result="%B%(?.%F{green}✓%b.%F{red}✗)%b%f"
+
+PROMPT="${current_dir} ${result} "

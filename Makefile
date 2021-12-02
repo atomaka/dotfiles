@@ -1,4 +1,4 @@
-STOWED = alacritty tmux zsh
+STOWED = alacritty tmux vim zsh
 
 all: install
 
@@ -11,6 +11,10 @@ linux:
 alacritty:
 	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
 	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
+
+vim:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	ln -s $(HOME)/.config/vim/vimrc $(HOME)/.vimrc
 
 zsh:
 	ln -s $(HOME)/.config/zsh/.zshenv $(HOME)/.zshenv

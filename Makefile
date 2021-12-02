@@ -1,4 +1,4 @@
-STOWED = alacritty tmux vim zsh
+STOWED = alacritty git tmux vim zsh
 
 all: install
 

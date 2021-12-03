@@ -1,0 +1,8 @@
+*.sw?
+*.exe
+*.DS_Store
+
+.envrc
+
+aet-*/**
+config/initializers/*_aet_*

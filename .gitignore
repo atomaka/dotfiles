@@ -1,4 +1,5 @@
 *.swp
 
+alacritty/.config/alacritty/alacritty.yml
 zsh/.config/zsh/.zcompdump
 

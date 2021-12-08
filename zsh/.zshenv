@@ -1,1 +1,5 @@
+PERSONAL_BIN="$HOME/bin"
+
 ZDOTDIR=$HOME/.config/zsh
+
+PATH="$PERSONAL_BIN:$PATH"

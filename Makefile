@@ -1,8 +1,8 @@
-STOWED = alacritty git tmux vim zsh
+STOWED = alacritty bin git tmux vim zsh
 
 all: install
 
-install: 
+install:
 	stow $(STOWED)
 
 linux:
@@ -11,6 +11,7 @@ linux:
 alacritty:
 	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
 	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
+	toggle-color-bin
 
 vim:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim

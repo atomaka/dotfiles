@@ -1,5 +1,6 @@
 alias a="ls -la"
 alias c="clear"
+alias cs="toggle-color-mode"
 alias g="g" # overwrite g alias
 alias ga="git add"
 alias gap="git add --patch"

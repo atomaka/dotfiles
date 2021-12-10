@@ -13,7 +13,7 @@ alacritty:
 javascript: nodenv-base nodenv-build
 
 linux:
-	sudo apt-get install direnv fzf silversearcher-ag tmux vim
+	sudo apt-get install direnv fzf silversearcher-ag stow tmux vim zsh
 
 ruby: rbenv-base rbenv-build
 

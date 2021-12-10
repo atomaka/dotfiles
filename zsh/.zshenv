@@ -1,5 +1,6 @@
 PERSONAL_BIN="$HOME/bin"
-
+RBENV_PATH="$HOME/.rbenv/bin"
 ZDOTDIR=$HOME/.config/zsh
 
 PATH="$PERSONAL_BIN:$PATH"
+[[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"

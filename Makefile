@@ -1,17 +1,29 @@
-STOWED = alacritty bin git tmux vim zsh
+STOWED = alacritty bin git ruby tmux vim zsh
 
 all: install
 
 install:
 	stow $(STOWED)
 
-linux:
-	sudo apt-get install fzf tmux vim
-
 alacritty:
 	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
 	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
 	toggle-color-bin
 
+linux:
+	sudo apt-get install fzf tmux vim
+
+ruby: rbenv-base rbenv-build
+
 vim:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+rbenv-base:
+	if test ! -d ~/.rbenv ; then \
+		git clone https://github.com/rbenv/rbenv.git ~/.rbenv ; \
+	fi
+
+rbenv-build:
+	if test ! -d ~/.rbenv/plugins/ruby-build ; then \
+		git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build ; \
+	fi

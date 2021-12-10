@@ -1,3 +1,5 @@
+typeset -U PATH
+
 source $ZDOTDIR/aliases
 source $ZDOTDIR/functions
 

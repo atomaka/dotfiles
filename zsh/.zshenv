@@ -4,3 +4,7 @@ ZDOTDIR=$HOME/.config/zsh
 
 PATH="$PERSONAL_BIN:$PATH"
 [[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"
+
+# EDITOR
+EDITOR=vim
+GIT_EDITOR=vim

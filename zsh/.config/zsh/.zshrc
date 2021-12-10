@@ -15,6 +15,10 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd
 
+if which direnv > /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
+
 if which rbenv > /dev/null; then
   eval "$(rbenv init --no-rehash -)"
   (rbenv rehash &) 2> /dev/null

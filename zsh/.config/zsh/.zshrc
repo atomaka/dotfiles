@@ -19,3 +19,8 @@ if which rbenv > /dev/null; then
   eval "$(rbenv init --no-rehash -)"
   (rbenv rehash &) 2> /dev/null
 fi
+
+if which nodenv > /dev/null; then
+  eval "$(nodenv init --no-rehash -)"
+  (nodenv rehash &) 2> /dev/null
+fi

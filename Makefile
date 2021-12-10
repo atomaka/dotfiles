@@ -10,6 +10,8 @@ alacritty:
 	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
 	toggle-color-bin
 
+javascript: nodenv-base nodenv-build
+
 linux:
 	sudo apt-get install fzf tmux vim
 
@@ -26,4 +28,14 @@ rbenv-base:
 rbenv-build:
 	if test ! -d ~/.rbenv/plugins/ruby-build ; then \
 		git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build ; \
+	fi
+
+nodenv-base:
+	if test ! -d ~/.nodenv ; then \
+		git clone https://github.com/nodenv/nodenv.git ~/.nodenv ; \
+	fi
+
+nodenv-build:
+	if test ! -d ~/.nodenv ; then \
+		git clone https://github.com/nodenv/node-build.git ~/.nodenv/plugins/node-build ; \
 	fi

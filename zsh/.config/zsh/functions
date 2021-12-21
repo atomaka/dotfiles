@@ -1,0 +1,78 @@
+function ag-count {
+  if [ $# -lt 1 ]; then
+    echo Usage: ag-count SEARCHTERM
+  else
+    searchterm=$1; shift
+
+    ag --stats $searchterm | tail -n5
+  fi
+}
+
+function aws-profile {
+  if [ $# -eq 0 ]; then
+    echo Current AWS Profile: $AWS_DEFAULT_PROFILE
+  else
+    export AWS_DEFAULT_PROFILE=$1
+    export AWS_PROFILE=$1
+  fi
+}
+
+function docker-compose-call {
+  if docker compose > /dev/null 2>&1; then
+    docker compose $@
+  else
+    docker-compose $@
+  fi
+}
+
+function g {
+  if [[ $# > 0 ]]; then
+    git $@
+  else
+    git status
+  fi
+}
+
+function git-date-added {
+  if [ $# -eq 0 ]; then
+    echo Usage: git-date-added FILENAME
+  else
+    git log --format=%aD $1 | tail -1
+  fi
+}
+
+function password-generator {
+  if [ -x "$(command -v openssl)" ]; then
+    password=$(
+      openssl rand -base64 32 \
+        | head -c 32
+    )
+  else
+    password=$(
+      date +%s \
+        | sha256sum \
+        | base64 \
+        | head -c 32
+    )
+  fi
+
+  echo $password
+}
+
+function test-rails {
+  if bundle exec rspec --help > /dev/null 2>&1; then
+    if [ -d spec ]; then
+      bundle exec rspec $@
+    else
+      ruby *_test.rb
+    fi
+  elif bundle exec rails version > /dev/null 2>&1; then
+    bundle exec rails test $@
+  else
+    if [[ $# > 0 ]]; then
+      ruby $@
+    else
+      ruby *_test.rb
+    fi
+  fi
+}

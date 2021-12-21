@@ -1,25 +1,24 @@
-STOWED = bin git ruby tmux vim zsh alacritty atomaka
+STOWED = alacritty bin git ruby tmux vim zsh
 
 all: install
 
-install: vim-setup initialize-colors
+install:
 	stow $(STOWED)
 
-uninstall:
-	stow -D $(STOWED)
+alacritty:
+	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
+	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
+	toggle-color-bin
 
-vim-setup:
-	mkdir -p $$HOME/.vim/undo
-	if test ! -f ~/.vim/autoload/plug.vim ; then \
-		curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-				https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim ; \
-	fi
+javascript: nodenv-base nodenv-build
 
-initialize-colors:
-	cat alacritty/.config/alacritty/alacritty-base.yml alacritty/.config/alacritty/themes/dark.yml > alacritty/.config/alacritty/alacritty.yml
-	cp atomaka/.config/atomaka/color.sample.yml atomaka/.config/atomaka/color.yml
+linux:
+	sudo apt-get install direnv fzf silversearcher-ag stow tmux vim zsh
 
-rbenv: rbenv-base rbenv-build
+ruby: rbenv-base rbenv-build
+
+vim:
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 rbenv-base:
 	if test ! -d ~/.rbenv ; then \
@@ -31,17 +30,12 @@ rbenv-build:
 		git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build ; \
 	fi
 
-update: update-repo
+nodenv-base:
+	if test ! -d ~/.nodenv ; then \
+		git clone https://github.com/nodenv/nodenv.git ~/.nodenv ; \
+	fi
 
-update-repo:
-	git pull --rebase
-
-clean:
-	rm -f $$HOME/bin/,
-	bash remove-symlinks
-
-mac:
-	sudo mv /etc/{zprofile,zprofile.old}
-	infocmp -x tmux-256color > ~/tmux-256color.src
-	sed -i "" -e "s/pairs#0x10000/pairs#0x1000/" ~/tmux-256color.src
-	/usr/bin/tic -x ~/tmux-256color.src
+nodenv-build:
+	if test ! -d ~/.nodenv ; then \
+		git clone https://github.com/nodenv/node-build.git ~/.nodenv/plugins/node-build ; \
+	fi

@@ -1,8 +1,5 @@
 *.sw?
-*.o
 *.exe
-*.stackdump
-*.out
 *.DS_Store
 
 .envrc

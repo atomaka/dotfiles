@@ -1,60 +1,33 @@
-[user]
-  email = atomaka@gmail.com
-  name = Andrew Tomaka
-  signingkey = 61209BF70A5B18BE
-[github]
-  user = atomaka
-
-[includeIf "gitdir:~/Source/benefitbay/"]
-  path = ~/.gitconfig_work
-
-[apply]
-  whitespace = fix
 [alias]
   fancy-graph = log --graph --decorate --pretty=oneline --abbrev-commit
   hist = log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   hist-details = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   hist-tags = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   most-recent-by-branch = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
-  undo = reset --soft HEAD^
-[color]
-  ui = auto
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "diff"]
-  frag = magenta
-  new = green
-  old = red
-  meta = yellow bold
-[color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+
 [commit]
   gpgsign = true
+
 [core]
   autocrlf = input
-  excludesfile = ~/.gitignore_global
-  attributesfile = ~/.gitattributes_global
-  filemode = false
+  excludesfile = ~/.config/git/gitignore_global
+
+[github]
+  username = atomaka
+
 [gpg]
   program = gpg
+
 [merge]
   tool = vimdiff
-[push]
-  default = upstream
+
+[pull]
+  rebase = false
+
 [status]
   showUntrackedFiles = all
-  # show all files instead of just directories
-[transfer]
-  fsckobjects = false
-  # https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
-[diff "enc"]
-  textconv = bundle exec rails encrypted:show
-  cachetextconv = false
-[pull]
-	rebase = false
-[init]
-  defaultBranch = master
+
+[user]
+  email = atomaka@gmail.com
+  name = Andrew Tomaka
+  signingkey = 61209BF70A5B18BE

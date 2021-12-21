@@ -1,2 +1,5 @@
+*.swp
+
 alacritty/.config/alacritty/alacritty.yml
-atomaka/.config/atomaka/color.yml
+zsh/.config/zsh/.zcompdump
+

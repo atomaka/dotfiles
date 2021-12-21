@@ -1,6 +1,10 @@
 #!/bin/bash
 
 color_file=$HOME/.config/atomaka/color.yml
+if ! test -f $color_file; then
+  mkdir -p $HOME/.config/atomaka
+  echo light > $color_file
+fi
 old_color=$(cat $color_file)
 
 if [[ $old_color == "dark" ]]; then
@@ -16,7 +20,3 @@ echo $alacritty_header > $alacritty/alacritty.yml
 cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty/alacritty.yml
 
 echo $new_color > $color_file
-
-if [[ $TMUX ]]; then
-  tmux source-file $HOME/.tmux/${new_color}.conf
-fi

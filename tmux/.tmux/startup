@@ -1,5 +1,0 @@
-#!/bin/bash
-
-startup_color=$(cat $HOME/.config/atomaka/color.yml)
-
-tmux source-file $HOME/.tmux/$startup_color.conf

@@ -1,3 +1,5 @@
+export GPG_TTY=$(tty)
+
 typeset -U PATH
 
 source $ZDOTDIR/aliases

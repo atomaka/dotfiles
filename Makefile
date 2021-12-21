@@ -15,6 +15,11 @@ javascript: nodenv-base nodenv-build
 linux:
 	sudo apt-get install direnv fzf silversearcher-ag stow tmux vim zsh
 
+mac:
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	sudo mv /etc/{zprofile,zprofile.old}
+	brew install coreutils direnv fzf git stow the_silver_searcher tmux vim zsh
+
 ruby: rbenv-base rbenv-build
 
 vim:

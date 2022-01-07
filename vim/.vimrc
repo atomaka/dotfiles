@@ -5,6 +5,7 @@ Plug 'junegunn/fzf'
 Plug 'moll/vim-bbye'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
 
@@ -90,6 +91,11 @@ map <Leader>fw :StripWhitespace<cr>
 
 " vim-eunuch
 map <Leader>sa :Move %<tab>
+
+" Fugitive
+autocmd FileType fugitiveblame nmap <buffer> q gq
+command! Gblame :G blame
+map <Leader>gb :Git blame<cr>
 
 " vim-plug
 map <Leader>pc :PlugClean<cr>

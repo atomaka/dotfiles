@@ -12,6 +12,7 @@ Plug 'troydm/zoomwintab.vim'
 " languages
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 

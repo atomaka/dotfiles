@@ -41,6 +41,6 @@ nodenv-base:
 	fi
 
 nodenv-build:
-	if test ! -d ~/.nodenv ; then \
+	if test ! -d ~/.nodenv/plugins/node-build ; then \
 		git clone https://github.com/nodenv/node-build.git ~/.nodenv/plugins/node-build ; \
 	fi

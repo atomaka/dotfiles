@@ -5,4 +5,5 @@
 .envrc
 
 aet-*/**
+aet-*
 config/initializers/*_aet_*

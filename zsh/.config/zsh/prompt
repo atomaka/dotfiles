@@ -1,4 +1,15 @@
+precmd() {
+  setopt promptsubst
+  autoload -Uz vcs_info
+
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*:prompt:*' formats "[%b]"
+  vcs_info 'prompt'
+}
+
+local current_time="[%B%D{%T}%b]"
 local current_dir='%~%f'
+local current_branch='${vcs_info_msg_0_}'
 local result="%B%(?.%F{green}✓%b.%F{red}✗)%b%f"
 
-PROMPT="${current_dir} ${result} "
+PROMPT="${current_time} ${current_dir} ${current_branch} ${result} "

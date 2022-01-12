@@ -16,31 +16,43 @@ Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
+" STATUS LINE
+set statusline=
+set statusline+=%<\ %f%{ZoomState()}
+set statusline+=\ %m%r%y%w%=
+set statusline+=\ Line:\ %l\/%L\ [%p%%]
+set statusline+=\ Col:\ %v
+set statusline+=\ Buf:\ #%n
+set statusline+=\                       " trailing space
+
 " SETTINGS
 filetype plugin indent on
 
+set autowrite
 set backspace=2                   " Backspace over indent, eol, start of insert
 set cpoptions+=$                  " delimit end of change text
-set endofline                     " Add newline to end of file
+set endofline
+set laststatus=2                  " always show status line
 set nobackup
 set noswapfile
-set nowrap                        " Disable wrapping by default
-set scrolloff=3                   " Keep cursor from touching edges
-set showmode                      " Show current mode
+set nowrap
+set scrolloff=3
+set showmatch
+set showmode
 set timeoutlen=500                " Don't wait too long (ambiguous leaders)
 set virtualedit=all               " Cursor can go anywhere
-
-set hlsearch                      " Search highlights
-set ignorecase                    " Ignore case with search
-set incsearch                     " Search as you type
-set smartcase                     " Search will not ignore uppercase
-set wrapscan                      " Wrapped search
+set wildcharm=<tab>               " Allow use of tab in macros
+set hlsearch
+set ignorecase
+set incsearch
+set smartcase
+set wrapscan
 
 set number
-set relativenumber                " Relative line numbers
+set relativenumber
 
 set textwidth=80
-set colorcolumn=80,120            " Ruler at line 80, 120
+set colorcolumn=80,120
 
 " Tabs are 2 spaces
 set tabstop=2
@@ -48,6 +60,12 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 set shiftround                    " make >> go to next tab
+
+if has('persistent_undo')
+  set undolevels=5000
+  set undodir=$HOME/.vim/undo
+  set undofile
+endif
 
 " consistency is key - Y should act like C, D
 map Y y$
@@ -72,6 +90,12 @@ map <Leader>sz :so ~/.vimrc<cr>
 map <Leader>cp "+y
 map <Leader>pa "+p
 
+" tabbing
+map <Leader>2 :set tabstop=2 softtabstop=2 shiftwidth=2 expandtab<cr>
+map <Leader>4 :set tabstop=4 softtabstop=4 shiftwidth=4 expandtab<cr>
+map <Leader>a :set tabstop=8 softtabstop=8 shiftwidth=8 noexpandtab<cr>
+map <Leader>st :let @/ = "\t"<cr>
+
 " clear search
 map <Leader>cs :let @/ = ""<cr>
 
@@ -93,7 +117,7 @@ map <Leader>fw :StripWhitespace<cr>
 " vim-eunuch
 map <Leader>sa :Move %<tab>
 
-" Fugitive
+" vim-fugitive
 autocmd FileType fugitiveblame nmap <buffer> q gq
 command! Gblame :G blame
 map <Leader>gb :Git blame<cr>
@@ -103,7 +127,10 @@ map <Leader>pc :PlugClean<cr>
 map <Leader>pi :PlugInstall<cr>
 map <Leader>pu :PlugUpdate<cr>
 
-" zoomwintab
+" vim-terraform
+let g:terraform_align=1
+
+" zoomwintab.vim
 nnoremap <C-w>z :ZoomWinTabToggle<CR>
 nnoremap <C-w><C-z> :ZoomWinTabToggle<CR>
 function! ZoomState()

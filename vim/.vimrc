@@ -131,8 +131,24 @@ map <Leader>pu :PlugUpdate<cr>
 let g:terraform_align=1
 
 " zoomwintab.vim
-nnoremap <C-w>z :ZoomWinTabToggle<CR>
-nnoremap <C-w><C-z> :ZoomWinTabToggle<CR>
+nnoremap <C-w>z :call MyZoomWinTabToggle()<CR>
+nnoremap <C-w><C-z> :call MyZoomWinTabToggle()<CR>
+function! MyZoomWinTabToggle()
+  call zoomwintab#Toggle()
+  if exists('t:zoomwintab')
+    echo 'unmap'
+    nnoremap <C-w>s <nop>
+    nnoremap <C-w>v <nop>
+    nnoremap <C-w><C-s> <nop>
+    nnoremap <C-w><C-v> <nop>
+  else
+    echo 'remap'
+    nnoremap <C-w>s :split<cr>
+    nnoremap <C-w>v :vsplit<cr>
+    nnoremap <C-w><C-s> :split<cr>
+    nnoremap <C-w><C-v> :vsplit<cr>
+  endif
+endfunction
 function! ZoomState()
   if exists('t:zoomwintab')
     return 'Z'

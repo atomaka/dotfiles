@@ -139,7 +139,7 @@ function! MyCtrlW()
 
   if get(t:, 'zoomed', 0) == 1
     if char is# 'v' || char is# 's' || char is# '' || char is# ''
-      return "" " TODO: '\<C-w>z\<C-w>'.char
+      return ""
     endif
   end
   return "\<C-w>".char

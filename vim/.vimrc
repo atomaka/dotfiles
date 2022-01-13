@@ -137,7 +137,7 @@ let g:zoom#statustext='Z'
 function! MyCtrlW()
   let char = nr2char(getchar())
 
-  if zoom#statusline() == 'Z'
+  if get(t:, 'zoomed', 0) == 1
     if char is# 'v' || char is# 's' || char is# '' || char is# ''
       return "" " TODO: '\<C-w>z\<C-w>'.char
     endif

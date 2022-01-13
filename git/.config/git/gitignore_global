@@ -6,4 +6,4 @@
 
 aet-*/**
 aet-*
-config/initializers/*_aet_*
+*_aet_*

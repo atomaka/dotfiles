@@ -1,13 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'chrisbra/matchit'
+Plug 'dhruvasagar/vim-zoom'
 Plug 'junegunn/fzf'
 Plug 'moll/vim-bbye'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'troydm/zoomwintab.vim'
 
 " languages
 Plug 'tpope/vim-rails'
@@ -18,7 +18,7 @@ call plug#end()
 
 " STATUS LINE
 set statusline=
-set statusline+=%<\ %f%{ZoomState()}
+set statusline+=%<\ %f%{zoom#statusline()}
 set statusline+=\ %m%r%y%w%=
 set statusline+=\ Line:\ %l\/%L\ [%p%%]
 set statusline+=\ Col:\ %v
@@ -131,12 +131,17 @@ map <Leader>pu :PlugUpdate<cr>
 let g:terraform_align=1
 
 " zoomwintab.vim
-nnoremap <C-w>z :ZoomWinTabToggle<CR>
-nnoremap <C-w><C-z> :ZoomWinTabToggle<CR>
-function! ZoomState()
-  if exists('t:zoomwintab')
-    return 'Z'
-  else
-    return ''
-  endif
+nmap <C-w>z <Plug>(zoom-toggle)
+nmap <C-w><C-z> <Plug>(zoom-toggle)
+let g:zoom#statustext='Z'
+function! MyCtrlW()
+  let char = nr2char(getchar())
+
+  if get(t:, 'zoomed', 0) == 1
+    if char is# 'v' || char is# 's' || char is# '' || char is# ''
+      return ""
+    endif
+  end
+  return "\<C-w>".char
 endfunction
+nnoremap <expr> <C-w> MyCtrlW()

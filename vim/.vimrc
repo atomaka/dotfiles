@@ -134,3 +134,14 @@ let g:terraform_align=1
 nmap <C-w>z <Plug>(zoom-toggle)
 nmap <C-w><C-z> <Plug>(zoom-toggle)
 let g:zoom#statustext='Z'
+function! MyCtrlW()
+  let char = nr2char(getchar())
+
+  if zoom#statusline() == 'Z'
+    if char is# 'v' || char is# 's' || char is# '' || char is# ''
+      return ""
+    endif
+  end
+  return "\<C-w>".char
+endfunction
+nnoremap <expr> <C-w> MyCtrlW()

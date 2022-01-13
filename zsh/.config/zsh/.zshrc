@@ -15,6 +15,7 @@ SAVEHIST=20000
 # be like vim
 bindkey -v
 
+setopt complete_in_word
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd

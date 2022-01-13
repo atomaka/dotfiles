@@ -11,6 +11,7 @@ alias ber="bundle exec rake"
 alias bet="test-rails"
 alias c="clear"
 alias cs="toggle-color-mode"
+alias cdr="cd $(git root)"
 alias dc="docker-compose-call"
 alias g="g" # overwrite g alias
 alias ga="git add"

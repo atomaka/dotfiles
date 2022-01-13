@@ -139,7 +139,7 @@ function! MyCtrlW()
 
   if zoom#statusline() == 'Z'
     if char is# 'v' || char is# 's' || char is# '' || char is# ''
-      return ""
+      return "" " TODO: '\<C-w>z\<C-w>'.char
     endif
   end
   return "\<C-w>".char

@@ -1,13 +1,13 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'chrisbra/matchit'
+Plug 'dhruvasagar/vim-zoom'
 Plug 'junegunn/fzf'
 Plug 'moll/vim-bbye'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'troydm/zoomwintab.vim'
 
 " languages
 Plug 'tpope/vim-rails'
@@ -18,7 +18,7 @@ call plug#end()
 
 " STATUS LINE
 set statusline=
-set statusline+=%<\ %f%{ZoomState()}
+set statusline+=%<\ %f%{zoom#statusline()}
 set statusline+=\ %m%r%y%w%=
 set statusline+=\ Line:\ %l\/%L\ [%p%%]
 set statusline+=\ Col:\ %v
@@ -131,28 +131,6 @@ map <Leader>pu :PlugUpdate<cr>
 let g:terraform_align=1
 
 " zoomwintab.vim
-nnoremap <C-w>z :call MyZoomWinTabToggle()<CR>
-nnoremap <C-w><C-z> :call MyZoomWinTabToggle()<CR>
-function! MyZoomWinTabToggle()
-  call zoomwintab#Toggle()
-  if exists('t:zoomwintab')
-    echo 'unmap'
-    nnoremap <C-w>s <nop>
-    nnoremap <C-w>v <nop>
-    nnoremap <C-w><C-s> <nop>
-    nnoremap <C-w><C-v> <nop>
-  else
-    echo 'remap'
-    nnoremap <C-w>s :split<cr>
-    nnoremap <C-w>v :vsplit<cr>
-    nnoremap <C-w><C-s> :split<cr>
-    nnoremap <C-w><C-v> :vsplit<cr>
-  endif
-endfunction
-function! ZoomState()
-  if exists('t:zoomwintab')
-    return 'Z'
-  else
-    return ''
-  endif
-endfunction
+nmap <C-w>z <Plug>(zoom-toggle)
+nmap <C-w><C-z> <Plug>(zoom-toggle)
+let g:zoom#statustext='Z'

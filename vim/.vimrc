@@ -41,7 +41,6 @@ set showmatch
 set showmode
 set timeoutlen=500                " Don't wait too long (ambiguous leaders)
 set virtualedit=all               " Cursor can go anywhere
-set wildcharm=<tab>               " Allow use of tab in macros
 set hlsearch
 set ignorecase
 set incsearch
@@ -53,6 +52,13 @@ set relativenumber
 
 set textwidth=80
 set colorcolumn=80,120
+
+" For commands
+set infercase
+set wildcharm=<tab>
+set wildignorecase
+set wildmenu
+set wildmode=list:longest,full
 
 " Tabs are 2 spaces
 set tabstop=2

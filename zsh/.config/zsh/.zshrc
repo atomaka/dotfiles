@@ -33,3 +33,12 @@ if which nodenv > /dev/null; then
   eval "$(nodenv init --no-rehash -)"
   (nodenv rehash &) 2> /dev/null
 fi
+
+autoload compinit -Uz
+setopt EXTENDEDGLOB
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+unsetopt EXTENDEDGLOB

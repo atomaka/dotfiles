@@ -10,6 +10,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   HOMEBREW_CELLAR="/opt/homebrew/Cellar"
   HOMEBREW_REPOSITORY="/opt/homebrew"
 
+  GNU_SED_PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin"
   GNU_TOOLS_PATH="/opt/homebrew/opt/coreutils/libexec/gnubin"
   GNU_TOOLS_MAN_PATH="/opt/homebrew/opt/coreutils/libexec/gnuman"
 
@@ -19,6 +20,7 @@ if [[ "$OSTYPE" == darwin* ]]; then
   MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:";
   INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}";
 
+  [[ -d "$GNU_SED_PATH" ]] && PATH="$GNU_SED_PATH:$PATH"
   [[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
   [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
 fi

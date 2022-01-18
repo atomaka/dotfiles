@@ -5,25 +5,27 @@ all: install
 install:
 	stow $(STOWED)
 
-alacritty:
-	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
-	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
-	toggle-color-bin
-
-javascript: nodenv-base nodenv-build
-
 linux:
 	sudo apt-get install direnv fzf silversearcher-ag stow tmux vim zsh
 
 mac:
 	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	sudo mv /etc/{zprofile,zprofile.old}
-	brew install coreutils direnv fzf git stow the_silver_searcher tmux vim zsh
+	brew install coreutils gnu-sed direnv fzf git stow the_silver_searcher tmux vim zsh
+
+javascript: nodenv-base nodenv-build
 
 ruby: rbenv-base rbenv-build
 
+alacritty:
+	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
+	sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
+	toggle-color-bin
+
 vim:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+
 
 rbenv-base:
 	if test ! -d ~/.rbenv ; then \

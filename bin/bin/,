@@ -1,0 +1,13 @@
+#!/usr/bin/env zsh
+
+source $ZDOTDIR/functions
+
+dir=$(find-local-bin aet)
+
+if [[ -f $dir/$@  ]]; then
+  exec $dir/$@
+elif [[ -f $HOME/bin/$@ ]]; then
+  exec $HOME/bin/$@
+else
+  echo "Nothing to execute"
+fi

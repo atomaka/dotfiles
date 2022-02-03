@@ -25,6 +25,25 @@ function docker-compose-call {
   fi
 }
 
+function find-local-bin {
+  local prefix=$1
+  local bin_dir="$prefix-bin"
+  local found_bin_dir=""
+
+  current_dir=$(pwd)
+  found_bin_dir=$current_dir/$bin_dir
+  while [ ! -d $found_bin_dir ]; do
+    if [[ $current_dir == $HOME ]]; then
+      break
+    fi
+
+    current_dir=$(realpath "$current_dir/..")
+    found_bin_dir=$current_dir/$bin_dir
+  done
+
+  echo $found_bin_dir
+}
+
 function g {
   if [[ $# > 0 ]]; then
     git $@

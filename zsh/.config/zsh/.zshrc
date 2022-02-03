@@ -36,7 +36,7 @@ fi
 
 autoload compinit -Uz
 setopt EXTENDEDGLOB
-if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.m+1) ]]; then
   compinit
 else
   compinit -C

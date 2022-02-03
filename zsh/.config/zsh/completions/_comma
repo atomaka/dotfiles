@@ -1,0 +1,6 @@
+ #compdef ,
+
+found_bin_dir=$(find-local-bin aet)
+
+_files -g "^," -W $found_bin_dir
+_files -g "^," -W $HOME/bin

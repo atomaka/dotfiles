@@ -1,9 +1,10 @@
+ZDOTDIR=$HOME/.config/zsh
+
 PERSONAL_BIN_PATH="$HOME/bin"
+PERSONAL_FPATH="$ZDOTDIR/completions"
 
 NODENV_PATH="$HOME/.nodenv/bin"
 RBENV_PATH="$HOME/.rbenv/bin"
-
-ZDOTDIR=$HOME/.config/zsh
 
 if [[ "$OSTYPE" == darwin* ]]; then
   HOMEBREW_PREFIX="/opt/homebrew"
@@ -28,6 +29,7 @@ fi
 [[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"
 [[ -d "$NODENV_PATH" ]] && PATH="$NODENV_PATH:$PATH"
 [[ -d "$PERSONAL_BIN_PATH" ]] && PATH="$PERSONAL_BIN_PATH:$PATH"
+[[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"
 
 # EDITOR
 EDITOR=vim

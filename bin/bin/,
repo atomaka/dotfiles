@@ -4,9 +4,9 @@ source $ZDOTDIR/functions
 
 dir=$(find-local-bin aet)
 
-if [[ -f $dir/$@  ]]; then
+if [[ -f $dir/$1  ]]; then
   exec $dir/$@
-elif [[ -f $HOME/bin/$@ ]]; then
+elif [[ -f $HOME/bin/$1 ]]; then
   exec $HOME/bin/$@
 else
   echo "Nothing to execute"

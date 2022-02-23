@@ -32,3 +32,6 @@
   email = atomaka@atomaka.com
   name = Andrew Tomaka
   signingkey = 61209BF70A5B18BE
+
+[includeIf "gitdir:~/Source/work/"]
+  path = ~/.config/git/gitconfig_benefitbay

@@ -11,6 +11,7 @@
 
 [core]
   autocrlf = input
+  attributesfile = ~/.config/git/gitattributes_global
   excludesfile = ~/.config/git/gitignore_global
 
 [github]
@@ -32,6 +33,10 @@
   email = atomaka@atomaka.com
   name = Andrew Tomaka
   signingkey = 61209BF70A5B18BE
+
+[diff "enc"]
+  textconv = bundle exec rails encrypted:show
+  cachetextconv = false
 
 [includeIf "gitdir:~/Source/work/"]
   path = ~/.config/git/gitconfig_benefitbay

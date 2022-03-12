@@ -78,6 +78,18 @@ function password-generator {
   echo $password
 }
 
+function run {
+  if [ $# -lt 2 ]; then
+    echo Usage: run NUMBER COMMAND
+  else
+    number=$1; shift
+
+    for i in `seq $number`; do
+      eval "$@"
+    done
+  fi
+}
+
 function test-rails {
   if bundle exec rspec --help > /dev/null 2>&1; then
     if [ -d spec ]; then

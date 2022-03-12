@@ -32,8 +32,8 @@ fi
 [[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"
 
 # EDITOR
-EDITOR=vim
-GIT_EDITOR=vim
+export EDITOR=vim
+export GIT_EDITOR=vim
 
 # Don't let Debian distributions run compinit
 skip_global_compinit=1

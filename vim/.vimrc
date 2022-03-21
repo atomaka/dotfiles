@@ -7,6 +7,7 @@ Plug 'moll/vim-bbye'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 
 " languages
@@ -128,6 +129,7 @@ map <Leader>sa :Move %<tab>
 autocmd FileType fugitiveblame nmap <buffer> q gq
 command! Gblame :G blame
 map <Leader>gb :Git blame<cr>
+map <Leader>gh :GBrowse<cr>
 
 " vim-plug
 map <Leader>pc :PlugClean<cr>

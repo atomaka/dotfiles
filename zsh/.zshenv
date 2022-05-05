@@ -5,6 +5,9 @@ PERSONAL_FPATH="$ZDOTDIR/completions"
 
 NODENV_PATH="$HOME/.nodenv/bin"
 RBENV_PATH="$HOME/.rbenv/bin"
+TFENV_PATH="$HOME/.tfenv/bin"
+
+CARGO_PATH="$HOME/.cargo/bin"
 
 if [[ "$OSTYPE" == darwin* ]]; then
   HOMEBREW_PREFIX="/opt/homebrew"
@@ -28,6 +31,8 @@ fi
 
 [[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"
 [[ -d "$NODENV_PATH" ]] && PATH="$NODENV_PATH:$PATH"
+[[ -d "$TFENV_PATH" ]] && PATH="$TFENV_PATH:$PATH"
+[[ -d "$CARGO_PATH" ]] && PATH="$CARGO_PATH:$PATH"
 [[ -d "$PERSONAL_BIN_PATH" ]] && PATH="$PERSONAL_BIN_PATH:$PATH"
 [[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"
 

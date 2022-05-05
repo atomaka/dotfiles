@@ -13,9 +13,16 @@ mac:
 	sudo mv /etc/{zprofile,zprofile.old}
 	brew install coreutils gnu-sed direnv fzf git stow the_silver_searcher tmux vim zsh
 
+
 javascript: nodenv-base nodenv-build
 
 ruby: rbenv-base rbenv-build
+
+rust:
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path
+
+terraform: tfenv
+
 
 alacritty:
 	curl -fLo /tmp/alacritty.info https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
@@ -24,7 +31,6 @@ alacritty:
 
 vim:
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 
 
 rbenv-base:
@@ -45,4 +51,9 @@ nodenv-base:
 nodenv-build:
 	if test ! -d ~/.nodenv/plugins/node-build ; then \
 		git clone https://github.com/nodenv/node-build.git ~/.nodenv/plugins/node-build ; \
+	fi
+
+tfenv:
+	if test ! -d ~/.tfenv ; then \
+		git clone https://github.com/tfutils/tfenv.git ~/.tfenv ; \
 	fi

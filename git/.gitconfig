@@ -39,4 +39,4 @@
   cachetextconv = false
 
 [includeIf "gitdir:~/Source/work/"]
-  path = ~/.config/git/gitconfig_benefitbay
+  path = ~/.config/git/gitconfig_oak

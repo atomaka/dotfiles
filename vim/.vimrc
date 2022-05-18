@@ -12,9 +12,10 @@ Plug 'tpope/vim-surround'
 
 " languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'hashivim/vim-terraform'
+Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
-Plug 'hashivim/vim-terraform'
 
 call plug#end()
 
@@ -114,6 +115,9 @@ map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 noremap <C-p> :FZF<CR>
+
+" rust.vim
+let g:rustfmt_autosave = 1
 
 " vim-bbye
 nnoremap <silent> <Leader>bd :Bdelete<CR>

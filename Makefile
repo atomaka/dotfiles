@@ -30,7 +30,8 @@ vim:
 
 mac_applications:
 	brew install coreutils gnu-sed direnv fzf git stow the_silver_searcher tmux \
-		vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm cmake
+		vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
+		awscli cmake session-manager-plugin jq
 	brew install --cask docker rectangle slack google-chrome alacritty telegram \
 		discord
 

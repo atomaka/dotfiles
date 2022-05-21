@@ -9,6 +9,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
+Plug 'vim-syntastic/syntastic'
 
 " languages
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -121,6 +122,16 @@ noremap <C-p> :FZF<CR>
 
 " rust.vim
 let g:rustfmt_autosave = 1
+
+" syntastic
+" recommended settings for syntastic beginners
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " vim-bbye
 nnoremap <silent> <Leader>bd :Bdelete<CR>

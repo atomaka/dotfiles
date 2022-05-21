@@ -111,6 +111,9 @@ map <Leader>cs :let @/ = ""<cr>
 " github
 map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
 
+" filetype overrides
+au Filetype rust set colorcolumn=100
+
 " PLUGIN CONFIGURATION
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'

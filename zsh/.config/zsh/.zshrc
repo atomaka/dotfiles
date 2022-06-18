@@ -42,3 +42,5 @@ else
   compinit -C
 fi
 unsetopt EXTENDEDGLOB
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

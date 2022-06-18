@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'chrisbra/matchit'
 Plug 'dhruvasagar/vim-zoom'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf'
 Plug 'moll/vim-bbye'
 Plug 'ntpeters/vim-better-whitespace'
@@ -113,9 +114,13 @@ map <Leader>cs :let @/ = ""<cr>
 map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
 
 " filetype overrides
-au Filetype rust set colorcolumn=100
+autocmd Filetype rust set colorcolumn=100
+autocmd BufNewFile,BufRead *.tftpl :set filetype=terraform
 
 " PLUGIN CONFIGURATION
+" editorconfig-vim
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+
 " fzf
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 noremap <C-p> :FZF<CR>

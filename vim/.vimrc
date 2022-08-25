@@ -111,7 +111,7 @@ map <Leader>st :let @/ = "\t"<cr>
 map <Leader>cs :let @/ = ""<cr>
 
 " github
-map <Leader>gg :exe "!hub gist create -o %:p"<cr><cr>
+map <Leader>gg :exe "!gh gist create -w %:p"<cr><cr>
 
 " filetype overrides
 autocmd Filetype rust set colorcolumn=100

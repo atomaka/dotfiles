@@ -32,7 +32,7 @@ mac_applications:
 	softwareupdate --install-rosetta
 	brew install coreutils gnu-sed direnv fzf git stow the_silver_searcher tmux \
 		vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
-		awscli cmake session-manager-plugin jq gnu-tar sccache watch hub
+		awscli cmake session-manager-plugin jq gnu-tar sccache watch gh
 	brew install --cask docker rectangle slack google-chrome alacritty telegram \
 		discord element
 

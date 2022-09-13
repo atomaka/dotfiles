@@ -116,6 +116,9 @@ map <Leader>gg :exe "!gh gist create -w %:p"<cr><cr>
 autocmd Filetype rust set colorcolumn=100
 autocmd BufNewFile,BufRead *.tftpl :set filetype=terraform
 
+" other
+map <Leader>fj :%!jq .<cr>
+
 " PLUGIN CONFIGURATION
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']

@@ -73,8 +73,13 @@ set shiftround                    " make >> go to next tab
 
 if has('persistent_undo')
   set undolevels=5000
-  set undodir=$HOME/.vim/undo
   set undofile
+
+  if has('nvim')
+    set undodir=$HOME/.config/nvim/undo
+  else
+    set undodir=$HOME/.vim/undo
+  endif
 endif
 
 " consistency is key - Y should act like C, D

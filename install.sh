@@ -128,7 +128,7 @@ main() {
       ;;
   esac
 
-  stow alacritty bin git ruby tmux vim zsh
+  stow alacritty bin git nvim ruby tmux vim zsh
 }
 
 main

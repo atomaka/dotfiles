@@ -5,3 +5,5 @@ zsh/.config/zsh/.zcompdump
 zsh/.config/zsh/.zsh_history
 zsh/.config/zsh/.zsh_sessions
 
+vim/.config/vim/undo
+nvim/.config/nvim/undo

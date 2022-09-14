@@ -29,6 +29,15 @@ if [[ "$OSTYPE" == darwin* ]]; then
   [[ -d "$GNU_TAR_PATH" ]] && PATH="$GNU_TAR_PATH:$PATH"
   [[ -d "$GNU_TOOLS_PATH" ]] && PATH="$GNU_TOOLS_PATH:$PATH"
   [[ -d "$GNU_TOOLS_MAN_PATH" ]] && MANPATH="$GNU_TOOLS_MAN_PATH:$MANPATH"
+elif [[ "$OSTYPE" == linux* ]]; then
+  HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
+  HOMEBREW_CELLAR="/home/linuxbrew/.linuxbrew/Cellar";
+  HOMEBREW_REPOSITORY="/home/linuxbrew/.linuxbrew/Homebrew";
+
+  PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}";
+
+  MANPATH="/home/linuxbrew/.linuxbrew/share/man${MANPATH+:$MANPATH}:";
+  INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 fi
 
 [[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"

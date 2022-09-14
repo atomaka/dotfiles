@@ -84,13 +84,15 @@ install_vim() {
 
 install_linux() {
   if ! command -v apt-get > /dev/null; then
-    echo apt-get is not required, but not available
+    echo apt-get is required, but not available
     exit 1
   fi
 
-  DEBIAN_FRONTEND=noninteractive sudo apt-get install --assume-yes \
-    build-essential procps curl file git cmake pkg-config libfreetype6-dev \
-    libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+  packages="build-essential procps curl file git cmake pkg-config\
+    libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev\
+    libxkbcommon-dev python3"
+  dpkg -s $packages >/dev/null 2>&1 \
+    || sudo apt-get install --assume-yes $packages
 
   install_homebrew
   source ~/dotfiles/zsh/.zshenv

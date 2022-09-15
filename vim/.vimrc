@@ -128,10 +128,14 @@ autocmd BufNewFile,BufRead *.tftpl :set filetype=terraform
 map <Leader>fj :%!jq .<cr>
 
 " COLOR CONFIGURATION
-set termguicolors
+if has('nvim')
+  set termguicolors
+endif
+
 colorscheme gruvbox
 
-autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+" NONE is case sensitive in vim here (but not nvim)
+autocmd ColorScheme * hi Normal ctermbg=NONE guibg=NONE
 
 function! ChangeBackground()
   let &background=readfile(glob("~/.config/atomaka/color.yml"))[0]

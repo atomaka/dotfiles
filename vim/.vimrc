@@ -18,6 +18,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 
+" colors
+Plug 'morhetz/gruvbox'
+
 call plug#end()
 
 " STATUS LINE
@@ -123,6 +126,17 @@ autocmd BufNewFile,BufRead *.tftpl :set filetype=terraform
 
 " other
 map <Leader>fj :%!jq .<cr>
+
+" COLOR CONFIGURATION
+set termguicolors
+colorscheme gruvbox
+
+autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+
+function! ChangeBackground()
+  let &background=readfile(glob("~/.config/atomaka/color.yml"))[0]
+endfunction
+call ChangeBackground()
 
 " PLUGIN CONFIGURATION
 " editorconfig-vim

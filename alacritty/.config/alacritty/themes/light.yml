@@ -1,27 +1,30 @@
-# ayu-light
+# Colors (Gruvbox light)
 colors:
+  # Default colors
   primary:
-    background: '0xfafafa'
-    foreground: '0x5b6672'
+    # hard contrast: background = '0xf9f5d7'
+    background: '0xfbf1c7'
+    # soft contrast: background = '0xf2e5bc'
+    foreground: '0x3c3836'
 
   # Normal colors
   normal:
-    black: '0x000000' #0
-    red: '0xf2590b' #1
-    green: '0x76cc00' #2
-    yellow: '0xf29717' #3
-    blue: '0x41a5d9' #4
-    magenta: '0x9965cc' #5
-    cyan: '0x4dbf98' #6
-    white: '0xc7c7c7' #7
+    black:   '0xfbf1c7'
+    red:     '0xcc241d'
+    green:   '0x98971a'
+    yellow:  '0xd79921'
+    blue:    '0x458588'
+    magenta: '0xb16286'
+    cyan:    '0x689d6a'
+    white:   '0x7c6f64'
 
   # Bright colors
   bright:
-    black: '0x676767'
-    red: '0xd6646a' #9
-    green: '0xa3d900' #10
-    yellow: '0xe7c446' #11
-    blue: '0x6871ff' #12
-    magenta: '0xa37acc' #13
-    cyan: '0x56d9ad' #14
-    white: '0xfeffff' #15
+    black:   '0x928374'
+    red:     '0x9d0006'
+    green:   '0x79740e'
+    yellow:  '0xb57614'
+    blue:    '0x076678'
+    magenta: '0x8f3f71'
+    cyan:    '0x427b58'
+    white:   '0x3c3836'

@@ -20,3 +20,11 @@ echo $alacritty_header > $alacritty/alacritty.yml
 cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty/alacritty.yml
 
 echo $new_color > $color_file
+
+for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); do
+  IFS=- read pane cmd <<< "$pane_info"
+
+  if [[ $cmd == "vim" || $cmd == "nvim" ]]; then
+    tmux send-keys -t $pane ":call ChangeBackground()" ENTER
+  fi
+done

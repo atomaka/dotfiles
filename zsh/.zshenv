@@ -48,8 +48,11 @@ fi
 [[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"
 
 # EDITOR
-export EDITOR=vim
-export GIT_EDITOR=vim
+if command -v nvim > /dev/null; then
+  export {EDITOR,GIT_EDITOR}=nvim
+else
+  export {EDITOR,GIT_EDITOR}=vim
+fi
 
 # Don't let Debian distributions run compinit
 skip_global_compinit=1

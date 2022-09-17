@@ -96,8 +96,8 @@ vnoremap > >gv
 vnoremap < <gv
 
 " typo-city
-:command W w
-:command Wq wq
+command W w
+command Wq wq
 
 " quick replaceement
 nmap S :%s//g<LEFT><LEFT>
@@ -140,6 +140,27 @@ function! ChangeBackground()
   let &background=readfile(glob("~/.config/atomaka/color.yml"))[0]
 endfunction
 call ChangeBackground()
+
+" Targetting!
+augroup Reticle
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorcolumn
+  au WinLeave * setlocal nocursorcolumn
+augroup END
+
+" crosshair
+set cursorline
+set cursorcolumn
+
+" crosshair
+set cursorline
+set cursorcolumn
+
+" crosshair
+set cursorline
+set cursorcolumn
 
 " PLUGIN CONFIGURATION
 " context.vim

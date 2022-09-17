@@ -61,7 +61,7 @@ set number
 set relativenumber
 
 set textwidth=80
-" set colorcolumn=80,120
+set colorcolumn=80,120
 
 " For commands
 set infercase

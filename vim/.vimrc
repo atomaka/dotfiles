@@ -22,7 +22,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'morhetz/gruvbox'
 
 " testing
-Plug 'wellle/context.vim'   " consider nvim-treesitter-context
+Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 call plug#end()
 
@@ -163,9 +164,6 @@ set cursorline
 set cursorcolumn
 
 " PLUGIN CONFIGURATION
-" context.vim
-let g:context_highlight_border = '<hide>'
-
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 

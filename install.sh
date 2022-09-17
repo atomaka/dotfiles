@@ -16,7 +16,7 @@ install_homebrew() {
 install_shared_applications() {
   brew install direnv fzf git stow the_silver_searcher tmux \
     vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
-    awscli cmake jq watch gh
+    awscli cmake jq watch gh nvim
 
   install_alacritty_terminfo
   install_rust
@@ -72,13 +72,9 @@ install_rust() {
 }
 
 install_vim() {
-  if ! test -f ~/.vim/autoload/plug.vim > /dev/null; then
-    curl \
-      --create-dirs \
-      --fail \
-      --location \
-      --output ~/.vim/autoload/plug.vim \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  if ! test -d ~/.local/share/nvim/site > /dev/null; then
+    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
   fi
 }
 

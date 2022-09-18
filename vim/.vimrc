@@ -155,14 +155,6 @@ augroup END
 set cursorline
 set cursorcolumn
 
-" crosshair
-set cursorline
-set cursorcolumn
-
-" crosshair
-set cursorline
-set cursorcolumn
-
 " PLUGIN CONFIGURATION
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']

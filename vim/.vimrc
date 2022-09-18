@@ -21,10 +21,6 @@ Plug 'vim-ruby/vim-ruby'
 " colors
 Plug 'morhetz/gruvbox'
 
-" testing
-Plug 'nvim-treesitter/nvim-treesitter'
-Plug 'nvim-treesitter/nvim-treesitter-context'
-
 call plug#end()
 
 " STATUS LINE

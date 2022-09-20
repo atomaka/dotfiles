@@ -23,6 +23,9 @@ packer.startup(function()
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
 
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-context'
+
     use "gpanders/editorconfig.nvim"
     use "johnfrankmorgan/whitespace.nvim"
 
@@ -155,6 +158,9 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
+--- nvim-treesitter-context
+require'treesitter-context'.setup {}
+
 --- packer.nvim
 vim.keymap.set('n', '<Leader>pi', function()
   vim.cmd('PackerCompile')

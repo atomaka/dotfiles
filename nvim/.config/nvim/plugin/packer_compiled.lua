@@ -74,6 +74,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["editorconfig.nvim"] = {
+    loaded = true,
+    path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/editorconfig.nvim",
+    url = "https://github.com/gpanders/editorconfig.nvim"
+  },
   gruvbox = {
     loaded = true,
     path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/gruvbox",
@@ -93,6 +98,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["whitespace.nvim"] = {
+    loaded = true,
+    path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/whitespace.nvim",
+    url = "https://github.com/johnfrankmorgan/whitespace.nvim"
   }
 }
 

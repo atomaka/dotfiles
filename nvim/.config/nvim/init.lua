@@ -23,6 +23,9 @@ packer.startup(function()
     use "nvim-lua/plenary.nvim"
     use "nvim-telescope/telescope.nvim"
 
+    use "gpanders/editorconfig.nvim"
+    use "johnfrankmorgan/whitespace.nvim"
+
     use "gruvbox-community/gruvbox"
   end
 )
@@ -163,4 +166,9 @@ vim.keymap.set('n', '<Leader>pc', ':PackerClean<CR>')
 --- telescope.nvim
 vim.keymap.set('n', '<C-p>', function()
     require('telescope.builtin').git_files()
+end)
+
+--- whitespace.nvim
+vim.keymap.set('n', '<Leader>fw', function()
+  require('whitespace-nvim').trim()
 end)

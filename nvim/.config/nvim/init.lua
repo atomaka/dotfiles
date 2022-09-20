@@ -101,6 +101,15 @@ vim.api.nvim_create_autocmd({"WinLeave"}, {
     end
 })
 
+--- background matching terminal
+function ChangeBackground()
+  local file = io.open(os.getenv("HOME") .. "/.config/atomaka/color.yml", "rb")
+  local background = file:read()
+  file:close()
+  vim.opt.background = background
+end
+ChangeBackground()
+
 -- LEADER CONFIGURATION
 vim.g.mapleader = ","
 

@@ -1,38 +1,38 @@
-local vim = vim
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
--- ensure that packer is installed
-local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-    execute('!git clone https://github.com/wbthomason/packer.nvim '..install_path)
-    execute 'packadd packer.nvim'
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
 
-vim.cmd('packadd packer.nvim')
-local packer = require'packer'
-local util = require'packer.util'
-packer.init({
-  package_root = util.join_paths(vim.fn.stdpath('data'), 'site', 'pack')
-})
---- startup and add configure plugins
-packer.startup(function()
+local packer_bootstrap = ensure_packer()
+
+require('packer').startup(function(use)
   local use = use
-    use "wbthomason/packer.nvim"
 
-    use "nvim-lua/plenary.nvim"
-    use "nvim-telescope/telescope.nvim"
+  use "wbthomason/packer.nvim"
+  -- TODO: autoupdate (but after plugins separate file
+  -- augroup packer_user_config
+  --   autocmd!
+  --   autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  -- augroup end
 
-    use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/nvim-treesitter-context'
+  use "nvim-lua/plenary.nvim"
+  use "nvim-telescope/telescope.nvim"
 
-    use "gpanders/editorconfig.nvim"
-    use "johnfrankmorgan/whitespace.nvim"
-    use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
+  use 'nvim-treesitter/nvim-treesitter'
+  use 'nvim-treesitter/nvim-treesitter-context'
 
-    use "gruvbox-community/gruvbox"
-  end
-)
+  use "gpanders/editorconfig.nvim"
+  use "johnfrankmorgan/whitespace.nvim"
+  use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
+
+  use "gruvbox-community/gruvbox"
+end)
 
 --- SETTING CONFIGURATION
 vim.opt.autowrite = true

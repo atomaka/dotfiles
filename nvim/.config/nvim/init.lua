@@ -245,6 +245,5 @@ require("whitespace-nvim").setup({
   hightlight = "red"
 })
 vim.keymap.set("n", "<Leader>fw", function()
-  -- require("whitespace-nvim").trim()
-  vim.cmd [[%substitute/\v\s+$//eg]]
+  require("whitespace-nvim").trim()
 end, { silent = true })

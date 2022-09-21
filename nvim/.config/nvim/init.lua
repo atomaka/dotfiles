@@ -24,7 +24,7 @@ packer.startup(function()
     use "nvim-telescope/telescope.nvim"
 
     use 'nvim-treesitter/nvim-treesitter'
-    use 'wellle/context.vim'    -- use 'nvim-treesitter/nvim-treesitter-context'
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     use "gpanders/editorconfig.nvim"
     use "johnfrankmorgan/whitespace.nvim"
@@ -158,9 +158,6 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
---- context.vim
-vim.cmd("let g:context_highlight_border = '<hide>'")
-
 --- packer.nvim
 vim.keymap.set('n', '<Leader>pi', function()
   vim.cmd('PackerCompile')
@@ -173,6 +170,32 @@ vim.keymap.set('n', '<Leader>pc', ':PackerClean<CR>')
 vim.keymap.set('n', '<C-p>', function()
     require('telescope.builtin').git_files()
 end)
+
+--- nvim-treesitter
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = "all",
+    sync_install = false,
+
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false,
+    },
+}
+
+-- nvim-treesitter-context
+require("treesitter-context").setup({
+  patterns = {
+    rust = {
+      -- default rust
+      'impl_item',
+      'struct',
+      'enum',
+
+      -- substrate xD
+      'macro_invocation',
+    },
+  },
+})
 
 --- whitespace.nvim
 vim.keymap.set('n', '<Leader>fw', function()

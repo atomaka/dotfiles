@@ -24,7 +24,7 @@ packer.startup(function()
     use "nvim-telescope/telescope.nvim"
 
     use 'nvim-treesitter/nvim-treesitter'
-    use 'nvim-treesitter/nvim-treesitter-context'
+    use 'wellle/context.vim'    -- use 'nvim-treesitter/nvim-treesitter-context'
 
     use "gpanders/editorconfig.nvim"
     use "johnfrankmorgan/whitespace.nvim"
@@ -158,8 +158,8 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
---- nvim-treesitter-context
-require'treesitter-context'.setup {}
+--- context.vim
+vim.cmd("let g:context_highlight_border = '<hide>'")
 
 --- packer.nvim
 vim.keymap.set('n', '<Leader>pi', function()

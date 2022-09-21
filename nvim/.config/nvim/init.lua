@@ -27,11 +27,13 @@ require("packer").startup(function(use)
   use "nvim-treesitter/nvim-treesitter"
   use "nvim-treesitter/nvim-treesitter-context"
 
+  use "famiu/bufdelete.nvim"
   use "gpanders/editorconfig.nvim"
   use "johnfrankmorgan/whitespace.nvim"
   use "kylechui/nvim-surround"
   use "lewis6991/gitsigns.nvim"
   use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
+  use "ruifm/gitlinker.nvim"
 
   use "gruvbox-community/gruvbox"
 end)
@@ -161,8 +163,29 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
+--- bufdelete.nvim
+vim.keymap.set("n", "<Leader>bd", function()
+  require("bufdelete").bufdelete(0, true)
+end)
+
+--- gitlinker.nvim
+require"gitlinker".setup()
+vim.keymap.set("n", "<Leader>gh", function()
+  require"gitlinker".get_buf_range_url(
+    "n",
+    { action_callback = require"gitlinker.actions".open_in_browser }
+  )
+end, { silent = true })
+vim.keymap.set("v", "<leader>gh", function()
+  require"gitlinker".get_buf_range_url(
+    "v",
+    { action_callback = require"gitlinker.actions".open_in_browser }
+  )
+end)
+
 --- gitsigns.nvim
 require("gitsigns").setup()
+vim.keymap.set("n", "<leader>gb", require("gitsigns").toggle_current_line_blame)
 
 --- NeoZoom.lua
 require("neo-zoom").setup({
@@ -217,6 +240,10 @@ vim.keymap.set("n", "<C-p>", function()
 end)
 
 --- whitespace.nvim
+require("whitespace-nvim").setup({
+  hightlight = "red"
+})
 vim.keymap.set("n", "<Leader>fw", function()
-  require("whitespace-nvim").trim()
-end)
+  -- require("whitespace-nvim").trim()
+  vim.cmd [[%substitute/\v\s+$//eg]]
+end, { silent = true })

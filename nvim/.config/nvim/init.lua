@@ -1,8 +1,8 @@
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -11,7 +11,7 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-require('packer').startup(function(use)
+require("packer").startup(function(use)
   local use = use
 
   use "wbthomason/packer.nvim"
@@ -24,11 +24,13 @@ require('packer').startup(function(use)
   use "nvim-lua/plenary.nvim"
   use "nvim-telescope/telescope.nvim"
 
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/nvim-treesitter-context'
+  use "nvim-treesitter/nvim-treesitter"
+  use "nvim-treesitter/nvim-treesitter-context"
 
   use "gpanders/editorconfig.nvim"
   use "johnfrankmorgan/whitespace.nvim"
+  use "kylechui/nvim-surround"
+  use "lewis6991/gitsigns.nvim"
   use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
 
   use "gruvbox-community/gruvbox"
@@ -75,17 +77,17 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undo"
 
 -- REMAP CONFIGURATION
 --- Stay in visual mode while tabbing
-vim.keymap.set('v', '>', '>gv')
-vim.keymap.set('v', '<', '<gv')
+vim.keymap.set("v", ">", ">gv")
+vim.keymap.set("v", "<", "<gv")
 
 --- quick replacement
-vim.keymap.set('n', 'S', ':%s//g<LEFT><LEFT>')
-vim.keymap.set('v', 'S', 'y:%s/<C-r><C-r>"//g<Left><Left>')
+vim.keymap.set("n", "S", ":%s//g<LEFT><LEFT>")
+vim.keymap.set("v", "S", 'y:%s/<C-r><C-r>"//g<Left><Left>')
 
 --- COMMAND CONFIGURATION
 --- Avoid typos
-vim.api.nvim_create_user_command('W', 'w', {})
-vim.api.nvim_create_user_command('Wq', 'wq', {})
+vim.api.nvim_create_user_command("W", "w", {})
+vim.api.nvim_create_user_command("Wq", "wq", {})
 
 -- CUSTOM CONFIGURATION
 --- Targetting!
@@ -120,35 +122,35 @@ ChangeBackground()
 -- LEADER CONFIGURATION
 vim.g.mapleader = ","
 
-vim.keymap.set('n', '<leader>sz', ':luafile ~/.config/nvim/init.lua<cr>')
+vim.keymap.set("n", "<leader>sz", ":luafile ~/.config/nvim/init.lua<cr>")
 
-vim.keymap.set({ 'n', 'v' }, '<leader>cp', '"+y')
-vim.keymap.set({ 'n', 'v' }, '<leader>pa', '"+P')
+vim.keymap.set({ "n", "v" }, "<leader>cp", '"+y')
+vim.keymap.set({ "n", "v" }, "<leader>pa", '"+P')
 
-vim.keymap.set('n', '<leader>cs', ':let @/ = ""<cr>')
-vim.keymap.set('n', '<leader>fj', ':%!jq .<cr>')
-vim.keymap.set('n', '<leader>gg', ':exe "!gh gist create -w %:p"<cr><cr>')
+vim.keymap.set("n", "<leader>cs", ":let @/ = ''<cr>")
+vim.keymap.set("n", "<leader>fj", ":%!jq .<cr>")
+vim.keymap.set("n", "<leader>gg", ":exe '!gh gist create -w %:p'<cr><cr>")
 
 --- tabs
-vim.keymap.set('n', '<Leader>2', function()
+vim.keymap.set("n", "<Leader>2", function()
   print("Setting tabstop to 2")
   vim.opt.tabstop = 2
   vim.opt.shiftwidth = 2
   vim.opt.expandtab = true
 end)
-vim.keymap.set('n', '<Leader>4', function()
+vim.keymap.set("n", "<Leader>4", function()
   print("Setting tabstop to 4")
   vim.opt.tabstop = 4
   vim.opt.shiftwidth = 4
   vim.opt.expandtab = true
 end)
-vim.keymap.set('n', '<Leader>a', function()
+vim.keymap.set("n", "<Leader>a", function()
   print("Setting tabstop to tab")
   vim.opt.tabstop = 8
   vim.opt.shiftwidth = 8
   vim.opt.expandtab = false
 end)
-vim.keymap.set('n', '<Leader>st', ':let @/ = "\t"<cr>')
+vim.keymap.set("n", "<Leader>st", ':let @/ = "\t"<cr>')
 
 -- COLOR CONFIGURATION
 vim.cmd("colorscheme gruvbox")
@@ -159,18 +161,24 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
+--- gitsigns.nvim
+require("gitsigns").setup()
+
 --- NeoZoom.lua
-require('neo-zoom').setup({
+require("neo-zoom").setup({
   left_ratio = 0,
   top_ratio = 0,
   width_ratio = 1,
   height_ratio = 1,
-  border = 'none',
+  border = "none",
 })
-vim.keymap.set('n', '<C-w>z', require("neo-zoom").neo_zoom)
+vim.keymap.set("n", "<C-w>z", require("neo-zoom").neo_zoom)
+
+--- nvim-surround
+require("nvim-surround").setup()
 
 --- nvim-treesitter
-require'nvim-treesitter.configs'.setup {
+require"nvim-treesitter.configs".setup {
     ensure_installed = "all",
     sync_install = false,
 
@@ -185,30 +193,30 @@ require("treesitter-context").setup({
   patterns = {
     rust = {
       -- default rust
-      'impl_item',
-      'struct',
-      'enum',
+      "impl_item",
+      "struct",
+      "enum",
 
       -- substrate xD
-      'macro_invocation',
+      "macro_invocation",
     },
   },
 })
 
 --- packer.nvim
-vim.keymap.set('n', '<Leader>pi', function()
-  vim.cmd('PackerCompile')
-  vim.cmd('PackerInstall')
+vim.keymap.set("n", "<Leader>pi", function()
+  vim.cmd("PackerCompile")
+  vim.cmd("PackerInstall")
 end)
-vim.keymap.set('n', '<Leader>pu', ':PackerSync<CR>')
-vim.keymap.set('n', '<Leader>pc', ':PackerClean<CR>')
+vim.keymap.set("n", "<Leader>pu", ":PackerSync<CR>")
+vim.keymap.set("n", "<Leader>pc", ":PackerClean<CR>")
 
 --- telescope.nvim
-vim.keymap.set('n', '<C-p>', function()
-    require('telescope.builtin').git_files()
+vim.keymap.set("n", "<C-p>", function()
+    require("telescope.builtin").git_files()
 end)
 
 --- whitespace.nvim
-vim.keymap.set('n', '<Leader>fw', function()
-  require('whitespace-nvim').trim()
+vim.keymap.set("n", "<Leader>fw", function()
+  require("whitespace-nvim").trim()
 end)

@@ -74,10 +74,10 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["context.vim"] = {
+  ["NeoZoom.lua"] = {
     loaded = true,
-    path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/context.vim",
-    url = "https://github.com/wellle/context.vim"
+    path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/NeoZoom.lua",
+    url = "https://github.com/nyngwang/NeoZoom.lua"
   },
   ["editorconfig.nvim"] = {
     loaded = true,
@@ -93,6 +93,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/atomaka/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
   ["packer.nvim"] = {
     loaded = true,

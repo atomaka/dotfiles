@@ -28,6 +28,7 @@ packer.startup(function()
 
     use "gpanders/editorconfig.nvim"
     use "johnfrankmorgan/whitespace.nvim"
+    use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
 
     use "gruvbox-community/gruvbox"
   end
@@ -158,18 +159,15 @@ vim.api.nvim_create_autocmd({"ColorScheme", "BufWinEnter"}, {
 })
 
 -- PLUGIN CONFIGURATION
---- packer.nvim
-vim.keymap.set('n', '<Leader>pi', function()
-  vim.cmd('PackerCompile')
-  vim.cmd('PackerInstall')
-end)
-vim.keymap.set('n', '<Leader>pu', ':PackerSync<CR>')
-vim.keymap.set('n', '<Leader>pc', ':PackerClean<CR>')
-
---- telescope.nvim
-vim.keymap.set('n', '<C-p>', function()
-    require('telescope.builtin').git_files()
-end)
+--- NeoZoom.lua
+require('neo-zoom').setup({
+  left_ratio = 0,
+  top_ratio = 0,
+  width_ratio = 1,
+  height_ratio = 1,
+  border = 'none',
+})
+vim.keymap.set('n', '<C-w>z', require("neo-zoom").neo_zoom)
 
 --- nvim-treesitter
 require'nvim-treesitter.configs'.setup {
@@ -196,6 +194,19 @@ require("treesitter-context").setup({
     },
   },
 })
+
+--- packer.nvim
+vim.keymap.set('n', '<Leader>pi', function()
+  vim.cmd('PackerCompile')
+  vim.cmd('PackerInstall')
+end)
+vim.keymap.set('n', '<Leader>pu', ':PackerSync<CR>')
+vim.keymap.set('n', '<Leader>pc', ':PackerClean<CR>')
+
+--- telescope.nvim
+vim.keymap.set('n', '<C-p>', function()
+    require('telescope.builtin').git_files()
+end)
 
 --- whitespace.nvim
 vim.keymap.set('n', '<Leader>fw', function()

@@ -21,9 +21,6 @@ Plug 'vim-ruby/vim-ruby'
 " colors
 Plug 'morhetz/gruvbox'
 
-" testing
-Plug 'wellle/context.vim'   " consider nvim-treesitter-context
-
 call plug#end()
 
 " STATUS LINE
@@ -154,18 +151,7 @@ augroup END
 set cursorline
 set cursorcolumn
 
-" crosshair
-set cursorline
-set cursorcolumn
-
-" crosshair
-set cursorline
-set cursorcolumn
-
 " PLUGIN CONFIGURATION
-" context.vim
-let g:context_highlight_border = '<hide>'
-
 " editorconfig-vim
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 

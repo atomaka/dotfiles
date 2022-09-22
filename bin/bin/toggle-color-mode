@@ -25,6 +25,6 @@ for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); 
   IFS=- read pane cmd <<< "$pane_info"
 
   if [[ $cmd == "vim" || $cmd == "nvim" ]]; then
-    tmux send-keys -t $pane ":call ChangeBackground()" ENTER
+    tmux send-keys -t $pane ":lua ChangeBackground()" ENTER
   fi
 done

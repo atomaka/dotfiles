@@ -130,6 +130,28 @@ function ChangeBackground()
 end
 ChangeBackground()
 
+--- runtime files xD
+function DisableLspForRuntime()
+  local current_buffer = vim.fn.bufnr('%')
+  local current_file_path = vim.fn.expand('%:p')
+  local current_file_name = vim.fn.expand('%:p:t')
+
+  if current_file_path:find("runtime") and current_file_name == "lib.rs" then
+    vim.diagnostic.hide(diagnostic_bufnr, current_buffer)
+  else
+    vim.diagnostic.show(diagnostic_bufnr, current_buffer)
+  end
+end
+
+local protect_from_runtime = vim.api.nvim_create_augroup("ToggleLsp", {
+  clear = true
+})
+
+vim.api.nvim_create_autocmd({"BufEnter"}, {
+    group = protect_from_runtime,
+    callback = DisableLspForRuntime
+})
+
 -- LEADER CONFIGURATION
 vim.g.mapleader = ","
 

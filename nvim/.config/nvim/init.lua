@@ -31,9 +31,18 @@ require("packer").startup(function(use)
   use "gpanders/editorconfig.nvim"
   use "johnfrankmorgan/whitespace.nvim"
   use "kylechui/nvim-surround"
+  use "L3MON4D3/LuaSnip"
   use "lewis6991/gitsigns.nvim"
   use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
   use "ruifm/gitlinker.nvim"
+
+  use "neovim/nvim-lspconfig"
+  use "hrsh7th/nvim-cmp"
+  use "hrsh7th/cmp-nvim-lsp"
+  use "hrsh7th/cmp-buffer"
+  use "hrsh7th/cmp-path"
+  use "hrsh7th/cmp-nvim-lua"
+  use 'saadparwaiz1/cmp_luasnip'
 
   use "gruvbox-community/gruvbox"
 end)
@@ -196,6 +205,22 @@ require("neo-zoom").setup({
   border = "none",
 })
 vim.keymap.set("n", "<C-w>z", require("neo-zoom").neo_zoom)
+
+--- nvim-cmp
+require("cmp").setup({ -- TODO: More incoming
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end,
+  }
+})
+
+--- nvim-lspconfig
+require("lspconfig").rust_analyzer.setup({
+  capabilities = require("cmp_nvim_lsp").update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+  ),
+})
 
 --- nvim-surround
 require("nvim-surround").setup()

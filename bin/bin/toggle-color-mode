@@ -21,10 +21,12 @@ cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty
 
 echo $new_color > $color_file
 
-for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); do
-  IFS=- read pane cmd <<< "$pane_info"
+if tmux info &> /dev/null; then
+  for pane_info in $(tmux list-panes -a -F '#{pane_id}-#{pane_current_command}'); do
+    IFS=- read pane cmd <<< "$pane_info"
 
-  if [[ $cmd == "vim" || $cmd == "nvim" ]]; then
-    tmux send-keys -t $pane ":lua ChangeBackground()" ENTER
-  fi
-done
+    if [[ $cmd == "vim" || $cmd == "nvim" ]]; then
+      tmux send-keys -t $pane ":lua ChangeBackground()" ENTER
+    fi
+  done
+fi

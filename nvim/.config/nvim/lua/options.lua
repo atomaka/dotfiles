@@ -1,23 +1,16 @@
 -- SETTING CONFIGURATION
 vim.opt.autowrite = true
--- vim.opt.backspace = 2 -- default in neovim?
 vim.opt.cpoptions:append("$")
--- vim.opt.endofline -- default in neovim?
--- vim.opt.laststatus = 2 -- default in neovim?
--- vim.opt.backup = false -- default in neovim?
 vim.opt.swapfile = false
 vim.opt.wrap = false
 vim.opt.scrolloff = 3
 vim.opt.showmatch = true
--- vim.opt.showmode = true -- default in neovim?
--- vim.opt.showmode = true -- default in neovim?
 vim.opt.timeoutlen = 500
 vim.opt.virtualedit = "all"
--- vim.opt.hlsearch = true -- default in neovim?
 vim.opt.ignorecase = true
--- vim.opt.incsearch = true -- default in neovim?
 vim.opt.smartcase = true
--- vim.opt.wrapscan = true -- default in neovim?
+-- Allow use of tab in macros
+vim.opt.wildcharm = ('\t'):byte()
 
 vim.opt.number = true
 vim.opt.relativenumber = true

@@ -56,6 +56,8 @@ vim.keymap.set("n", "<leader>cs", ":let @/ = ''<cr>")
 vim.keymap.set("n", "<leader>fj", ":%!jq .<cr>")
 vim.keymap.set("n", "<leader>gg", ":exe '!gh gist create -w %:p'<cr><cr>")
 
+vim.keymap.set('n', '<leader>sa', ':Move %<tab>')
+
 --- tabs
 vim.keymap.set("n", "<Leader>2", function()
   print("Setting tabstop to 2")

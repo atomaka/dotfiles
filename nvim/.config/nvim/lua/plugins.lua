@@ -31,6 +31,7 @@ return require('packer').startup(function(use)
   use "lewis6991/gitsigns.nvim"
   use "nyngwang/NeoZoom.lua" -- TODO: Floating window background color
   use "ruifm/gitlinker.nvim"
+  use "tpope/vim-eunuch"
 
   use "gruvbox-community/gruvbox"
 

@@ -1,5 +1,7 @@
 ZDOTDIR=$HOME/.config/zsh
 
+XDG_CONFIG_HOME="$HOME/.config"
+
 PERSONAL_BIN_PATH="$HOME/bin"
 PERSONAL_FPATH="$ZDOTDIR/completions"
 

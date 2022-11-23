@@ -43,4 +43,4 @@ else
 fi
 unsetopt EXTENDEDGLOB
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ] && source $XDG_CONFIG_HOME/fzf/fzf.zsh

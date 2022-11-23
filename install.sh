@@ -13,12 +13,13 @@ install_homebrew() {
   fi
 }
 
-install_shared_applications() {
+install_shared_applicaions() {
   brew install direnv fzf git stow the_silver_searcher tmux \
     vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
     awscli cmake jq watch gh nvim openssl@1.1 openssl@3 readline libyaml gmp
 
   install_alacritty_terminfo
+  install_fzf
   install_rust
   install_vim
 }
@@ -57,6 +58,14 @@ install_alacritty_terminfo() {
     sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
     $HOME/dotfiles/bin/bin/toggle-color-mode
   fi
+}
+
+install_fzf() {
+  $(brew --prefix)/opt/fzf/install \
+    --xdg \
+    --no-update-rc \
+    --keybindings \
+    --completion
 }
 
 install_rust() {

@@ -68,6 +68,7 @@ install_tmux_terminfo() {
 
     pushd /tmp
     gunzip tmux-256color.src.gz
+    sed -i 's/pairs#0x10000/pairs#32767/g' tmux-256color.src
 
     sudo tic -xe tmux-256color tmux-256color.src
     popd

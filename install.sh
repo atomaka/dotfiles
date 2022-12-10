@@ -42,7 +42,7 @@ install_alacritty() {
     sudo mv /tmp/Alacritty.svg /usr/share/pixmaps/Alacritty.svg
     sudo desktop-file-install /tmp/Alacritty.desktop
     sudo update-desktop-database
-    sudo ln -s /home/$USERNAME/.cargo/bin/alacritty /usr/local/bin/alacritty
+    sudo ln -s /home/$USER/.cargo/bin/alacritty /usr/local/bin/alacritty
   fi
 }
 

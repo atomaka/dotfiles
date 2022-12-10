@@ -1,8 +1,8 @@
 #!/bin/bash
 
-color_file=$HOME/.config/$USERNAME/color.yml
+color_file=$HOME/.config/$USER/color.yml
 if ! test -f $color_file; then
-  mkdir -p $HOME/.config/$USERNAME
+  mkdir -p $HOME/.config/$USER
   echo light > $color_file
 fi
 old_color=$(cat $color_file)

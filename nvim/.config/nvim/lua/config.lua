@@ -36,7 +36,7 @@ vim.api.nvim_create_autocmd({"WinLeave"}, {
 --- background matching terminal
 function ChangeBackground()
   local home = os.getenv("HOME")
-  local user = os.getenv("USERNAME")
+  local user = os.getenv("USER")
   local file = io.open(home.."/.config/"..user.."/color.yml", "rb")
   local background = file:read()
   file:close()

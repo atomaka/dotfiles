@@ -13,12 +13,11 @@ install_homebrew() {
   fi
 }
 
-install_shared_applicaions() {
+install_shared_applications() {
   brew install direnv fzf git stow the_silver_searcher tmux \
     vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
     awscli cmake jq watch gh nvim openssl@1.1 openssl@3 readline libyaml gmp
 
-  install_alacritty_terminfo
   install_fzf
   install_rust
   install_vim
@@ -56,7 +55,22 @@ install_alacritty_terminfo() {
       https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
 
     sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
-    $HOME/dotfiles/bin/bin/toggle-color-mode
+  fi
+}
+
+install_tmux_terminfo() {
+  if ! infocmp tmux-256color > /dev/null; then
+    curl \
+      --fail \
+      --location \
+      --output /tmp/tmux-256color.src.gz \
+      https://invisible-island.net/datafiles/current/terminfo.src.gz
+
+    pushd /tmp
+    gunzip tmux-256color.src.gz
+
+    sudo tic -xe tmux-256color tmux-256color.src
+    popd
   fi
 }
 
@@ -64,7 +78,7 @@ install_fzf() {
   $(brew --prefix)/opt/fzf/install \
     --xdg \
     --no-update-rc \
-    --keybindings \
+    --key-bindings \
     --completion
 }
 
@@ -106,20 +120,23 @@ install_linux() {
 
   # gui
   install_alacritty
+  install_alacritty_terminfo
 }
 
 install_darwin() {
   install_homebrew
-  sudo mv /etc/{zprofile,zprofile.old}
+  [[ -f /etc/zprofile ]] && sudo mv /etc/{zprofile,zprofile.old}
   source ~/dotfiles/zsh/.zshenv
   install_shared_applications
 
-  softwareupdate --install-rosetta
+  softwareupdate --install-rosetta --agree-to-license
   brew install coreutils gnu-sed session-manager-plugin
 
   # gui
   brew install --cask docker rectangle slack google-chrome alacritty telegram \
-    discord element
+    discord element brave-browser
+
+  install_tmux_terminfo
 }
 
 main() {
@@ -135,7 +152,8 @@ main() {
   esac
 
   stow alacritty bin git nvim ruby tmux zsh
-  install_alacritty_terminfo
+
+  $HOME/dotfiles/bin/bin/toggle-color-mode
 }
 
 main

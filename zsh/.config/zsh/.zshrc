@@ -34,6 +34,11 @@ if which nodenv > /dev/null; then
   (nodenv rehash &) 2> /dev/null
 fi
 
+if which pyenv > /dev/null; then
+  eval "$(pyenv init --no-rehash -)"
+  (pyenv rehash &) 2> /dev/null
+fi
+
 autoload compinit -Uz
 setopt EXTENDEDGLOB
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.m+1) ]]; then

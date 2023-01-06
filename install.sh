@@ -16,7 +16,8 @@ install_homebrew() {
 install_shared_applications() {
   brew install direnv fzf git stow the_silver_searcher tmux \
     vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
-    awscli cmake jq watch gh nvim openssl@1.1 openssl@3 readline libyaml gmp
+    awscli cmake jq watch gh nvim openssl@1.1 openssl@3 readline libyaml gmp \
+    pyenv
 
   install_fzf
   install_rust
@@ -135,7 +136,7 @@ install_darwin() {
 
   # gui
   brew install --cask docker rectangle slack google-chrome alacritty telegram \
-    discord element brave-browser
+    discord element brave-browser zoom notion
 
   install_tmux_terminfo
 }

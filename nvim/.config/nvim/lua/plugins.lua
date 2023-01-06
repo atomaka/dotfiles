@@ -39,6 +39,14 @@ return require('packer').startup(function(use)
 
   use "gruvbox-community/gruvbox"
 
+  -- languages
+  use "fatih/vim-go"
+  use "hashivim/vim-terraform"
+  use "leafgarland/typescript-vim"
+  use "tpope/vim-markdown"
+  use "tpope/vim-rails"
+  use "vim-ruby/vim-ruby"
+
   if packer_bootstrap then
     require('packer').sync()
   end

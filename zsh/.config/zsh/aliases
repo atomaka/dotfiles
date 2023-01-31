@@ -53,6 +53,7 @@ alias grbi="git rebase --interactive"
 alias grc="git rm --cached"
 alias grh="git reset --hard"
 alias grm="git rm"
+alias gst="git log $(git describe --tags --abbrev=0)..HEAD --no-merges --oneline"
 alias gup="git-branch-delete-merged"
 alias Grep='grep'
 alias l="ls"

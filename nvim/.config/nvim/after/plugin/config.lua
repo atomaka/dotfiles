@@ -47,10 +47,27 @@ vim.keymap.set("n", "<Leader>pc", ":PackerClean<CR>")
 --- telescope.nvim
 vim.keymap.set("n", "<C-p>", function()
     require("telescope.builtin").find_files({
-      file_ignore_patterns = {".git/", "node_modules/"},
       hidden = true,
       previewer = false,
     })
+end)
+vim.keymap.set('n', '<Leader>ff', function()
+  require("telescope.builtin").find_files({
+    file_ignore_patterns = {".git/", "node_modules/"},
+    hidden = true,
+    no_ignore = true,
+    previewer = false,
+  })
+end)
+vim.keymap.set('n', '<Leader>fg', function()
+  require("telescope.builtin").live_grep({
+    file_ignore_patterns = {".git/", "node_modules/"},
+    hidden = true,
+    previewer = false,
+  })
+end)
+vim.keymap.set('n', '<Leader>fb', function()
+  require("telescope.builtin").buffers()
 end)
 
 --- whitespace.nvim

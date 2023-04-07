@@ -90,6 +90,14 @@ function run {
   fi
 }
 
+function run-rails {
+  if [ -f bin/rails ]; then
+    bin/rails $@
+  else
+    bundle exec rails
+  fi
+}
+
 function test-rails {
   if bundle exec rspec --help > /dev/null 2>&1; then
     if [ -d spec ]; then

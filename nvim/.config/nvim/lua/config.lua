@@ -58,6 +58,11 @@ vim.keymap.set("n", "<leader>gg", ":exe '!gh gist create -w %:p'<cr><cr>")
 
 vim.keymap.set('n', '<leader>sa', ':Move %<tab>')
 
+-- pairing
+vim.keymap.set("n", "<leader>pm", function()
+  vim.opt.relativenumber = not(vim.opt.relativenumber:get())
+end)
+
 --- tabs
 vim.keymap.set("n", "<Leader>2", function()
   print("Setting tabstop to 2")

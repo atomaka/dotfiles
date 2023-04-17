@@ -116,6 +116,10 @@ function test-rails {
   fi
 }
 
+function until-fail {
+  while "$@"; do :; done
+}
+
 function zsh-time {
   for i in $(seq 1 10); do
     time zsh -i -c exit

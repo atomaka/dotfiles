@@ -1,6 +1,6 @@
-alias ..="cd .."
+alias ....="cd ../../.."
 alias ...="cd ../.."
-alias ...="cd ../../.."
+alias ..="cd .."
 alias a="ls -l --human-readable --all --color=auto"
 alias agc="ag-count"
 alias agh="ag --hidden"

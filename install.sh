@@ -132,10 +132,10 @@ install_darwin() {
   install_shared_applications
 
   softwareupdate --install-rosetta --agree-to-license
-  brew install coreutils gnu-sed session-manager-plugin
+  brew install coreutils gnu-sed session-manager-plugin orbstack
 
   # gui
-  brew install --cask docker rectangle slack google-chrome alacritty telegram \
+  brew install --cask rectangle slack google-chrome alacritty telegram \
     discord element brave-browser zoom notion
 
   install_tmux_terminfo

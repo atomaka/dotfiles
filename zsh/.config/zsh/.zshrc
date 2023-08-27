@@ -5,6 +5,10 @@ typeset -U PATH
 source $ZDOTDIR/aliases
 source $ZDOTDIR/functions
 
+for source in $(ls $ZDOTDIR/sources); do
+  source $ZDOTDIR/sources/$source
+done
+
 source $ZDOTDIR/prompt
 
 # Larger history

@@ -3,7 +3,7 @@ precmd() {
   autoload -Uz vcs_info
 
   zstyle ':vcs_info:*' enable git
-  zstyle ':vcs_info:*:prompt:*' formats "[%b]"
+  zstyle ':vcs_info:*:prompt:*' formats "(%b)"
   vcs_info 'prompt'
 }
 

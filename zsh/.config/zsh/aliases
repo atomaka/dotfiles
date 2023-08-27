@@ -13,7 +13,7 @@ alias ber="bundle exec rake"
 alias bet="test-rails"
 alias c="clear"
 alias cs="toggle-color-mode"
-alias cdr='cd $(git root)'
+alias cdr="git-root"
 alias dc="docker-compose-call"
 alias g="g" # overwrite g alias
 alias ga="git add"
@@ -54,7 +54,7 @@ alias grbi="git rebase --interactive"
 alias grc="git rm --cached"
 alias grh="git reset --hard"
 alias grm="git rm"
-alias gst="git log $(git describe --tags --abbrev=0)..HEAD --no-merges --oneline"
+alias gst="git-since-last-tag"
 alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs -I "{}" git add-trailer "Co-authored-by: {}"'
 alias gup="git-branch-delete-merged"
 alias Grep='grep'

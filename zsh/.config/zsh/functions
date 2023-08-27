@@ -70,6 +70,16 @@ function git-date-added {
   fi
 }
 
+function git-since-last-tag {
+ git log $(git describe --tags --abbrev=0)..HEAD --no-merges --oneline
+}
+
+function git-root {
+  if [[ "$(git rev-parse --is-inside-work-tree)" == "true" ]]; then
+    cd $(git root)
+  fi
+}
+
 function password-generator {
   if [ -x "$(command -v openssl)" ]; then
     password=$(

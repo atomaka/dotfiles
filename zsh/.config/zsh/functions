@@ -20,7 +20,7 @@ function ag-count {
 
 function aws-profile {
   if [ $# -eq 0 ]; then
-    echo Current AWS Profile: $AWS_DEFAULT_PROFILE
+    echo Current AWS Profile: $AWS_PROFILE
   else
     export AWS_DEFAULT_PROFILE=$1
     export AWS_PROFILE=$1

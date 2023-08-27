@@ -6,7 +6,7 @@ Personal dotfiles managed via GNU stow.
 
 ```bash
 cd $HOME
-git clone https://github.com/atomaka/dotfiles.git
+git clone https://git.atomaka.com/atomaka/dotfiles.git
 cd dotfiles
 ./install.sh
 ```

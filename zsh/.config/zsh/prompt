@@ -4,7 +4,17 @@ precmd() {
 
   zstyle ':vcs_info:*' enable git
   zstyle ':vcs_info:*:prompt:*' formats "(%b)"
+  zstyle ':vcs_info:git*+set-message:*' hooks git-branch
   vcs_info 'prompt'
+}
+
+function +vi-git-branch() {
+  local branch_name=${hook_com[branch]}
+  local readonly max=${ZDOT_MAX_BRANCH_LENGTH:-20}
+
+  if [[ ${#branch_name} -gt $max ]]; then
+    hook_com[branch]="${branch_name:0:($max - 1)}…"
+  fi
 }
 
 local current_time="[%B%D{%T}%b]"

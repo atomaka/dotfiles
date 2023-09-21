@@ -36,14 +36,6 @@ vim.keymap.set("n", "<C-w>z", require("neo-zoom").neo_zoom)
 --- nvim-surround
 require("nvim-surround").setup()
 
---- packer.nvim
-vim.keymap.set("n", "<Leader>pi", function()
-  vim.cmd("PackerCompile")
-  vim.cmd("PackerInstall")
-end)
-vim.keymap.set("n", "<Leader>pu", ":PackerSync<CR>")
-vim.keymap.set("n", "<Leader>pc", ":PackerClean<CR>")
-
 --- telescope.nvim
 vim.keymap.set("n", "<C-p>", function()
     require("telescope.builtin").find_files({

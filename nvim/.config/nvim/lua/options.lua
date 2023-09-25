@@ -29,3 +29,5 @@ vim.opt.shiftround = true                 -- make >> go to next tab
 vim.opt.undolevels = 5000
 vim.opt.undofile = true
 vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undo"
+
+vim.g.mapleader = ","

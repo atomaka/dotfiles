@@ -23,16 +23,6 @@ end)
 require("gitsigns").setup()
 vim.keymap.set("n", "<leader>gb", require("gitsigns").toggle_current_line_blame)
 
---- NeoZoom.lua
-require("neo-zoom").setup({
-  left_ratio = 0,
-  top_ratio = 0,
-  width_ratio = 1,
-  height_ratio = 1,
-  border = "none",
-})
-vim.keymap.set("n", "<C-w>z", require("neo-zoom").neo_zoom)
-
 --- nvim-surround
 require("nvim-surround").setup()
 
@@ -69,3 +59,21 @@ require("whitespace-nvim").setup({
 vim.keymap.set("n", "<Leader>fw", function()
   require("whitespace-nvim").trim()
 end, { silent = true })
+
+--- vim-zoom
+-- let g:zoom#statustext='Z'
+vim.api.nvim_tabpage_set_var(0, "zoomed", 0)
+vim.keymap.set("n", "<C-w>", function()
+  local char = vim.fn.nr2char(vim.fn.getchar())
+
+  if vim.api.nvim_tabpage_get_var(0, "zoomed")== 1 then
+    if char == 'v' or char == 's' or char == '' or char == '' then
+      vim.notify("cannot split when zoomed", vim.log.levels.ERROR)
+      return ""
+    end
+  end
+
+  return "<C-w>"..char
+end, {expr = true, replace_keycodes = true})
+vim.keymap.set("n", "<C-w>z", "<Plug>(zoom-toggle)")
+vim.keymap.set("n", "<C-w><C-z>", "<Plug>(zoom-toggle)")

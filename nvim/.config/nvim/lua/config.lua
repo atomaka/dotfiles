@@ -19,18 +19,18 @@ local reticle = vim.api.nvim_create_augroup("Reticle", {
 })
 
 vim.api.nvim_create_autocmd({"VimEnter", "WinEnter", "BufWinEnter"}, {
-    group = reticle,
-    callback = function()
-      vim.opt_local.cursorline = true
-      vim.opt_local.cursorcolumn = true
-    end
+  group = reticle,
+  callback = function()
+    vim.opt_local.cursorline = true
+    vim.opt_local.cursorcolumn = true
+  end
 })
 vim.api.nvim_create_autocmd({"WinLeave"}, {
-    group = reticle,
-    callback = function()
-      vim.opt_local.cursorline = false
-      vim.opt_local.cursorcolumn = false
-    end
+  group = reticle,
+  callback = function()
+    vim.opt_local.cursorline = false
+    vim.opt_local.cursorcolumn = false
+  end
 })
 
 --- background matching terminal
@@ -45,8 +45,6 @@ end
 ChangeBackground()
 
 -- LEADER CONFIGURATION
-vim.g.mapleader = ","
-
 vim.keymap.set("n", "<leader>sz", ":luafile ~/.config/nvim/init.lua<cr>")
 
 vim.keymap.set({ "n", "v" }, "<leader>cp", '"+y')

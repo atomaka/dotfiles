@@ -14,11 +14,11 @@ require("lazy").setup({
   "nvim-lua/plenary.nvim",
   "nvim-telescope/telescope.nvim",
   "famiu/bufdelete.nvim",
+  "dhruvasagar/vim-zoom",
   "gpanders/editorconfig.nvim",
   "johnfrankmorgan/whitespace.nvim",
   "kylechui/nvim-surround",
   "lewis6991/gitsigns.nvim",
-  "nyngwang/NeoZoom.lua", -- TODO: Floating window background color
   "ruifm/gitlinker.nvim",
   "tpope/vim-eunuch",
 

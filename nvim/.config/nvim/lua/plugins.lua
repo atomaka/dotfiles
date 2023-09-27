@@ -18,6 +18,8 @@ require("lazy").setup({
   "gpanders/editorconfig.nvim",
   "johnfrankmorgan/whitespace.nvim",
   "kylechui/nvim-surround",
+  -- "FabijanZulj/blame.nvim",
+  "rhysd/git-messenger.vim",
   "lewis6991/gitsigns.nvim",
   "ruifm/gitlinker.nvim",
   "tpope/vim-eunuch",

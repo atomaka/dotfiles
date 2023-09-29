@@ -32,6 +32,7 @@ require("nvim-surround").setup()
 --- telescope.nvim
 vim.keymap.set("n", "<C-p>", function()
     require("telescope.builtin").find_files({
+      file_ignore_patterns = {".git/", "node_modules/"},
       hidden = true,
       previewer = false,
     })

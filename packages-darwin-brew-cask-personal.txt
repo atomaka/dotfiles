@@ -1,0 +1,4 @@
+arduino-ide
+battle-net
+prusaslicer
+zwift

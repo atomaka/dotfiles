@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+readonly PROGNAME=$(basename $0)
+readonly PROGDIR=$(readlink -m $(dirname $0))
+readonly ARGS="$@"
+
 install_homebrew() {
   echo -n Checking homebrew...
   if command -v brew > /dev/null; then
@@ -164,8 +168,16 @@ install_darwin_brew_packages() {
 
 install_darwin_brew_cask_packages() {
   echo -n Checking Darwin brew cask packages...
+  package_files="packages-darwin-brew-cask.txt"
+  if [[ $ARGS == "personal" ]]; then
+    package_files+=" packages-darwin-brew-cask-personal.txt"
+  fi
+  if [[ $ARGS == "work" ]]; then
+    package_files+=" packages-darwin-brew-cask-work.txt"
+  fi
+
   missing_packages=$(
-    comm -23  <(cat packages-darwin-brew-cask.txt) <(brew list | sort) \
+    comm -23  <(cat $package_files | sort) <(brew list | sort) \
       | tr "\n" " "
   )
 

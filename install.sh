@@ -192,7 +192,7 @@ install_darwin_brew_cask_packages() {
 
 install_color_default() {
   echo -n Checking color default file...
-  if [[ -f $HOME/.config/atomaka/color.yml ]]; then
+  if [[ -f $HOME/.config/$USER/color.yml ]]; then
     echo -n already installed...
   else
     echo -n installing....
@@ -209,6 +209,18 @@ install_darwin_profile_hack() {
     echo -n installing...
     sudo mv /etc/{zprofile,zprofile.old}
   fi
+  echo done
+}
+
+install_rosetta() {
+  echo -n Installing Rosetta...
+  if pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto &> /dev/null; then
+    echo -n already installled...
+  else
+    echo -n installing...
+    softwareupdate --install-rosetta --agree-to-license
+  fi
+  echo done
 }
 
 install_env() {
@@ -220,6 +232,10 @@ install_env() {
     source ~/dotfiles/zsh/.zshenv
   fi
   echo done
+}
+
+install_stow_paths() {
+  stow alacritty bin git nvim ruby tmux zsh
 }
 
 install_linux() {
@@ -236,6 +252,8 @@ install_linux() {
   install_rust
   install_alacritty
   install_alacritty_terminfo
+  install_stow_paths
+  install_color_default
 }
 
 install_darwin() {
@@ -245,10 +263,12 @@ install_darwin() {
   install_shared_brew_packages
   install_fzf
   install_rust
-  softwareupdate --install-rosetta --agree-to-license
+  install_rosetta
   install_darwin_brew_packages
   install_darwin_brew_cask_packages
   install_tmux_terminfo
+  install_stow_paths
+  install_color_default
 }
 
 main() {
@@ -262,10 +282,6 @@ main() {
       exit 1
       ;;
   esac
-
-  stow alacritty bin git nvim ruby tmux zsh
-
-  install_color_default
 }
 
 main

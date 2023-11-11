@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 install_homebrew() {
-  if ! command -v brew > /dev/null; then
+  echo -n Checking homebrew...
+  if command -v brew > /dev/null; then
+    echo -n already installed...
+  else
+    echo -n installing...
     NONINTERACTIVE=1 /bin/bash -c "$(
       curl \
         --fail \
@@ -11,21 +15,31 @@ install_homebrew() {
         https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
     )"
   fi
+  echo done
 }
 
-install_shared_applications() {
-  brew install direnv fzf git stow the_silver_searcher tmux \
-    vim zsh rbenv ruby-build tfenv nodenv node-build tig libpq gnupg llvm \
-    awscli cmake jq watch gh nvim openssl@1.1 openssl@3 readline libyaml gmp \
-    pyenv ripgrep
+install_shared_brew_packages() {
+  echo -n Checking shared brew packages...
+  missing_packages=$(
+    comm -23  <(cat packages-shared-brew.txt) <(brew list | sort) \
+      | tr "\n" " "
+  )
 
-  install_fzf
-  install_rust
-  install_vim
+  if [[ -z $missing_packages ]]; then
+    echo -n already installed...
+  else
+    echo -n installing $missing_packages...
+    brew install $missing_packages
+  fi
+  echo done
 }
 
 install_alacritty() {
-  if ! command -v alacritty > /dev/null; then
+  echo -n Checking Alacritty...
+  if command -v alacritty > /dev/null; then
+    echo -n already installed...
+  else
+    echo -n installing...
     cargo install alacritty
 
     curl \
@@ -45,10 +59,15 @@ install_alacritty() {
     sudo update-desktop-database
     sudo ln -s /home/$USER/.cargo/bin/alacritty /usr/local/bin/alacritty
   fi
+  echo done
 }
 
 install_alacritty_terminfo() {
-  if ! infocmp alacritty > /dev/null; then
+  echo -n Checking Alacritty terminfo...
+  if infocmp alacritty > /dev/null; then
+    echo -n already installed...
+  else
+    echo -n installing...
     curl \
       --fail \
       --location \
@@ -57,10 +76,15 @@ install_alacritty_terminfo() {
 
     sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
   fi
+  echo done
 }
 
 install_tmux_terminfo() {
-  if ! infocmp tmux-256color > /dev/null; then
+  echo -n Checking Tmux terminfo...
+  if infocmp tmux-256color > /dev/null; then
+    echo -n already installed...
+  else
+    echo -n installling....
     curl \
       --fail \
       --location \
@@ -74,18 +98,30 @@ install_tmux_terminfo() {
     sudo tic -xe tmux-256color tmux-256color.src
     popd
   fi
+  echo done
 }
 
 install_fzf() {
-  $(brew --prefix)/opt/fzf/install \
-    --xdg \
-    --no-update-rc \
-    --key-bindings \
-    --completion
+  echo -n Checking fzf...
+  if [[ $PATH =~ "fzf" ]]; then
+    echo -n already installed...
+  else
+    echo -n installing...
+    $(brew --prefix)/opt/fzf/install \
+      --xdg \
+      --no-update-rc \
+      --key-bindings \
+      --completion
+  fi
+  echo done
 }
 
 install_rust() {
-  if ! command -v rustup > /dev/null; then
+  echo -n Checking Rust...
+  if command -v rustup > /dev/null; then
+    echo -n already installed...
+  else
+    echo -n installing...
     curl \
       --fail \
       --proto '=https' \
@@ -95,13 +131,83 @@ install_rust() {
       https://sh.rustup.rs \
         | sh -s -- -y --no-modify-path
   fi
+  echo done
 }
 
-install_vim() {
-  if ! test -d ~/.local/share/nvim/site > /dev/null; then
-    git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+install_linux_packagges() {
+  echo -n Checking Linux packages...
+  packages=$(cat packages-linux-apt.txt | tr "\n" " ")
+  if dpkg -s $packages >/dev/null 2>&1; then
+    echo -n already installed...
+  else
+    echo -n installing...
+    sudo apt-get install --assume-yes $packages
   fi
+  echo done
+}
+
+install_darwin_brew_packages() {
+  echo -n Checking Darwin brew packages...
+  missing_packages=$(
+    comm -23  <(cat packages-darwin-brew.txt) <(brew list | sort) \
+      | tr "\n" " "
+  )
+
+  if [[ -z $missing_packages ]]; then
+    echo -n already installed...
+  else
+    echo -n installing $missing_packages...
+    brew install --cask $missing_packages
+  fi
+  echo done
+}
+
+install_darwin_brew_cask_packages() {
+  echo -n Checking Darwin brew cask packages...
+  missing_packages=$(
+    comm -23  <(cat packages-darwin-brew-cask.txt) <(brew list | sort) \
+      | tr "\n" " "
+  )
+
+  if [[ -z $missing_packages ]]; then
+    echo -n already installed...
+  else
+    echo -n installing $missing_packages...
+    brew install --cask $missing_packages
+  fi
+  echo done
+}
+
+install_color_default() {
+  echo -n Checking color default file...
+  if [[ -f $HOME/.config/atomaka/color.yml ]]; then
+    echo -n already installed...
+  else
+    echo -n installing....
+    $HOME/dotfiles/bin/bin/toggle-color-mode
+  fi
+  echo done
+}
+
+install_darwin_profile_hack() {
+  echo -n Checking profile hack...
+  if [[ ! -f /etc/zprofile ]]; then
+    echo -n already installled...
+  else
+    echo -n installing...
+    sudo mv /etc/{zprofile,zprofile.old}
+  fi
+}
+
+install_env() {
+  echo -n Checking zshenv available...
+  if [[ -z $HOMEBREW_PREFIX ]]; then
+    echo -n already installed...
+  else
+    echo -n installling...
+    source ~/dotfiles/zsh/.zshenv
+  fi
+  echo done
 }
 
 install_linux() {
@@ -110,34 +216,26 @@ install_linux() {
     exit 1
   fi
 
-  packages="build-essential procps curl file git cmake pkg-config\
-    libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev\
-    libxkbcommon-dev python3 libssl-dev xclip"
-  dpkg -s $packages >/dev/null 2>&1 \
-    || sudo apt-get install --assume-yes $packages
-
+  install_linux_packagges
   install_homebrew
-  source ~/dotfiles/zsh/.zshenv
-  install_shared_applications
-
-  # gui
+  install_env
+  install_shared_brew_packages
+  install_fzf
+  install_rust
   install_alacritty
   install_alacritty_terminfo
 }
 
 install_darwin() {
+  install_darwin_profile_hack
   install_homebrew
-  [[ -f /etc/zprofile ]] && sudo mv /etc/{zprofile,zprofile.old}
-  source ~/dotfiles/zsh/.zshenv
-  install_shared_applications
-
+  install_env
+  install_shared_brew_packages
+  install_fzf
+  install_rust
   softwareupdate --install-rosetta --agree-to-license
-  brew install coreutils gnu-sed session-manager-plugin orbstack
-
-  # gui
-  brew install --cask rectangle slack google-chrome alacritty telegram \
-    discord element brave-browser zoom notion
-
+  install_darwin_brew_packages
+  install_darwin_brew_cask_packages
   install_tmux_terminfo
 }
 
@@ -155,7 +253,7 @@ main() {
 
   stow alacritty bin git nvim ruby tmux zsh
 
-  $HOME/dotfiles/bin/bin/toggle-color-mode
+  install_color_default
 }
 
 main

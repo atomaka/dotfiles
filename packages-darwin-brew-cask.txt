@@ -1,0 +1,11 @@
+alacritty
+brave-browser
+discord
+element
+firefox
+google-chrome
+notion
+rectangle
+slack
+telegram
+zoom

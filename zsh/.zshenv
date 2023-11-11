@@ -7,11 +7,6 @@ XDG_CONFIG_HOME="$HOME/.config"
 PERSONAL_BIN_PATH="$HOME/bin"
 PERSONAL_FPATH="$ZDOTDIR/completions"
 
-NODENV_PATH="$HOME/.nodenv/bin"
-RBENV_PATH="$HOME/.rbenv/bin"
-TFENV_PATH="$HOME/.tfenv/bin"
-PYENV_PATH="$HOME/.pyenv/bin"
-
 CARGO_PATH="$HOME/.cargo/bin"
 
 if [[ "$OSTYPE" == darwin* ]]; then
@@ -45,10 +40,6 @@ elif [[ "$OSTYPE" == linux* ]]; then
   INFOPATH="/home/linuxbrew/.linuxbrew/share/info:${INFOPATH:-}";
 fi
 
-[[ -d "$RBENV_PATH" ]] && PATH="$RBENV_PATH:$PATH"
-[[ -d "$NODENV_PATH" ]] && PATH="$NODENV_PATH:$PATH"
-[[ -d "$TFENV_PATH" ]] && PATH="$TFENV_PATH:$PATH"
-[[ -d "$PYENV_PATH" ]] && PATH="$PYENV_PATH:$PATH"
 [[ -d "$CARGO_PATH" ]] && PATH="$CARGO_PATH:$PATH"
 [[ -d "$PERSONAL_BIN_PATH" ]] && PATH="$PERSONAL_BIN_PATH:$PATH"
 [[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"

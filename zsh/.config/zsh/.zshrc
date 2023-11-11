@@ -28,19 +28,8 @@ if which direnv > /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
-if which rbenv > /dev/null; then
-  eval "$(rbenv init --no-rehash -)"
-  (rbenv rehash &) 2> /dev/null
-fi
-
-if which nodenv > /dev/null; then
-  eval "$(nodenv init --no-rehash -)"
-  (nodenv rehash &) 2> /dev/null
-fi
-
-if which pyenv > /dev/null; then
-  eval "$(pyenv init --no-rehash -)"
-  (pyenv rehash &) 2> /dev/null
+if which rtx > /dev/null; then
+  eval "$(rtx activate zsh)"
 fi
 
 if [ -f $HOME/.orbstack/shell/init.zsh ]; then

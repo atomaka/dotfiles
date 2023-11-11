@@ -1,0 +1,4 @@
+coreutils
+gnu-sed
+orbstack
+session-manager-plugin

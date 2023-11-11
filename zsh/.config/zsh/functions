@@ -80,6 +80,14 @@ function git-root {
   fi
 }
 
+function install-ruby {
+  if [ $# -eq 0 ]; then
+    echo Usage: install-ruby RUBY_VERSION
+  else
+    ruby-build $1 $HOME/.rubies/$1
+  fi
+}
+
 function password-generator {
   if [ -x "$(command -v openssl)" ]; then
     password=$(

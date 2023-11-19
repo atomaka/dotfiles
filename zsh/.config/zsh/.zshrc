@@ -24,10 +24,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd
 
-if which direnv > /dev/null; then
-  eval "$(direnv hook zsh)"
-fi
-
 if which rtx > /dev/null; then
   eval "$(rtx activate zsh)"
 fi

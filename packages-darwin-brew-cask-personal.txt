@@ -1,4 +1,6 @@
 arduino-ide
 battle-net
+openscad
 prusaslicer
+steam
 zwift

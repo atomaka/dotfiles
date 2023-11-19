@@ -19,10 +19,12 @@ nodenv
 openssl@1.1
 openssl@3
 pyenv
+rar
 readline
 ripgrep
 rtx
 ruby-build
+shared-mime-info
 stow
 tfenv
 the_silver_searcher

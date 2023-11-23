@@ -1,5 +1,6 @@
 arduino-ide
 battle-net
+mqtt-explorer
 openscad
 prusaslicer
 steam

@@ -1,3 +1,4 @@
+ansible
 awscli
 bzip2
 cmake

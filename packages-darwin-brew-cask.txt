@@ -3,6 +3,7 @@ brave-browser
 discord
 firefox
 google-chrome
+obsidian
 rectangle
 slack
 zoom

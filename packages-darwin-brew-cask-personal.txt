@@ -1,7 +1,9 @@
 arduino-ide
 battle-net
+minecraft
 mqtt-explorer
 openscad
 prusaslicer
 steam
+thunderbird
 zwift

@@ -28,4 +28,5 @@ tig
 tmux
 vim
 watch
+weechat
 zsh

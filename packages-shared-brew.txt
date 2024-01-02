@@ -5,11 +5,11 @@ cmake
 d2
 fontconfig
 fzf
-hurl
 gh
 git
 gmp
 gnupg
+hurl
 jq
 libpq
 libyaml

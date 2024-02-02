@@ -55,7 +55,7 @@ alias grc="git rm --cached"
 alias grh="git reset --hard"
 alias grm="git rm"
 alias gst="git-since-last-tag"
-alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs -I "{}" git add-trailer "Co-authored-by: {}"'
+alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs --null -I "{}" git add-trailer "Co-authored-by: {}"'
 alias gup="git-branch-delete-merged"
 alias Grep='grep'
 alias l="ls"

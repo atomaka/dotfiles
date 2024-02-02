@@ -5,7 +5,7 @@
   hist-tags = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   most-recent-by-branch = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
   root = rev-parse --show-toplevel
-  add-trailer = commit --no-edit --amend --trailer
+  add-trailer = commit --allow-empty --no-edit --amend --trailer
 
 
 [commit]

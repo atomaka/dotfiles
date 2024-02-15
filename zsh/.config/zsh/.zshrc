@@ -24,8 +24,8 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 setopt auto_cd
 
-if which rtx > /dev/null; then
-  eval "$(rtx activate zsh)"
+if which mise > /dev/null; then
+  eval "$(mise activate zsh)"
 fi
 
 if [ -f $HOME/.orbstack/shell/init.zsh ]; then

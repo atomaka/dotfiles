@@ -22,7 +22,7 @@ qmk/qmk/qmk
 rar
 readline
 ripgrep
-rtx
+mise
 ruby-build
 shared-mime-info
 stow

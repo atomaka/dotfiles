@@ -5,6 +5,8 @@
 .envrc
 .rtx.toml*
 .rtx.toml
+.mise.toml*
+.mise.toml
 
 aet-*/**
 aet-*

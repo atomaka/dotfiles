@@ -3,6 +3,7 @@ battle-net
 minecraft
 mqtt-explorer
 openscad
+prismlauncher
 prusaslicer
 steam
 thunderbird

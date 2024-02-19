@@ -13,11 +13,10 @@ else
   new_color=dark
 fi
 
-alacritty_header=" # Dynamically generated. Edit $HOME/.config/alacritty/alacritty-base.yml"
-
 alacritty=$HOME/.config/alacritty/
-echo $alacritty_header > $alacritty/alacritty.yml
-cat $alacritty/alacritty-base.yml $alacritty/themes/$new_color.yml >> $alacritty/alacritty.yml
+ln -sf $alacritty/themes/$new_color.toml $alacritty/theme.toml
+# Alacritty does not notice update of imported symlink
+touch $alacritty/alacritty.toml
 
 echo $new_color > $color_file
 

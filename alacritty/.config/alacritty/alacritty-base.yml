@@ -1,6 +1,0 @@
-window:
-  opacity: 0.9
-font:
-  size: 14
-key_bindings:
-  - { key: Return, mods: Command, action: ToggleFullscreen }

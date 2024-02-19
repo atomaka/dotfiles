@@ -1,6 +1,6 @@
 *.swp
 
-alacritty/.config/alacritty/alacritty.yml
+alacritty/.config/alacritty/theme.toml
 
 bin/bin
 

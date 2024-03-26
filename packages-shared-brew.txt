@@ -10,6 +10,7 @@ git
 gmp
 gnupg
 hurl
+iperf3
 jq
 libpq
 libyaml

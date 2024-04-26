@@ -17,6 +17,7 @@ libyaml
 llvm
 neovim
 node-build
+openapi-generator
 openssl@1.1
 openssl@3
 qmk/qmk/qmk

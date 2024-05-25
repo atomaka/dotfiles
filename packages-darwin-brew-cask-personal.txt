@@ -1,5 +1,4 @@
 arduino-ide
-battle-net
 minecraft
 mqtt-explorer
 openscad

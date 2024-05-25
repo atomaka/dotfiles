@@ -9,6 +9,7 @@ gh
 git
 gmp
 gnupg
+goreleaser/tap/goreleaser
 hurl
 iperf3
 jq

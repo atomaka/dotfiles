@@ -1,4 +1,5 @@
 arduino-ide
+freecad
 minecraft
 mqtt-explorer
 openscad

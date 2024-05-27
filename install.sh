@@ -25,7 +25,7 @@ install_homebrew() {
 install_shared_brew_packages() {
   echo -n Checking shared brew packages...
   missing_packages=$(
-    comm -23  <(cat packages-shared-brew.txt) <(brew list | sort) \
+    comm -23  <(cat packages-shared-brew.txt) <(brew list --full-name | sort) \
       | tr "\n" " "
   )
 
@@ -153,7 +153,7 @@ install_linux_packagges() {
 install_darwin_brew_packages() {
   echo -n Checking Darwin brew packages...
   missing_packages=$(
-    comm -23  <(cat packages-darwin-brew.txt) <(brew list | sort) \
+    comm -23  <(cat packages-darwin-brew.txt) <(brew list --full-name | sort) \
       | tr "\n" " "
   )
 
@@ -177,7 +177,7 @@ install_darwin_brew_cask_packages() {
   fi
 
   missing_packages=$(
-    comm -23  <(cat $package_files | sort) <(brew list | sort) \
+    comm -23  <(cat $package_files | sort) <(brew list --full-name | sort) \
       | tr "\n" " "
   )
 

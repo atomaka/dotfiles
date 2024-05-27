@@ -16,6 +16,7 @@ jq
 libpq
 libyaml
 llvm
+mise
 neovim
 node-build
 openapi-generator
@@ -25,7 +26,6 @@ qmk/qmk/qmk
 rar
 readline
 ripgrep
-mise
 ruby-build
 shared-mime-info
 stow

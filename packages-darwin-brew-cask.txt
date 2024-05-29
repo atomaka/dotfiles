@@ -5,6 +5,7 @@ discord
 firefox
 google-chrome
 obsidian
+podman-desktop
 rectangle
 slack
 zoom

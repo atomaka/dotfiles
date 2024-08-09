@@ -26,6 +26,9 @@ vim.keymap.set("n", "<leader>gb", require("gitsigns").toggle_current_line_blame)
 --- git-messanger.vim
 vim.g["git_messenger_always_into_popup"] = 1
 
+--- nvim-lspconfig
+
+
 --- nvim-surround
 require("nvim-surround").setup()
 

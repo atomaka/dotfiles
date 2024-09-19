@@ -23,7 +23,7 @@
   program = gpg
 
 [merge]
-  tool = vimdiff
+  tool = nvim -d
 
 [pull]
   rebase = false

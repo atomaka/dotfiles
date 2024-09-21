@@ -22,6 +22,7 @@ require("lazy").setup({
   "rhysd/git-messenger.vim",
   "lewis6991/gitsigns.nvim",
   "linrongbin16/gitlinker.nvim",
+  "f-person/git-blame.nvim",
   "tpope/vim-eunuch",
 
   "gruvbox-community/gruvbox",

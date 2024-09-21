@@ -4,6 +4,17 @@ vim.keymap.set("n", "<Leader>bd", function()
   require("bufdelete").bufdelete(0, true)
 end)
 
+--- gitblame.nvim
+vim.g.gitblame_use_blame_commit_file_urls = true
+vim.g.gitblame_display_virtual_text = 0
+
+require('gitblame').setup {enabled = true}
+
+vim.api.nvim_set_keymap('n', '<leader>gbo', ':GitBlameOpenCommitURL<CR>', {
+  noremap = true,
+  silent = true,
+})
+
 --- gitlinker.nvim
 require"gitlinker".setup({
   router = {

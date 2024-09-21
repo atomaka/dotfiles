@@ -1,5 +1,4 @@
 {
-  "LazyVim": { "branch": "main", "commit": "a1c3ec4cd43fe61e3b614237a46ac92771191c81" },
   "bufdelete.nvim": { "branch": "master", "commit": "f6bcea78afb3060b198125256f897040538bcb81" },
   "editorconfig.nvim": { "branch": "master", "commit": "5b9e303e1d6f7abfe616ce4cc8d3fffc554790bf" },
   "git-blame.nvim": { "branch": "master", "commit": "8c56e864d448e84e0162872c381dd2715824dce2" },

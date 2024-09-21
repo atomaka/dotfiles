@@ -4,20 +4,54 @@ vim.keymap.set("n", "<Leader>bd", function()
   require("bufdelete").bufdelete(0, true)
 end)
 
+--- gitblame.nvim
+vim.g.gitblame_use_blame_commit_file_urls = true
+vim.g.gitblame_display_virtual_text = 0
+
+require('gitblame').setup {enabled = true}
+
+vim.api.nvim_set_keymap('n', '<leader>gbo', ':GitBlameOpenCommitURL<CR>', {
+  noremap = true,
+  silent = true,
+})
+
 --- gitlinker.nvim
-require"gitlinker".setup()
-vim.keymap.set("n", "<Leader>gh", function()
-  require"gitlinker".get_buf_range_url(
-    "n",
-    { action_callback = require"gitlinker.actions".open_in_browser }
-  )
-end, { silent = true })
-vim.keymap.set("v", "<leader>gh", function()
-  require"gitlinker".get_buf_range_url(
-    "v",
-    { action_callback = require"gitlinker.actions".open_in_browser }
-  )
-end)
+require"gitlinker".setup({
+  router = {
+    browse = {
+      ["^git%.atomaka%.com"] = "https://git.atomaka.com/"
+        .. "{_A.ORG}/"
+        .. "{_A.REPO}/commit/"
+        .. "{_A.REV}/"
+    },
+    blame = {
+      ["^git%.atomaka%.com"] = "https://git.atomaka.com/"
+        .. "{_A.ORG}/"
+        .. "{_A.REPO}/blame/"
+        .. "branch/{_A.CURRENT_BRANCH}/"
+        .. "{_A.FILE}"
+    },
+  },
+})
+vim.keymap.set(
+  {"n", 'v'},
+  "<leader>gl",
+  function()
+    require("gitlinker").link({ action = require("gitlinker.actions").system })
+  end,
+  { silent = true, noremap = true, desc = "GitLink!" }
+)
+vim.keymap.set(
+  {"n", 'v'},
+  "<leader>glb",
+  function()
+    require("gitlinker").link({
+      router_type = "blame",
+      action = require("gitlinker.actions").system,
+    })
+  end,
+  { silent = true, noremap = true, desc = "GitLink! blame" }
+)
 
 --- gitsigns.nvim
 require("gitsigns").setup()
@@ -33,6 +67,10 @@ vim.g["git_messenger_always_into_popup"] = 1
 require("nvim-surround").setup()
 
 --- telescope.nvim
+vim.api.nvim_set_keymap('n', '<leader>t', ':Telescope<CR>', {
+  noremap = true,
+  silent = true,
+})
 vim.keymap.set("n", "<C-p>", function()
     require("telescope.builtin").find_files({
       file_ignore_patterns = {".git/", "node_modules/"},

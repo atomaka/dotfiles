@@ -22,9 +22,5 @@ return {
   {"tpope/vim-markdown"},
   {"tpope/vim-rails"},
   {"vim-ruby/vim-ruby"},
-
-  -- lsp
-  "williamboman/mason.nvim",
-  "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig"
 }

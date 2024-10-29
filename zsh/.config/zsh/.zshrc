@@ -28,10 +28,6 @@ if which mise > /dev/null; then
   eval "$(mise activate zsh)"
 fi
 
-if [ -f $HOME/.orbstack/shell/init.zsh ]; then
-  source $HOME/.orbstack/shell/init.zsh 2>/dev/null || :
-fi
-
 autoload compinit -Uz
 setopt EXTENDEDGLOB
 if [[ -n ${ZDOTDIR}/.zcompdump(#qN.m+1) ]]; then

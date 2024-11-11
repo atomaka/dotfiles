@@ -1,6 +1,3 @@
-import = [
-  "~/.config/alacritty/theme.toml",
-]
 
 [window]
 opacity = 0.9
@@ -12,3 +9,8 @@ size = 14
 action = "ToggleFullscreen"
 key = "Return"
 mods = "Command"
+
+[general]
+import = [
+  "~/.config/alacritty/theme.toml",
+]

@@ -190,17 +190,6 @@ install_darwin_brew_cask_packages() {
   echo done
 }
 
-install_color_default() {
-  echo -n Checking color default file...
-  if [[ -f $HOME/.config/$USER/color.yml ]]; then
-    echo -n already installed...
-  else
-    echo -n installing....
-    $HOME/dotfiles/bin/bin/toggle-color-mode
-  fi
-  echo done
-}
-
 install_darwin_profile_hack() {
   echo -n Checking profile hack...
   if [[ ! -f /etc/zprofile ]]; then
@@ -253,7 +242,6 @@ install_linux() {
   install_alacritty
   install_alacritty_terminfo
   install_stow_paths
-  install_color_default
 }
 
 install_darwin() {
@@ -268,7 +256,6 @@ install_darwin() {
   install_darwin_brew_cask_packages
   install_tmux_terminfo
   install_stow_paths
-  install_color_default
 }
 
 main() {

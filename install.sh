@@ -235,7 +235,7 @@ install_env() {
 }
 
 install_stow_paths() {
-  stow alacritty bin git nvim ruby tmux zsh
+  stow alacritty bin ghostty git nvim ruby tmux zsh
 }
 
 install_linux() {

@@ -3,6 +3,7 @@ android-file-transfer
 brave-browser
 discord
 firefox
+ghostty
 google-chrome
 obsidian
 podman-desktop

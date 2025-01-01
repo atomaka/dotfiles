@@ -1,16 +1,9 @@
 return {
   "nvim-lua/plenary.nvim",
-  "nvim-telescope/telescope.nvim",
-  "famiu/bufdelete.nvim",
-  "dhruvasagar/vim-zoom",
   "gpanders/editorconfig.nvim",
-  "johnfrankmorgan/whitespace.nvim",
+  "johnfrankmorgan/whitespace.nvim", -- not working
   "kylechui/nvim-surround",
   -- "FabijanZulj/blame.nvim",
-  "rhysd/git-messenger.vim",
-  "lewis6991/gitsigns.nvim",
-  "linrongbin16/gitlinker.nvim",
-  "f-person/git-blame.nvim",
   "tpope/vim-eunuch",
 
   "gruvbox-community/gruvbox",

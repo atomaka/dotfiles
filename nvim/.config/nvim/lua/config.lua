@@ -33,17 +33,6 @@ vim.api.nvim_create_autocmd({"WinLeave"}, {
   end
 })
 
---- background matching terminal
-function ChangeBackground()
-  local home = os.getenv("HOME")
-  local user = os.getenv("USER")
-  local file = io.open(home.."/.config/"..user.."/color.yml", "rb")
-  local background = file:read()
-  file:close()
-  vim.opt.background = background
-end
-ChangeBackground()
-
 -- LEADER CONFIGURATION
 vim.keymap.set("n", "<leader>sz", ":luafile ~/.config/nvim/init.lua<cr>")
 

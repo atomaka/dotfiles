@@ -38,51 +38,6 @@ install_shared_brew_packages() {
   echo done
 }
 
-install_alacritty() {
-  echo -n Checking Alacritty...
-  if command -v alacritty > /dev/null; then
-    echo -n already installed...
-  else
-    echo -n installing...
-    cargo install alacritty
-
-    curl \
-      --fail \
-      --location \
-      --output /tmp/Alacritty.svg \
-      https://raw.githubusercontent.com/alacritty/alacritty/master/extra/logo/alacritty-term.svg
-
-    curl \
-      --fail \
-      --location \
-      --output /tmp/Alacritty.desktop \
-      https://raw.githubusercontent.com/alacritty/alacritty/master/extra/linux/Alacritty.desktop
-
-    sudo mv /tmp/Alacritty.svg /usr/share/pixmaps/Alacritty.svg
-    sudo desktop-file-install /tmp/Alacritty.desktop
-    sudo update-desktop-database
-    sudo ln -s /home/$USER/.cargo/bin/alacritty /usr/local/bin/alacritty
-  fi
-  echo done
-}
-
-install_alacritty_terminfo() {
-  echo -n Checking Alacritty terminfo...
-  if infocmp alacritty > /dev/null; then
-    echo -n already installed...
-  else
-    echo -n installing...
-    curl \
-      --fail \
-      --location \
-      --output /tmp/alacritty.info \
-      https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info
-
-    sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
-  fi
-  echo done
-}
-
 install_tmux_terminfo() {
   echo -n Checking Tmux terminfo...
   if infocmp tmux-256color > /dev/null; then
@@ -224,7 +179,7 @@ install_env() {
 }
 
 install_stow_paths() {
-  stow alacritty bin ghostty git nvim ruby tmux zsh
+  stow bin ghostty git nvim ruby tmux zsh
 }
 
 install_linux() {
@@ -239,8 +194,6 @@ install_linux() {
   install_shared_brew_packages
   install_fzf
   install_rust
-  install_alacritty
-  install_alacritty_terminfo
   install_stow_paths
 }
 

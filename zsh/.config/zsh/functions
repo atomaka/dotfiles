@@ -1,3 +1,5 @@
+# vim: set filetype=bash :
+
 function advanced-git-checkout {
   if [ $# -eq 0 ]; then
     git branch \
@@ -85,6 +87,14 @@ function install-ruby {
     echo Usage: install-ruby RUBY_VERSION
   else
     ruby-build $1 $HOME/.rubies/$1
+  fi
+}
+
+function lint-ruby {
+  if [ -f "aet-rubocop.yml" ]; then
+    bundle exec rubocop --config aet-rubocop.yml $@
+  else
+    bundle exec rubocop $@
   fi
 }
 

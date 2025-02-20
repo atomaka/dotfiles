@@ -11,6 +11,8 @@ done
 
 source $ZDOTDIR/prompt
 
+setopt append_history
+
 # Larger history
 HISTSIZE=20000
 HISTFILE=~/.zsh_history

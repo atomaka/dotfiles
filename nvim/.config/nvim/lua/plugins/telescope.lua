@@ -30,6 +30,16 @@ vim.keymap.set('n', '<Leader>fb', function()
   builtin.buffers()
 end)
 
+local gem_dir = vim.fn.systemlist("ruby -e 'puts Gem.dir'")[1]
+vim.keymap.set('n', '<Leader>fgg', function()
+  builtin.live_grep({
+    file_ignore_patterns = {".git/", "node_modules/"},
+    hidden = true,
+    previewer = false,
+    search_dirs = { gem_dir }
+  })
+end)
+
 return {
   'nvim-telescope/telescope.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' }

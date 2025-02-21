@@ -1,7 +1,6 @@
 return {
   "nvim-lua/plenary.nvim",
   "gpanders/editorconfig.nvim",
-  "johnfrankmorgan/whitespace.nvim", -- not working
   "kylechui/nvim-surround",
   -- "FabijanZulj/blame.nvim",
   "tpope/vim-eunuch",

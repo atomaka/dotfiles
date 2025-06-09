@@ -1,2 +1,3 @@
+cursor
 nordlayer
 notion

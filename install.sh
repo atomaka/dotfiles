@@ -6,7 +6,7 @@ readonly ARGS="$@"
 
 install_homebrew() {
   echo -n Checking homebrew...
-  if command -v brew > /dev/null; then
+  if command -v /opt/homebrew/bin/brew > /dev/null; then
     echo -n already installed...
   else
     echo -n installing...
@@ -25,7 +25,7 @@ install_homebrew() {
 install_shared_brew_packages() {
   echo -n Checking shared brew packages...
   missing_packages=$(
-    comm -23  <(cat packages-shared-brew.txt) <(brew list --full-name | sort) \
+    comm -23  <(cat packages-shared-brew.txt) <(/opt/homebrew/bin/brew list --full-name | sort) \
       | tr "\n" " "
   )
 
@@ -33,7 +33,7 @@ install_shared_brew_packages() {
     echo -n already installed...
   else
     echo -n installing $missing_packages...
-    brew install $missing_packages
+    /opt/homebrew/bin/brew install $missing_packages
   fi
   echo done
 }
@@ -66,7 +66,7 @@ install_fzf() {
     echo -n already installed...
   else
     echo -n installing...
-    $(brew --prefix)/opt/fzf/install \
+    $(/opt/homebrew/bin/brew --prefix)/opt/fzf/install \
       --xdg \
       --no-update-rc \
       --key-bindings \
@@ -116,7 +116,7 @@ install_darwin_brew_packages() {
     echo -n already installed...
   else
     echo -n installing $missing_packages...
-    brew install --cask $missing_packages
+    /opt/homebrew/bin/brew install $missing_packages
   fi
   echo done
 }
@@ -132,7 +132,7 @@ install_darwin_brew_cask_packages() {
   fi
 
   missing_packages=$(
-    comm -23  <(cat $package_files | sort) <(brew list --full-name | sort) \
+    comm -23  <(cat $package_files | sort) <(/opt/homebrew/bin/brew list --full-name | sort) \
       | tr "\n" " "
   )
 
@@ -140,7 +140,7 @@ install_darwin_brew_cask_packages() {
     echo -n already installed...
   else
     echo -n installing $missing_packages...
-    brew install --cask $missing_packages
+    /opt/homebrew/bin/brew install --cask $missing_packages
   fi
   echo done
 }
@@ -179,7 +179,7 @@ install_env() {
 }
 
 install_stow_paths() {
-  stow bin ghostty git nvim ruby tmux zsh
+  /opt/homebrew/bin/stow bin ghostty git nvim ruby tmux zsh
 }
 
 install_linux() {

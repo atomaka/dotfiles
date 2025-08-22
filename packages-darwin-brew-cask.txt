@@ -3,9 +3,6 @@ brave-browser
 discord
 firefox
 ghostty
-google-chrome
-obsidian
+goreleaser
 podman-desktop
 rectangle
-slack
-zoom

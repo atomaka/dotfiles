@@ -9,7 +9,6 @@ gh
 git
 gmp
 gnupg
-goreleaser/tap/goreleaser
 hurl
 iperf3
 jq
@@ -20,7 +19,6 @@ mise
 neovim
 node-build
 openapi-generator
-openssl@1.1
 openssl@3
 qmk/qmk/qmk
 rar

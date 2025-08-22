@@ -1,5 +1,7 @@
 android-file-transfer
 brave-browser
+claude
+claude-code
 discord
 firefox
 ghostty

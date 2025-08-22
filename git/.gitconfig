@@ -41,6 +41,6 @@
   cachetextconv = false
 
 [includeIf "gitdir:~/Source/work/"]
-  path = ~/.config/git/gitconfig_mudflap
+  path = ~/.config/git/gitconfig_boldpenguin
 [init]
 	defaultBranch = main

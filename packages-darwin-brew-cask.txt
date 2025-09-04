@@ -5,6 +5,7 @@ claude-code
 discord
 firefox
 ghostty
-goreleaser
+goreleaser/tap/goreleaser
+joplin
 podman-desktop
 rectangle

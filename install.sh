@@ -179,7 +179,7 @@ install_env() {
 }
 
 install_stow_paths() {
-  /opt/homebrew/bin/stow bin ghostty git nvim ruby tmux zsh
+  /opt/homebrew/bin/stow bin ghostty git mise nvim ruby tmux zsh
 }
 
 install_linux() {

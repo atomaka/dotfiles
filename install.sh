@@ -182,6 +182,26 @@ install_stow_paths() {
   /opt/homebrew/bin/stow bin ghostty git mise nvim ruby tmux zsh
 }
 
+install_ssh_config() {
+  echo -n Checking SSH config...
+  if [[ ! -f ~/.ssh/config ]]; then
+    echo -n installing...
+    mkdir -p ~/.ssh
+    cp ./ssh/.ssh/config ~/.ssh/config
+  else
+    if cmp -s ./ssh/.ssh/config ~/.ssh/config; then
+      echo -n already installed...
+    else
+      echo -n different config found...
+      diff_output=$(diff ~/.ssh/config ./ssh/.ssh/config)
+      adds=$(echo "$diff_output" | grep -c '^>' || true)
+      removes=$(echo "$diff_output" | grep -c '^<' || true)
+      echo -n "$removes removes, $adds adds..."
+    fi
+  fi
+  echo done
+}
+
 install_linux() {
   if ! command -v apt-get > /dev/null; then
     echo apt-get is required, but not available
@@ -209,6 +229,7 @@ install_darwin() {
   install_darwin_brew_cask_packages
   install_tmux_terminfo
   install_stow_paths
+  install_ssh_config
 }
 
 main() {

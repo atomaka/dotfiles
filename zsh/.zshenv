@@ -4,6 +4,7 @@ ZDOT_MAX_BRANCH_LENGTH=30
 
 XDG_CONFIG_HOME="$HOME/.config"
 
+LOCAL_BIN_PATH="$HOME/.local/bin"
 PERSONAL_BIN_PATH="$HOME/bin"
 PERSONAL_FPATH="$ZDOTDIR/completions"
 
@@ -41,6 +42,7 @@ elif [[ "$OSTYPE" == linux* ]]; then
 fi
 
 [[ -d "$CARGO_PATH" ]] && PATH="$CARGO_PATH:$PATH"
+[[ -d "$LOCAL_BIN_PATH" ]] && PATH="$LOCAL_BIN_PATH:$PATH"
 [[ -d "$PERSONAL_BIN_PATH" ]] && PATH="$PERSONAL_BIN_PATH:$PATH"
 [[ -d "$PERSONAL_FPATH" ]] && FPATH="$PERSONAL_FPATH:$FPATH"
 

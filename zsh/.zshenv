@@ -7,6 +7,7 @@ XDG_CONFIG_HOME="$HOME/.config"
 LOCAL_BIN_PATH="$HOME/.local/bin"
 PERSONAL_BIN_PATH="$HOME/bin"
 PERSONAL_FPATH="$ZDOTDIR/completions"
+export SOPS_AGE_KEY_FILE="$XDG_CONFIG_HOME/sops/age/keys.txt"
 
 CARGO_PATH="$HOME/.cargo/bin"
 

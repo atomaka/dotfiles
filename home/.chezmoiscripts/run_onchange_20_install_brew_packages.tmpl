@@ -2,6 +2,8 @@
 
 # Brewfile hash: {{ include (joinPath .chezmoi.workingTree "Brewfile") | sha256sum }}
 
+echo "Installing homebrew packages"
+
 pushd $HOME/.local/share/chezmoi
 brew bundle
 popd

@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
 source $HOME/.zshenv
+
+echo ".zshenv has been sourced"

@@ -2,9 +2,12 @@
 
 set -e
 
+
 repo="https://git.atomaka.com/atomaka/dotfiles.git"
-local_bin="$HOME/.local/bin"
+local_dir="$HOME/.local/bin"
 chezmoi_source_dir="$HOME/.local/share/chezmoi"
+
+PATH="$local_dir:$PATH"
 
 echo "==> Bootstrapping dotfiles..."
 

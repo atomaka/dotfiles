@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-PATH="/opt/homebrew/bin:$PATH"

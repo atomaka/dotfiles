@@ -1,3 +1,0 @@
-coreutils
-gnu-sed
-session-manager-plugin

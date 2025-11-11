@@ -1,0 +1,44 @@
+[alias]
+  fancy-graph = log --graph --decorate --pretty=oneline --abbrev-commit
+  hist = log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  hist-details = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  hist-tags = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  most-recent-by-branch = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  root = rev-parse --show-toplevel
+  add-trailer = commit --allow-empty --no-edit --amend --trailer
+
+
+[commit]
+  gpgsign = true
+
+[core]
+  autocrlf = input
+
+[github]
+  username = atomaka
+
+[gpg]
+  program = gpg
+
+[merge]
+  tool = nvim -d
+
+[pull]
+  rebase = false
+
+[status]
+  showUntrackedFiles = all
+
+[user]
+  email = atomaka@atomaka.com
+  name = Andrew Tomaka
+  signingkey = 61209BF70A5B18BE
+
+[diff "enc"]
+  textconv = bundle exec rails encrypted:show
+  cachetextconv = false
+
+[includeIf "gitdir:~/Source/work/"]
+  path = ~/.config/git/gitconfig_boldpenguin
+[init]
+	defaultBranch = main

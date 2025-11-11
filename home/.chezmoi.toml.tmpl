@@ -1,0 +1,3 @@
+{{ $manage := promptBoolOnce . "manage" "Does this machine manage dotfiles" -}}
+[data]
+    manage = {{ $manage }}

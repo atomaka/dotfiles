@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# /etc/zprofile: {{ if stat "/etc/zprofile" }}placed{{ else }}moved{{ end }}
+
+if [ -f /etc/zprofile ]; then
+  sudo mv /etc/{zprofile,zprofile.old}
+fi

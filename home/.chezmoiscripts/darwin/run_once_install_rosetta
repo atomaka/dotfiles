@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if ! pkgutil --pkg-info com.apple.pkg.RosettaUpdateAuto &> /dev/null; then
+  softwareupdate --install-rosetta --agree-to-license
+fi

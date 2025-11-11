@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+if ! infocmp tmux-256color > /dev/null; then
+  curl \
+    --fail \
+    --location \
+    --output /tmp/tmux-256color.src.gz \
+    https://invisible-island.net/datafiles/current/terminfo.src.gz
+
+  pushd /tmp
+  gunzip tmux-256color.src.gz
+  sed -i 's/pairs#0x10000/pairs#32767/g' tmux-256color.src
+
+  sudo tic -xe tmux-256color tmux-256color.src
+  popd
+fi

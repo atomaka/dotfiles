@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# packages hash: {{ .packages.linux.apt | join " " | sha256sum }}
+
+sudo apt-get install --assume-yes \
+{{ range .packages.linux.apt -}}{{ . }} {{ end }}

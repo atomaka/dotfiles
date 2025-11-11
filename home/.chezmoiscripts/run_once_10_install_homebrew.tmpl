@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+{{ if eq .chezmoi.os "darwin" -}}
+  homebrew_binary=/opt/homebrew/bin/brew
+{{ else if eq .chezmoi.os "linux" -}}
+  homebrew_binary=/home/linuxbrew/.linuxbrew/bin/brew
+{{ else -}}
+  echo "Unsupported OS"
+  exit 1
+{{ end -}}
+
+if ! command -v $homebrew_binary > /dev/null; then
+  echo Installing homebrew
+  NONINTERACTIVE=1 /bin/bash -c "$(
+    curl \
+      --fail \
+      --location \
+      --show-error \
+      --silent \
+      https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+  )"
+  echo Done installing homebrew
+fi

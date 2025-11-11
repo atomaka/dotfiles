@@ -1,0 +1,31 @@
+#!/bin/bash
+
+set -e
+
+repo="https://git.atomaka.com/atomaka/dotfiles.git"
+local_bin="$HOME/.local/bin"
+chezmoi_source_dir="$HOME/.local/share/chezmoi"
+
+echo "==> Bootstrapping dotfiles..."
+
+# Check if chezmoi command is available
+if ! command -v chezmoi &> /dev/null; then
+    echo -n "Installing chezmoi..."
+    sh -c "$(curl -fsSL https://git.io/chezmoi)" -- -b "$local_dir"
+    echo "done"
+fi
+
+# Initialize chezmoi if source directory doesn't exist
+if [ ! -d "$chezmoi_source_dir" ]; then
+  echo -n "Initializing chezmoi with dotfiles repository..."
+  chezmoi init --apply "$repo"
+  echo "done"
+fi
+
+# Clean up script-installed chezmoi if homebrew will install it
+if [ -f "$local_bin/chezmoi" ]; then
+  rm -f "$local_bin/chezmoi"
+fi
+
+echo ""
+echo "==> Bootstrap complete!"

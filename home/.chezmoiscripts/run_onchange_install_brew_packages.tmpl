@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# Brewfile hash: {{ include (joinPath .chezmoi.workingTree "Brewfile") | sha256sum }}
+
+pushd $HOME/.local/share/chezmoi
+brew bundle
+popd

@@ -1,4 +1,0 @@
-[env]
-RIPGREP_CONFIG_PATH = "./.ripgreprc"
-
-# private configuration to go in .mise.local.toml

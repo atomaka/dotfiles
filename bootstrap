@@ -21,7 +21,7 @@ fi
 # Initialize chezmoi if source directory doesn't exist
 if [ ! -d "$chezmoi_source_dir" ]; then
   echo -n "Initializing chezmoi with dotfiles repository..."
-  chezmoi init --apply "$repo"
+  chezmoi init --apply "$repo" --branch fixes
   echo "done"
 fi
 

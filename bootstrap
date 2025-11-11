@@ -6,8 +6,9 @@ set -e
 repo="https://git.atomaka.com/atomaka/dotfiles.git"
 local_dir="$HOME/.local/bin"
 chezmoi_source_dir="$HOME/.local/share/chezmoi"
+home_brew_paths="/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
 
-PATH="$local_dir:$PATH"
+PATH="$local_dir:$home_brew_paths:$PATH"
 
 echo "==> Bootstrapping dotfiles..."
 

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if [[ ! $PATH =~ "fzf" ]]; then
+  $(brew --prefix)/opt/fzf/install \
+    --xdg \
+    --no-update-rc \
+    --key-bindings \
+    --completion
+fi

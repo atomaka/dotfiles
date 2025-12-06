@@ -6,3 +6,4 @@ ruby = "latest"
 [settings]
 legacy_version_file = true
 idiomatic_version_file_enable_tools = ["ruby", "nodejs", "node", "terraform"]
+activate_aggressive = true

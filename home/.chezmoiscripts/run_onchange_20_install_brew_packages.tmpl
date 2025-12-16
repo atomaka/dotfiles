@@ -1,7 +1,22 @@
 #!/usr/bin/env bash
 
-# Brewfile hash: {{ include (joinPath .chezmoi.workingTree "Brewfile") | sha256sum }}
+# packages.toml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/packages.toml") | sha256sum }}
 
-pushd $HOME/.local/share/chezmoi
-brew bundle
-popd
+{{- if eq .chezmoi.os "darwin" }}
+
+# Generate Brewfile content from packages.toml
+{
+{{- range .packages.darwin.brew }}
+  echo 'brew "{{ . }}"'
+{{- end }}
+{{- range .packages.darwin.cask }}
+  echo 'cask "{{ . }}"'
+{{- end }}
+{{- if .personal }}
+{{- range .packages.darwin.personal.cask }}
+  echo 'cask "{{ . }}"'
+{{- end }}
+{{- end }}
+} | brew bundle --file=-
+
+{{- end }}

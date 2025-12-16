@@ -1,3 +1,5 @@
 {{ $manage := promptBoolOnce . "manage" "Does this machine manage dotfiles" -}}
+{{ $personal := promptBoolOnce . "personal" "Is this a personal computer" -}}
 [data]
     manage = {{ $manage }}
+    personal = {{ $personal }}

@@ -15,3 +15,68 @@
     "python3",
     "xclip"
   ]
+
+[packages.darwin]
+  brew = [
+    "ansible",
+    "awscli",
+    "bzip2",
+    "cmake",
+    "coreutils",
+    "d2",
+    "fontconfig",
+    "fzf",
+    "gh",
+    "git",
+    "gmp",
+    "gnu-sed",
+    "gnupg",
+    "hurl",
+    "iperf3",
+    "jq",
+    "libpq",
+    "libyaml",
+    "llvm",
+    "mise",
+    "neovim",
+    "node-build",
+    "openssl@3",
+    "qmk/qmk/qmk",
+    "readline",
+    "ripgrep",
+    "ruby-build",
+    "shared-mime-info",
+    "tig",
+    "tmux",
+    "vim",
+    "watch",
+    "zsh"
+  ]
+  cask = [
+    "claude",
+    "claude-code",
+    "firefox",
+    "ghostty",
+    "goreleaser/tap/goreleaser",
+    "joplin",
+    "podman-desktop",
+    "rar",
+    "rectangle",
+    "session-manager-plugin"
+  ]
+
+[packages.darwin.personal]
+  cask = [
+    "arduino-ide",
+    "discord",
+    "google-chrome",
+    "mqtt-explorer",
+    "openscad",
+    "orcaslicer",
+    "prismlauncher",
+    "slack",
+    "steam",
+    "thunderbird",
+    "zoom",
+    "zwift"
+  ]

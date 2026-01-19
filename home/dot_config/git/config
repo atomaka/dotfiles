@@ -38,6 +38,16 @@
   textconv = bundle exec rails encrypted:show
   cachetextconv = false
 
+[difftool]
+  prompt = false
+
+[diff]
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  prompt = false
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
 [includeIf "gitdir:~/Source/work/"]
   path = ~/.config/git/gitconfig_boldpenguin
 [init]

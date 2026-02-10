@@ -36,6 +36,7 @@
     "jq",
     "libomp",
     "libpq",
+    "libvips",
     "libyaml",
     "llvm",
     "mise",

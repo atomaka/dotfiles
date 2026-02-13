@@ -20,6 +20,7 @@ alias docker="/opt/podman/bin/podman"
 alias g="g" # overwrite g alias
 alias ga="git add"
 alias gaa="git add --all"
+alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs --null -I "{}" git add-trailer "Co-authored-by: {}"'
 alias gap="git add --patch"
 alias gb="git branch"
 alias gc="git commit"
@@ -57,8 +58,8 @@ alias grc="git rm --cached"
 alias grh="git reset --hard"
 alias grm="git rm"
 alias gst="git-since-last-tag"
-alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs --null -I "{}" git add-trailer "Co-authored-by: {}"'
 alias gup="git-branch-delete-merged"
+alias gw="git worktree add"
 alias Grep='grep'
 alias l="ls"
 alias ll="ls -lv --human-readable --color=auto"

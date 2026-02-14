@@ -44,6 +44,7 @@
     "mysql-connector-c",
     "neovim",
     "node-build",
+    "opencode",
     "openssl@3",
     "qmk/qmk/qmk",
     "readline",

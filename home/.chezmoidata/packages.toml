@@ -66,7 +66,8 @@
     "podman-desktop",
     "rar",
     "rectangle",
-    "session-manager-plugin"
+    "session-manager-plugin",
+    "visual-studio-code"
   ]
 
 [packages.darwin.personal]

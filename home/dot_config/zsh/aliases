@@ -60,6 +60,7 @@ alias grm="git rm"
 alias gst="git-since-last-tag"
 alias gup="git-branch-delete-merged"
 alias gwa="git worktree add"
+alias gwl="git worktree list"
 alias gwr="git worktree remove"
 alias Grep='grep'
 alias l="ls"

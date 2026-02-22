@@ -51,6 +51,7 @@
     "ripgrep",
     "ruby-build",
     "shared-mime-info",
+    "sigsum-go",
     "tig",
     "tmux",
     "vim",

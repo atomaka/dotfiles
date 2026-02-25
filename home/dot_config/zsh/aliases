@@ -25,6 +25,7 @@ alias gap="git add --patch"
 alias gb="git branch"
 alias gc="git commit"
 alias gca="git commit --amend --allow-empty"
+alias gcd='cd "$(git worktree list | fzf | awk '\''{print $1}'\'')"'
 alias gcl="git commit -m 'Linting'"
 alias gcn="git commit --allow-empty --message 'noop'"
 alias gco="advanced-git-checkout"

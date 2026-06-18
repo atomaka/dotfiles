@@ -11,7 +11,7 @@ setopt append_history
 
 # Larger history
 HISTSIZE=20000
-HISTFILE=~/.zsh_history
+HISTFILE=$XDG_STATE_HOME/zsh/history
 SAVEHIST=20000
 
 # be like vim

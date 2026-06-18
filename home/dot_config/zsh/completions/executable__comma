@@ -1,6 +1,11 @@
- #compdef ,
+#compdef ,
 
-found_bin_dir=$(find-local-bin aet)
+setopt LOCAL_OPTIONS EXTENDED_GLOB
 
-_files -g "^," -W $found_bin_dir
-_files -g "^," -W $HOME/bin
+if (( CURRENT == 2 )); then
+  for dir in ${(f)"$(comma-search-paths)"}; do
+    _files -g "^," -W "$dir"
+  done
+else
+  _files
+fi

@@ -6,6 +6,13 @@
 
 # Generate Brewfile content from packages.toml
 {
+{{- range .packages.darwin.tap }}
+{{- if .url }}
+  echo 'tap "{{ .name }}", "{{ .url }}"'
+{{- else }}
+  echo 'tap "{{ .name }}"'
+{{- end }}
+{{- end }}
 {{- range .packages.darwin.brew }}
   echo 'brew "{{ . }}"'
 {{- end }}

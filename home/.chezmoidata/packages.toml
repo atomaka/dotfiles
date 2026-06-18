@@ -17,6 +17,9 @@
   ]
 
 [packages.darwin]
+  tap = [
+    { name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git" }
+  ]
   brew = [
     "ansible",
     "awscli",
@@ -59,6 +62,7 @@
     "zsh"
   ]
   cask = [
+    "atomaka/formula/local-review",
     "claude",
     "claude-code",
     "firefox",

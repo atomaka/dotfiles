@@ -1,5 +1,10 @@
 {{ $manage := promptBoolOnce . "manage" "Does this machine manage dotfiles" -}}
 {{ $personal := promptBoolOnce . "personal" "Is this a personal computer" -}}
+{{ $forgejoToken := index . "forgejo_token" -}}
+{{ if not $forgejoToken -}}
+{{ $forgejoToken = promptString "Forgejo token for homebrew tap" -}}
+{{ end -}}
 [data]
     manage = {{ $manage }}
     personal = {{ $personal }}
+    forgejo_token = {{ $forgejoToken | quote }}

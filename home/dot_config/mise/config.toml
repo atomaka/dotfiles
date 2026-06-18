@@ -2,6 +2,7 @@
 python = "latest"
 ghc = "latest"
 ruby = "latest"
+go = "latest"
 
 [settings]
 legacy_version_file = true

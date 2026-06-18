@@ -7,7 +7,7 @@ source $ZDOTDIR/functions
 
 source $ZDOTDIR/prompt
 
-setopt append_history
+setopt inc_append_history
 
 # Larger history
 HISTSIZE=20000

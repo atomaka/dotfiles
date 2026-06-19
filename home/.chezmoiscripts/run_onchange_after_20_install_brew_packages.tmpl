@@ -7,8 +7,12 @@
 # Generate Brewfile content from packages.toml
 {
 {{- range .packages.darwin.tap }}
-{{- if .url }}
+{{- if and .url .trusted }}
+  echo 'tap "{{ .name }}", "{{ .url }}", trusted: true'
+{{- else if .url }}
   echo 'tap "{{ .name }}", "{{ .url }}"'
+{{- else if .trusted }}
+  echo 'tap "{{ .name }}", trusted: true'
 {{- else }}
   echo 'tap "{{ .name }}"'
 {{- end }}

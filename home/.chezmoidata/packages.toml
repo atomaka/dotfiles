@@ -18,7 +18,8 @@
 
 [packages.darwin]
   tap = [
-    { name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git" }
+    { name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git", trusted = true },
+    { name = "goreleaser/tap", trusted = true }
   ]
   brew = [
     "ansible",

@@ -90,9 +90,62 @@ local function open_pr_from_commit()
   vim.notify("Unsupported git host", vim.log.levels.ERROR)
 end
 
+-- Upstream bug: gitmessenger#git#root_dir()'s "inside .git directory" guard
+-- does a raw string-prefix check (stridx(from, dotgit) == 0). When dotgit is
+-- a worktree gitfile like ".../repo/.git" (no trailing separator, since it
+-- comes from findfile() rather than finddir()), that string is itself a
+-- prefix of ".../repo/.github/...", so any file under .github/ is wrongly
+-- treated as being inside .git and root_dir() returns ''. Upstream issue #70
+-- fixed only the finddir() (regular .git directory, trailing-slash) case,
+-- not this findfile()/worktree case:
+-- https://github.com/rhysd/git-messenger.vim/issues/70
+--
+-- Force-redefine just this one function after the plugin loads, rather than
+-- shadowing the whole autoload file, so job-spawning code etc. stays as
+-- upstream ships it.
+local function patch_root_dir()
+  -- Vim only allows :function! to redefine an autoload-named function
+  -- outside its matching autoload file once that function has already been
+  -- defined by the real autoload load. Force that load first.
+  vim.cmd("silent! call gitmessenger#git#root_dir(getcwd())")
+
+  vim.cmd([[
+    function! gitmessenger#git#root_dir(from) abort
+      let sep = has('win32') ? '\' : '/'
+      let from = fnameescape(fnamemodify(a:from, ':p'))
+      if from[-1:] ==# sep
+        let from = from[:-2]
+      endif
+
+      let dir = finddir('.git', from . ';')
+      let file = findfile('.git', from . ';')
+      if dir ==# '' && file ==# ''
+        return ''
+      endif
+      let dir = dir ==# '' ? '' : fnamemodify(dir, ':p')
+      let file = file ==# '' ? '' : fnamemodify(file, ':p')
+      let dotgit = len(dir) > len(file) ? dir : file
+
+      " Anchor the prefix check on a path separator so "/path/to/.git" does
+      " not falsely match "/path/to/.github/...".
+      let dotgit_with_sep = dotgit[-1:] ==# sep ? dotgit : dotgit . sep
+      if stridx(from . sep, dotgit_with_sep) == 0
+        return ''
+      endif
+
+      if dotgit[-1:] ==# sep
+        let dotgit = dotgit[:-2]
+      endif
+      return fnamemodify(dotgit, ':h')
+    endfunction
+  ]])
+end
+
 return {
   "rhysd/git-messenger.vim",
   config = function()
+    patch_root_dir()
+
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "gitmessengerpopup",
       group = vim.api.nvim_create_augroup("GitMessengerPR", { clear = true }),

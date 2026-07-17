@@ -5,7 +5,7 @@ set -e
 repo="https://git.atomaka.com/atomaka/dotfiles.git"
 local_dir="$HOME/.local/bin"
 chezmoi_source_dir="$HOME/.local/share/chezmoi"
-home_brew_paths="/opt/homebrew/bin:/home/linuxbrew/.linuxbrew/bin"
+home_brew_paths="/opt/homebrew/bin"
 
 PATH="$local_dir:$home_brew_paths:$PATH"
 
@@ -39,8 +39,8 @@ if [ ! -d "$chezmoi_source_dir" ]; then
   echo "done"
 fi
 
-if [ -f "$local_bin/chezmoi" ]; then
-  rm -f "$local_bin/chezmoi"
+if [ -f "$local_dir/chezmoi" ]; then
+  rm -f "$local_dir/chezmoi"
 fi
 
 echo ""

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+# packages hash: {{ range .packages.tool }}{{ $managers := index . "managers" | default (list "brew" "pacman") }}{{ $personal := index . "personal" }}{{ if and (or (not $personal) $.personal) (has "aur" $managers) }}{{ index . "aur" | default .name }} {{ end }}{{ end }}
+
+{{- $aurTools := list }}
+{{- range .packages.tool }}
+{{- $managers := index . "managers" | default (list "brew" "pacman") }}
+{{- $personal := index . "personal" }}
+{{- if and (or (not $personal) $.personal) (has "aur" $managers) }}
+{{- $aurTools = mustAppend $aurTools (index . "aur" | default .name) }}
+{{- end }}
+{{- end }}
+{{- if $aurTools }}
+
+paru -S --needed --noconfirm \
+{{- range $aurTools }}
+  {{ . }} \
+{{- end }}
+{{- end }}

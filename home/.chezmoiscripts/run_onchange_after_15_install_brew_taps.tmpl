@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# packages.toml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/packages.toml") | sha256sum }}
+
+{{- if eq .chezmoi.os "darwin" }}
+
+# Tap declarations run as their own `brew bundle` invocation, separate from
+# formula/cask installation in run_onchange_after_20_install_brew_packages.tmpl.
+# `trusted: true` is only applied to the on-disk trust store once this process
+# exits; if taps and formulae shared one Brewfile, loading a formula's
+# transitive dependency from a newly-declared tap can race ahead of that
+# tap's own trust grant within the same `brew bundle` run and fail with
+# "Refusing to load formula ... from untrusted tap". Running taps first in a
+# separate process removes the race: trust.json is written and persisted
+# before the formula-installing process ever starts.
+{
+{{- range .packages.tool }}
+{{- $personal := index . "personal" }}
+{{- if or (not $personal) $.personal }}
+{{- range index . "repositories" }}
+{{- if eq .manager "brew" }}
+{{- if and (index . "url") (index . "trusted") }}
+  echo 'tap "{{ .name }}", "{{ .url }}", trusted: true'
+{{- else if index . "url" }}
+  echo 'tap "{{ .name }}", "{{ .url }}"'
+{{- else if index . "trusted" }}
+  echo 'tap "{{ .name }}", trusted: true'
+{{- else }}
+  echo 'tap "{{ .name }}"'
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}
+} | brew bundle --file=-
+
+{{- end }}

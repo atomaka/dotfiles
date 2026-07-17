@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+if ! command -v paru > /dev/null; then
+  echo Installing paru
+  tmp_dir=$(mktemp -d)
+  git clone https://aur.archlinux.org/paru.git "$tmp_dir/paru"
+  pushd "$tmp_dir/paru" > /dev/null
+  makepkg -si --noconfirm
+  popd > /dev/null
+  rm -rf "$tmp_dir"
+  echo Done installing paru
+fi

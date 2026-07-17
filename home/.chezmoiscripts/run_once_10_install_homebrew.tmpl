@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
 {{ if eq .chezmoi.os "darwin" -}}
-  homebrew_binary=/opt/homebrew/bin/brew
-{{ else if eq .chezmoi.os "linux" -}}
-  homebrew_binary=/home/linuxbrew/.linuxbrew/bin/brew
-{{ else -}}
-  echo "Unsupported OS"
-  exit 1
-{{ end -}}
+homebrew_binary=/opt/homebrew/bin/brew
 
 if ! command -v $homebrew_binary > /dev/null; then
   echo Installing homebrew
@@ -21,3 +15,4 @@ if ! command -v $homebrew_binary > /dev/null; then
   )"
   echo Done installing homebrew
 fi
+{{ end -}}

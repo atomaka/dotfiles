@@ -4,28 +4,23 @@
 
 {{- if eq .chezmoi.os "darwin" }}
 
-# Generate Brewfile content from packages.toml
+# Generate Brewfile content from packages.toml. Tap declarations run
+# separately in run_onchange_after_15_install_brew_taps.tmpl, before this
+# script, so trust is granted and persisted before any formula here can
+# trigger a transitive-dependency load from a newly-trusted tap.
 {
-{{- range .packages.darwin.tap }}
-{{- if and .url .trusted }}
-  echo 'tap "{{ .name }}", "{{ .url }}", trusted: true'
-{{- else if .url }}
-  echo 'tap "{{ .name }}", "{{ .url }}"'
-{{- else if .trusted }}
-  echo 'tap "{{ .name }}", trusted: true'
-{{- else }}
-  echo 'tap "{{ .name }}"'
+{{- range .packages.tool }}
+{{- $managers := index . "managers" | default (list "brew" "pacman") }}
+{{- $personal := index . "personal" }}
+{{- if and (or (not $personal) $.personal) (has "brew" $managers) }}
+  echo 'brew "{{ index . "brew" | default .name }}"'
 {{- end }}
 {{- end }}
-{{- range .packages.darwin.brew }}
-  echo 'brew "{{ . }}"'
-{{- end }}
-{{- range .packages.darwin.cask }}
-  echo 'cask "{{ . }}"'
-{{- end }}
-{{- if .personal }}
-{{- range .packages.darwin.personal.cask }}
-  echo 'cask "{{ . }}"'
+{{- range .packages.tool }}
+{{- $managers := index . "managers" | default (list "brew" "pacman") }}
+{{- $personal := index . "personal" }}
+{{- if and (or (not $personal) $.personal) (has "cask" $managers) }}
+  echo 'cask "{{ index . "cask" | default .name }}"'
 {{- end }}
 {{- end }}
 } | brew bundle --file=-

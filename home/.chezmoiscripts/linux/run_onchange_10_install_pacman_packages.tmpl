@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# packages hash: {{ range .packages.tool }}{{ $managers := index . "managers" | default (list "brew" "pacman") }}{{ $personal := index . "personal" }}{{ if and (or (not $personal) $.personal) (has "pacman" $managers) }}{{ index . "pacman" | default .name }} {{ end }}{{ end }}
+
+sudo pacman -Syu --needed --noconfirm \
+{{- range .packages.tool }}
+{{- $managers := index . "managers" | default (list "brew" "pacman") }}
+{{- $personal := index . "personal" }}
+{{- if and (or (not $personal) $.personal) (has "pacman" $managers) }}
+  {{ index . "pacman" | default .name }} \
+{{- end }}
+{{- end }}

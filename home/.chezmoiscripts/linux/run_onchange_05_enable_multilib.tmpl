@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# multilib enabled in /etc/pacman.conf: {{ output "sh" "-c" "grep -c '^\\[multilib\\]' /etc/pacman.conf 2>/dev/null || true" | trim | sha256sum }}
+
+{{ if .personal -}}
+if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
+  echo Enabling multilib repo
+  sudo sed -i '/^#\[multilib\]/,/^#Include/s/^#//' /etc/pacman.conf
+  sudo pacman -Sy
+  echo Done enabling multilib repo
+fi
+{{ end -}}

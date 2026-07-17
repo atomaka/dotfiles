@@ -1,94 +1,342 @@
-[packages.linux]
-  apt = [
-    "build-essential",
-    "cmake",
-    "curl",
-    "file",
-    "git",
-    "libfontconfig1-dev",
-    "libfreetype6-dev",
-    "libssl-dev",
-    "libxcb-xfixes0-dev",
-    "libxkbcommon-dev",
-    "pkg-config",
-    "procps",
-    "python3",
-    "xclip"
-  ]
+# Each [[packages.tool]] entry is one logical tool. `name` is the default
+# identifier used for every manager unless overridden by a per-manager field
+# (brew/cask/pacman/aur). `managers` selects which package managers install
+# it and defaults to ["brew", "pacman"] (the primary manager per OS) when
+# omitted; "cask" and "aur" are opt-in only, never defaulted. `personal`
+# gates on the .personal chezmoi data var. `repositories` declares any
+# third-party source (e.g. a Homebrew tap) a manager needs registered
+# before install — AUR needs none, paru resolves packages by name directly.
+#
+# Pacman/AUR package names have been verified against archlinux.org's
+# package search JSON API and the AUR RPC API. Entries marked VERIFY are
+# exceptions that couldn't be confirmed this way (e.g. a package that
+# doesn't exist yet anywhere).
 
-[packages.darwin]
-  tap = [
-    { name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git", trusted = true },
-    { name = "goreleaser/tap", trusted = true }
-  ]
-  brew = [
-    "ansible",
-    "awscli",
-    "bzip2",
-    "cmake",
-    "coreutils",
-    "d2",
-    "fontconfig",
-    "fzf",
-    "gh",
-    "git",
-    "gmp",
-    "gnu-sed",
-    "gnupg",
-    "hurl",
-    "hk",
-    "iperf3",
-    "jq",
-    "libomp",
-    "libpq",
-    "libvips",
-    "libyaml",
-    "llvm",
-    "mise",
-    "mysql-connector-c",
-    "neovim",
-    "node-build",
-    "opencode",
-    "openssl@3",
-    "qmk/qmk/qmk",
-    "readline",
-    "ripgrep",
-    "ruby-build",
-    "shared-mime-info",
-    "sigsum-go",
-    "tig",
-    "tmux",
-    "vim",
-    "watch",
-    "zsh"
-  ]
-  cask = [
-    "atomaka/formula/local-review",
-    "claude",
-    "claude-code",
-    "firefox",
-    "ghostty",
-    "goreleaser/tap/goreleaser",
-    "joplin",
-    "podman-desktop",
-    "rar",
-    "rectangle",
-    "session-manager-plugin",
-    "visual-studio-code"
-  ]
+[[packages.tool]]
+name = "ansible"
 
-[packages.darwin.personal]
-  cask = [
-    "arduino-ide",
-    "discord",
-    "google-chrome",
-    "mqtt-explorer",
-    "openscad",
-    "orcaslicer",
-    "prismlauncher",
-    "slack",
-    "steam",
-    "thunderbird",
-    "zoom",
-    "zwift"
-  ]
+[[packages.tool]]
+name = "aws-cli"
+brew = "awscli"
+pacman = "aws-cli" # confirmed: archlinux.org/packages extra/aws-cli
+
+[[packages.tool]]
+name = "base-devel"
+managers = ["pacman"]
+# build toolchain (makepkg, gcc, fakeroot, ...), required before
+# run_once_15_install_paru can bootstrap paru
+
+[[packages.tool]]
+name = "bzip2"
+managers = ["brew"]
+
+[[packages.tool]]
+name = "chezmoi"
+
+[[packages.tool]]
+name = "cmake"
+
+[[packages.tool]]
+name = "coreutils"
+managers = ["brew"]
+
+[[packages.tool]]
+name = "d2"
+# confirmed: archlinux.org/packages extra/d2
+
+[[packages.tool]]
+name = "fontconfig"
+# library for locating/configuring fonts, shared dependency of terminal and
+# font-rendering tools (ghostty, etc.)
+
+[[packages.tool]]
+name = "fzf"
+
+[[packages.tool]]
+name = "gh"
+pacman = "github-cli"
+
+[[packages.tool]]
+name = "git"
+
+[[packages.tool]]
+name = "gmp"
+# GNU multiple-precision arithmetic library, dependency of crypto/numeric
+# tools (gnupg, ruby/gem bignum extensions, etc.)
+
+[[packages.tool]]
+name = "gnu-sed"
+managers = ["brew"]
+
+[[packages.tool]]
+name = "gnupg"
+
+[[packages.tool]]
+name = "jq"
+
+[[packages.tool]]
+name = "libomp"
+managers = ["brew"]
+# LLVM's OpenMP runtime; needed on darwin since Apple's system clang doesn't
+# bundle it. Not tracked on linux: gcc/glibc toolchains ship libgomp instead,
+# which serves the same purpose.
+
+[[packages.tool]]
+name = "libpq"
+pacman = "postgresql-libs" # confirmed: archlinux.org/packages extra/postgresql-libs
+# client library + headers only (libpq), not the full postgres server —
+# matches brew's "libpq" formula, which is also client-only
+
+[[packages.tool]]
+name = "libvips"
+
+[[packages.tool]]
+name = "libyaml"
+
+[[packages.tool]]
+name = "llvm"
+
+[[packages.tool]]
+name = "mise" # confirmed: archlinux.org/packages extra/mise
+
+[[packages.tool]]
+name = "mysql-client"
+pacman = "mariadb-libs" # confirmed: archlinux.org/packages extra/mariadb-libs
+# brew formula "mysql-connector-c" was renamed to "mysql-client"
+# (mysql-connector-c is now just a deprecated alias); mariadb-libs provides
+# the equivalent client library on Arch
+
+[[packages.tool]]
+name = "neovim"
+
+[[packages.tool]]
+name = "node-build"
+managers = ["brew", "aur"]
+aur = "nodenv-node-build" # confirmed: no plain "node-build" in AUR, actual name is nodenv-node-build
+
+[[packages.tool]]
+name = "opencode"
+# confirmed: archlinux.org/packages extra/opencode
+
+[[packages.tool]]
+name = "openssl"
+brew = "openssl@3"
+managers = ["brew"]
+# darwin only: real OpenSSL via brew (system one is LibreSSL-based).
+# native/system on linux, not tracked here for now.
+# @3 still required: homebrew-core carries openssl@3 and openssl@4 as
+# distinct, actively maintained formulae (not a deprecated pin) — @3 is kept
+# since that's the ABI everything else here still links against.
+
+[[packages.tool]]
+name = "qmk"
+managers = ["brew", "pacman"]
+brew = "qmk/qmk/qmk"
+personal = true
+repositories = [
+  { manager = "brew", name = "qmk/qmk", url = "https://github.com/qmk/homebrew-qmk.git", trusted = true },
+  { manager = "brew", name = "osx-cross/arm", url = "https://github.com/osx-cross/homebrew-arm.git", trusted = true },
+  { manager = "brew", name = "osx-cross/avr", url = "https://github.com/osx-cross/homebrew-avr.git", trusted = true },
+]
+# url is required even though these are the default GitHub tap locations:
+# without it, Brewfile's `trusted: true` silently gets parsed into the
+# clone_target slot and is dropped (Homebrew/brew#22668), leaving the tap
+# untrusted. osx-cross/arm and osx-cross/avr aren't installed directly —
+# they're transitive taps pulled in by qmk's arm-none-eabi-gcc@8 and
+# avr-gcc@8 dependencies (per qmk.rb's depends_on lines, the only two
+# cross-tap deps it has), and Homebrew's tap-trust model (6.0.0+) requires
+# each to be explicitly trusted too, or the formula load is refused even
+# though nothing here calls it by name.
+# pacman: confirmed archlinux.org/packages extra/qmk (no tap/repository
+# needed on linux, it's in the official repo directly)
+
+[[packages.tool]]
+name = "readline"
+# confirmed: archlinux.org/packages core/readline
+
+[[packages.tool]]
+name = "ripgrep"
+
+[[packages.tool]]
+name = "ruby-build"
+# confirmed: archlinux.org/packages extra/ruby-build
+
+[[packages.tool]]
+name = "shared-mime-info"
+
+[[packages.tool]]
+name = "tig"
+
+[[packages.tool]]
+name = "tmux"
+
+[[packages.tool]]
+name = "vim"
+
+[[packages.tool]]
+name = "watch"
+managers = ["brew"]
+# GNU watch not needed on linux, procps-ng already provides it
+
+[[packages.tool]]
+name = "zsh"
+
+# GUI apps (darwin via cask, linux via AUR/pacman where available)
+
+[[packages.tool]]
+name = "claude"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "claude" (repackaged from the official
+# Debian package), name matches so no override needed
+
+[[packages.tool]]
+name = "claude-code"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "claude-code", name matches
+
+[[packages.tool]]
+name = "firefox"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/firefox, name matches
+
+[[packages.tool]]
+name = "ghostty"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/ghostty, name matches
+
+[[packages.tool]]
+name = "goreleaser"
+managers = ["cask", "pacman"]
+cask = "goreleaser/tap/goreleaser"
+repositories = [
+  { manager = "brew", name = "goreleaser/tap", url = "https://github.com/goreleaser/homebrew-tap.git", trusted = true },
+]
+# url is required even though it's the default GitHub tap location: without
+# it, Brewfile's `trusted: true` silently gets parsed into the clone_target
+# slot and is dropped (Homebrew/brew#22668), leaving the tap untrusted
+# pacman: confirmed archlinux.org/packages extra/goreleaser, name matches,
+# no repository/tap needed on linux
+
+[[packages.tool]]
+name = "joplin"
+managers = ["cask", "aur"]
+aur = "joplin-desktop" # confirmed: aur.archlinux.org joplin-desktop
+
+[[packages.tool]]
+name = "local-review"
+managers = ["cask"]
+cask = "atomaka/formula/local-review"
+repositories = [
+  { manager = "brew", name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git", trusted = true },
+]
+# cask only for now — no linux distribution yet, revisit once that's sorted
+
+[[packages.tool]]
+name = "podman-desktop"
+managers = ["cask", "aur"]
+aur = "podman-desktop-git" # confirmed: only a -git (dev) build exists in the AUR, no stable/bin package
+
+[[packages.tool]]
+name = "rar"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "rar" (RARLAB's own compress+extract
+# port), name matches. Arch's official repo only has "unrar" (extract-only).
+
+[[packages.tool]]
+name = "rectangle"
+managers = ["cask"]
+# no linux equivalent: macOS-specific window snapping via the Accessibility
+# API. On linux, window tiling is handled per-window-manager/DE instead of
+# by an installable app, so there's nothing to map this onto.
+
+[[packages.tool]]
+name = "session-manager-plugin"
+managers = ["cask", "aur"]
+aur = "aws-session-manager-plugin" # confirmed: aur.archlinux.org aws-session-manager-plugin
+
+[[packages.tool]]
+name = "visual-studio-code"
+managers = ["cask", "aur"]
+aur = "visual-studio-code-bin" # confirmed: aur.archlinux.org visual-studio-code-bin —
+# this is Microsoft's actual official binary (matches the darwin cask,
+# including marketplace access), unlike the OSS/MIT "code" package in the
+# official repo
+
+# Personal-only casks (gated on .personal)
+
+[[packages.tool]]
+name = "arduino-ide"
+managers = ["cask", "aur"]
+aur = "arduino-ide-bin" # confirmed: aur.archlinux.org arduino-ide-bin
+personal = true
+
+[[packages.tool]]
+name = "discord"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/discord, name matches
+personal = true
+
+[[packages.tool]]
+name = "google-chrome"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "google-chrome" (stable channel), name matches
+personal = true
+
+[[packages.tool]]
+name = "mqtt-explorer"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "mqtt-explorer", name matches
+personal = true
+
+[[packages.tool]]
+name = "openscad"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/openscad, name matches
+personal = true
+
+[[packages.tool]]
+name = "orcaslicer"
+managers = ["cask", "aur"]
+aur = "orca-slicer" # confirmed: aur.archlinux.org "orca-slicer" (hyphenated, unlike the tool name)
+personal = true
+
+[[packages.tool]]
+name = "prismlauncher"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/prismlauncher, name matches
+personal = true
+
+[[packages.tool]]
+name = "slack"
+managers = ["cask", "aur"]
+aur = "slack-desktop" # confirmed: aur.archlinux.org "slack-desktop"
+personal = true
+
+[[packages.tool]]
+name = "steam"
+managers = ["cask", "pacman"]
+personal = true
+# pacman: confirmed archlinux.org/packages multilib/steam, name matches —
+# requires the [multilib] repo, enabled by
+# .chezmoiscripts/linux/run_once_05_enable_multilib.tmpl (personal-only,
+# runs before this package list)
+
+[[packages.tool]]
+name = "thunderbird"
+managers = ["cask", "pacman"]
+# pacman: confirmed archlinux.org/packages extra/thunderbird, name matches
+personal = true
+
+[[packages.tool]]
+name = "zoom"
+managers = ["cask", "aur"]
+# aur: confirmed aur.archlinux.org "zoom", name matches
+personal = true
+
+[[packages.tool]]
+name = "zwift"
+managers = ["cask"]
+personal = true
+# no linux equivalent: Zwift has no official Linux client (Windows/macOS/
+# iOS/AppleTV/Android only), and nothing exists in the official repos or
+# AUR

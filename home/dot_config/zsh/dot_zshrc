@@ -35,4 +35,6 @@ else
 fi
 unsetopt EXTENDEDGLOB
 
-[ -f $XDG_CONFIG_HOME/fzf/fzf.zsh ] && source $XDG_CONFIG_HOME/fzf/fzf.zsh
+if which fzf > /dev/null; then
+  eval "$(fzf --zsh)"
+fi

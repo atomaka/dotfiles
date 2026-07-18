@@ -220,7 +220,9 @@ repositories = [
 [[packages.tool]]
 name = "joplin"
 managers = ["cask", "aur"]
-aur = "joplin-desktop" # confirmed: aur.archlinux.org joplin-desktop
+aur = "joplin-bin" # confirmed: aur.archlinux.org joplin-bin — prebuilt binary,
+# unlike joplin-desktop which compiles via npm/electron-builder (and was
+# stuck 2 major versions behind upstream at last check)
 
 [[packages.tool]]
 name = "local-review"
@@ -284,7 +286,9 @@ personal = true
 [[packages.tool]]
 name = "mqtt-explorer"
 managers = ["cask", "aur"]
-# aur: confirmed aur.archlinux.org "mqtt-explorer", name matches
+aur = "mqtt-explorer-appimage" # confirmed: aur.archlinux.org
+# mqtt-explorer-appimage — prebuilt AppImage, same version (0.3.5) as the
+# "mqtt-explorer" package, which instead compiles via yarn/electron-builder
 personal = true
 
 [[packages.tool]]
@@ -296,7 +300,9 @@ personal = true
 [[packages.tool]]
 name = "orcaslicer"
 managers = ["cask", "aur"]
-aur = "orca-slicer" # confirmed: aur.archlinux.org "orca-slicer" (hyphenated, unlike the tool name)
+aur = "orca-slicer-bin" # confirmed: aur.archlinux.org orca-slicer-bin —
+# prebuilt AppImage, same version (2.4.2) as "orca-slicer", which instead
+# does a heavy cmake/ninja C++ build from source
 personal = true
 
 [[packages.tool]]

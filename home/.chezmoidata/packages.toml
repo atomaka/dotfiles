@@ -233,8 +233,7 @@ repositories = [
 
 [[packages.tool]]
 name = "podman-desktop"
-managers = ["cask", "aur"]
-aur = "podman-desktop-git" # confirmed: only a -git (dev) build exists in the AUR, no stable/bin package
+managers = ["cask"]
 
 [[packages.tool]]
 name = "rar"

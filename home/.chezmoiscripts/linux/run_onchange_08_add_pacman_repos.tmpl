@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+
+# packages.toml hash: {{ include (joinPath .chezmoi.sourceDir ".chezmoidata/packages.toml") | sha256sum }}
+
+{{- range .packages.tool }}
+{{- $personal := index . "personal" }}
+{{- if or (not $personal) $.personal }}
+{{- range index . "repositories" }}
+{{- if eq .manager "pacman" }}
+{{- $owner := .owner }}
+{{- $host := (urlParse .url).host }}
+
+if ! grep -q '^\[{{ .name }}\]' /etc/pacman.conf; then
+  echo "Adding pacman repo {{ .name }}"
+  sudo tee -a /etc/pacman.conf > /dev/null <<'EOF'
+
+[{{ .name }}]
+SigLevel = Required
+Server = {{ .url }}
+EOF
+fi
+
+if ! pacman-key --list-keys '{{ $owner }}@noreply.{{ $host }}' &> /dev/null; then
+  echo "Importing signing key for {{ .name }}"
+  key_file=$(mktemp)
+  curl \
+    --fail \
+    --location \
+    --show-error \
+    --silent \
+    --output "$key_file" \
+    {{ .key_url }}
+  sudo pacman-key --add "$key_file"
+  sudo pacman-key --lsign-key '{{ $owner }}@noreply.{{ $host }}'
+  rm -f "$key_file"
+fi
+
+if ! sudo grep -q '^machine {{ $host }}$' /root/.netrc 2>/dev/null; then
+  echo "Adding netrc credentials for {{ $host }}"
+  printf 'machine %s\n  login %s\n  password %s\n' "{{ $host }}" "{{ $owner }}" "{{ $.forgejo_token }}" | sudo tee -a /root/.netrc > /dev/null
+  sudo chmod 600 /root/.netrc
+fi
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

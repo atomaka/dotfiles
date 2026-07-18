@@ -4,8 +4,9 @@
 # it and defaults to ["brew", "pacman"] (the primary manager per OS) when
 # omitted; "cask" and "aur" are opt-in only, never defaulted. `personal`
 # gates on the .personal chezmoi data var. `repositories` declares any
-# third-party source (e.g. a Homebrew tap) a manager needs registered
-# before install — AUR needs none, paru resolves packages by name directly.
+# third-party source (e.g. a Homebrew tap, or a custom pacman repo) a
+# manager needs registered before install — AUR needs none, paru resolves
+# packages by name directly.
 #
 # Pacman/AUR package names have been verified against archlinux.org's
 # package search JSON API and the AUR RPC API. Entries marked VERIFY are
@@ -226,12 +227,14 @@ aur = "joplin-bin" # confirmed: aur.archlinux.org joplin-bin — prebuilt binary
 
 [[packages.tool]]
 name = "local-review"
-managers = ["cask"]
+managers = ["cask", "pacman"]
 cask = "atomaka/formula/local-review"
 repositories = [
   { manager = "brew", name = "atomaka/formula", url = "https://git.atomaka.com/atomaka/homebrew-formula.git", trusted = true },
+  { manager = "pacman", name = "personal", owner = "atomaka", url = "https://git.atomaka.com/api/packages/atomaka/arch/personal/x86_64", key_url = "https://git.atomaka.com/api/packages/atomaka/arch/repository.key" },
 ]
-# cask only for now — no linux distribution yet, revisit once that's sorted
+# pacman: private Forgejo arch registry, group "personal" — shared across
+# any future arch packages too, not local-review-specific
 
 [[packages.tool]]
 name = "podman-desktop"

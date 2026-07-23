@@ -105,6 +105,10 @@ repositories = [
 ]
 
 [[packages.tool]]
+name = "quickshell"
+managers = ["pacman"]
+
+[[packages.tool]]
 name = "readline"
 
 [[packages.tool]]

@@ -66,7 +66,7 @@ ShellRoot {
 
             Process {
                 id: brightnessQuery
-                command: ["brightnessctl", "-m", "-d", "acpi_video0"]
+                command: ["brightnessctl", "-m", "-d", "intel_backlight"]
                 stdout: StdioCollector {
                     onStreamFinished: {
                         // acpi_video0,backlight,<raw>,<percent>%,<max>
@@ -417,7 +417,7 @@ ShellRoot {
                                     onReleased: {
                                         brightnessTrack.dragging = false;
                                         brightnessTrack.settledFraction = brightnessTrack.dragFraction;
-                                        brightnessSet.command = ["brightnessctl", "-d", "acpi_video0", "set", Math.round(brightnessTrack.dragFraction * 100) + "%"];
+                                        brightnessSet.command = ["brightnessctl", "-d", "intel_backlight", "set", Math.round(brightnessTrack.dragFraction * 100) + "%"];
                                         brightnessSet.running = true;
                                     }
                                 }

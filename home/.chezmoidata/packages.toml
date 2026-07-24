@@ -51,6 +51,10 @@ managers = ["brew"]
 name = "gnupg"
 
 [[packages.tool]]
+name = "hyprsunset"
+managers = ["pacman"]
+
+[[packages.tool]]
 name = "jq"
 
 [[packages.tool]]

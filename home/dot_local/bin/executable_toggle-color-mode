@@ -1,3 +1,14 @@
 #!/bin/bash
 
-osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+case "$(uname)" in
+Darwin)
+  osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+  ;;
+Linux)
+  if [[ "$(gsettings get org.gnome.desktop.interface color-scheme)" == "'prefer-dark'" ]]; then
+    gsettings set org.gnome.desktop.interface color-scheme 'default'
+  else
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+  fi
+  ;;
+esac

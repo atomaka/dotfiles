@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DEV="i2c-ELAN040D:00"
+DRIVER=/sys/bus/i2c/drivers/i2c_hid_acpi
+
+echo -n "$DEV" | sudo tee "$DRIVER/unbind"
+sleep 1
+echo -n "$DEV" | sudo tee "$DRIVER/bind"
+
+echo "Done. Try clicking the trackpad now."

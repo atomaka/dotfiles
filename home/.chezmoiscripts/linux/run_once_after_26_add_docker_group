@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if getent group docker > /dev/null && ! id -nG "$USER" | grep -qw docker; then
+  echo "Adding $USER to docker group"
+  sudo usermod -aG docker "$USER"
+  echo "Done adding $USER to docker group"
+fi

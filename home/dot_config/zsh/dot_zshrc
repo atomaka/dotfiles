@@ -2,7 +2,9 @@ export GPG_TTY=$(tty)
 
 typeset -U PATH
 
-source $ZDOTDIR/aliases
+for f in $XDG_CONFIG_HOME/aliases/*(.N); do
+  source "$f"
+done
 source $ZDOTDIR/functions
 
 source $ZDOTDIR/prompt

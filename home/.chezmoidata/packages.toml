@@ -28,6 +28,14 @@ managers = ["brew"]
 name = "d2"
 
 [[packages.tool]]
+name = "docker"
+managers = ["pacman"]
+
+[[packages.tool]]
+name = "docker-compose"
+managers = ["pacman"]
+
+[[packages.tool]]
 name = "fontconfig"
 
 [[packages.tool]]

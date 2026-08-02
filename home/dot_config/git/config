@@ -52,3 +52,6 @@
   path = ~/.config/git/gitconfig_boldpenguin
 [init]
 	defaultBranch = main
+
+[worktree]
+	guessRemote = true

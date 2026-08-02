@@ -22,6 +22,7 @@ alias gaa="git add --all"
 alias gack='git log --pretty="%an <%ae>" | sort -u | fzf | xargs --null -I "{}" git add-trailer "Co-authored-by: {}"'
 alias gap="git add --patch"
 alias gb="git branch"
+alias gcb="git-bare-clone"
 alias gc="git commit"
 alias gca="git commit --amend --allow-empty"
 alias gcd='cd "$(git worktree list | fzf | awk '\''{print $1}'\'')"'

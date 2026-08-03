@@ -5,12 +5,15 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 import Quickshell.Services.Pipewire
 import Quickshell.Bluetooth
+import Quickshell.Wayland
 
 ShellRoot {
     Variants {
         model: Quickshell.screens
 
         PanelWindow {
+            id: bar
+
             required property var modelData
             screen: modelData
 
@@ -20,294 +23,368 @@ ShellRoot {
                 top: true
             }
             implicitHeight: 30
-            color: "#1e1e2e"
+            color: "transparent"
 
-            Row {
-                anchors.left: parent.left
-                anchors.leftMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 4
+            WlrLayershell.layer: WlrLayer.Overlay
 
-                Repeater {
-                    model: Hyprland.workspaces
+            readonly property var hyprMonitor: Hyprland.monitorFor(screen)
+            readonly property bool fullscreenActive: hyprMonitor && hyprMonitor.activeWorkspace
+                ? hyprMonitor.activeWorkspace.toplevels.values.filter(t => (t.lastIpcObject.fullscreen ?? 0) > 1).length > 0
+                : false
+            readonly property bool revealed: revealArea.containsMouse
+                || backlightButtonHover.hovered
+                || volumeButtonHover.hovered
+                || bluetoothButtonHover.hovered
+                || profileMouse.containsMouse
+                || backlightMenuHover.hovered
+                || volumeMenuHover.hovered
+                || bluetoothMenuHover.hovered
+            readonly property bool hidden: fullscreenActive && !revealed
 
-                    delegate: Rectangle {
-                        required property HyprlandWorkspace modelData
+            exclusiveZone: hidden ? 0 : 30
+
+            mask: Region {
+                item: maskRegion
+            }
+
+            Connections {
+                target: Hyprland
+
+                function onRawEvent(event) {
+                    if (event.name === "fullscreen" || event.name === "openwindow"
+                            || event.name === "closewindow" || event.name === "movewindowv2")
+                        Hyprland.refreshToplevels();
+                }
+            }
+
+            MouseArea {
+                id: revealArea
+                anchors.fill: parent
+                hoverEnabled: true
+            }
+
+            Item {
+                id: content
+
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                    topMargin: bar.hidden ? -parent.height : 0
+                }
+                height: parent.height
+
+                Behavior on anchors.topMargin {
+                    NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
+                }
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: "#1e1e2e"
+                }
+                Row {
+                    anchors.left: parent.left
+                    anchors.leftMargin: 8
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 4
+
+                    Repeater {
+                        model: Hyprland.workspaces
+
+                        delegate: Rectangle {
+                            required property HyprlandWorkspace modelData
+
+                            width: 24
+                            height: 24
+                            radius: 4
+                            color: modelData.active ? "#89b4fa" : "transparent"
+
+                            Text {
+                                anchors.centerIn: parent
+                                text: modelData.name
+                                color: modelData.active ? "#1e1e2e" : "#cdd6f4"
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: modelData.activate()
+                            }
+                        }
+                    }
+                }
+
+                SystemClock {
+                    id: clock
+                    precision: SystemClock.Minutes
+                }
+
+                Process {
+                    id: brightnessQuery
+                    command: ["brightnessctl", "-m", "-d", "intel_backlight"]
+                    stdout: StdioCollector {
+                        onStreamFinished: {
+                            // acpi_video0,backlight,<raw>,<percent>%,<max>
+                            var parts = text.trim().split(",");
+                            if (parts.length >= 4) {
+                                var pct = parseInt(parts[3]);
+                                if (!isNaN(pct))
+                                    brightnessTrack.settledFraction = pct / 100;
+                            }
+                        }
+                    }
+                }
+
+                Process {
+                    id: brightnessSet
+                    onExited: brightnessQuery.running = true
+                }
+
+                Process {
+                    id: kbdBrightnessQuery
+                    command: ["brightnessctl", "-m", "-d", "system76_acpi::kbd_backlight"]
+                    stdout: StdioCollector {
+                        onStreamFinished: {
+                            var parts = text.trim().split(",");
+                            if (parts.length >= 4) {
+                                var pct = parseInt(parts[3]);
+                                if (!isNaN(pct)) {
+                                    var floor = kbdBrightnessTrack.minPercent;
+                                    var offZone = kbdBrightnessTrack.offZoneFraction;
+                                    var frac;
+                                    if (pct <= 0) {
+                                        frac = 0;
+                                    } else {
+                                        var clamped = Math.max(pct, floor);
+                                        frac = offZone + (clamped - floor) / (100 - floor) * (1 - offZone);
+                                    }
+                                    kbdBrightnessTrack.settledFraction = Math.max(0, Math.min(1, frac));
+                                }
+                            }
+                        }
+                    }
+                }
+
+                Process {
+                    id: kbdBrightnessSet
+                    onExited: kbdBrightnessQuery.running = true
+                }
+
+                PwObjectTracker {
+                    objects: Pipewire.defaultAudioSink ? [Pipewire.defaultAudioSink] : []
+                }
+
+                Timer {
+                    interval: 5000
+                    running: true
+                    repeat: true
+                    onTriggered: {
+                        brightnessQuery.running = true;
+                        kbdBrightnessQuery.running = true;
+                    }
+                }
+
+                Component.onCompleted: {
+                    brightnessQuery.running = true;
+                    kbdBrightnessQuery.running = true;
+                }
+
+                Row {
+                    anchors.right: parent.right
+                    anchors.rightMargin: 8
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 8
+
+                    Rectangle {
+                        id: backlightButton
 
                         width: 24
                         height: 24
                         radius: 4
-                        color: modelData.active ? "#89b4fa" : "transparent"
+                        color: backlightMenu.requestOpen ? "#89b4fa" : "transparent"
 
                         Text {
                             anchors.centerIn: parent
-                            text: modelData.name
-                            color: modelData.active ? "#1e1e2e" : "#cdd6f4"
+                            text: "🔆"
+                            color: backlightMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
+                        }
+
+                        HoverHandler {
+                            id: backlightButtonHover
+                            onHoveredChanged: backlightMenuCloseTimer.restart()
                         }
 
                         MouseArea {
                             anchors.fill: parent
-                            onClicked: modelData.activate()
+                            onClicked: backlightMenu.requestOpen = !backlightMenu.requestOpen
                         }
                     }
-                }
-            }
 
-            SystemClock {
-                id: clock
-                precision: SystemClock.Minutes
-            }
+                    Rectangle {
+                        id: volumeButton
 
-            Process {
-                id: brightnessQuery
-                command: ["brightnessctl", "-m", "-d", "intel_backlight"]
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        // acpi_video0,backlight,<raw>,<percent>%,<max>
-                        var parts = text.trim().split(",");
-                        if (parts.length >= 4) {
-                            var pct = parseInt(parts[3]);
-                            if (!isNaN(pct))
-                                brightnessTrack.settledFraction = pct / 100;
+                        readonly property var sinkAudio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio : null
+
+                        width: volumeText.implicitWidth + 12
+                        height: 24
+                        radius: 4
+                        color: volumeMenu.requestOpen ? "#89b4fa" : "transparent"
+
+                        Text {
+                            id: volumeText
+                            anchors.centerIn: parent
+                            color: volumeMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
+                            text: {
+                                if (!volumeButton.sinkAudio)
+                                    return "🔈 --";
+                                if (volumeButton.sinkAudio.muted)
+                                    return "🔇";
+                                var icon = volumeButton.sinkAudio.volume > 0.5 ? "🔊" : (volumeButton.sinkAudio.volume > 0 ? "🔉" : "🔈");
+                                return icon + " " + Math.round(volumeButton.sinkAudio.volume * 100) + "%";
+                            }
                         }
-                    }
-                }
-            }
 
-            Process {
-                id: brightnessSet
-                onExited: brightnessQuery.running = true
-            }
+                        HoverHandler {
+                            id: volumeButtonHover
+                            onHoveredChanged: volumeMenuCloseTimer.restart()
+                        }
 
-            Process {
-                id: kbdBrightnessQuery
-                command: ["brightnessctl", "-m", "-d", "system76_acpi::kbd_backlight"]
-                stdout: StdioCollector {
-                    onStreamFinished: {
-                        var parts = text.trim().split(",");
-                        if (parts.length >= 4) {
-                            var pct = parseInt(parts[3]);
-                            if (!isNaN(pct)) {
-                                var floor = kbdBrightnessTrack.minPercent;
-                                var offZone = kbdBrightnessTrack.offZoneFraction;
-                                var frac;
-                                if (pct <= 0) {
-                                    frac = 0;
+                        WheelHandler {
+                            onWheel: event => {
+                                if (!volumeButton.sinkAudio)
+                                    return;
+                                var step = event.angleDelta.y > 0 ? 0.05 : -0.05;
+                                volumeButton.sinkAudio.volume = Math.max(0, Math.min(1, volumeButton.sinkAudio.volume + step));
+                            }
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+                            onClicked: mouse => {
+                                if (mouse.button === Qt.MiddleButton) {
+                                    if (volumeButton.sinkAudio)
+                                        volumeButton.sinkAudio.muted = !volumeButton.sinkAudio.muted;
                                 } else {
-                                    var clamped = Math.max(pct, floor);
-                                    frac = offZone + (clamped - floor) / (100 - floor) * (1 - offZone);
+                                    volumeMenu.requestOpen = !volumeMenu.requestOpen;
                                 }
-                                kbdBrightnessTrack.settledFraction = Math.max(0, Math.min(1, frac));
                             }
                         }
                     }
-                }
-            }
 
-            Process {
-                id: kbdBrightnessSet
-                onExited: kbdBrightnessQuery.running = true
-            }
+                    Rectangle {
+                        id: bluetoothButton
 
-            PwObjectTracker {
-                objects: Pipewire.defaultAudioSink ? [Pipewire.defaultAudioSink] : []
-            }
+                        readonly property var adapter: Bluetooth.defaultAdapter
 
-            Timer {
-                interval: 5000
-                running: true
-                repeat: true
-                onTriggered: {
-                    brightnessQuery.running = true;
-                    kbdBrightnessQuery.running = true;
-                }
-            }
+                        width: 24
+                        height: 24
+                        radius: 4
+                        color: bluetoothMenu.requestOpen ? "#89b4fa" : "transparent"
 
-            Component.onCompleted: {
-                brightnessQuery.running = true;
-                kbdBrightnessQuery.running = true;
-            }
-
-            Row {
-                anchors.right: parent.right
-                anchors.rightMargin: 8
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 8
-
-                Rectangle {
-                    id: backlightButton
-
-                    width: 24
-                    height: 24
-                    radius: 4
-                    color: backlightMenu.requestOpen ? "#89b4fa" : "transparent"
-
-                    Text {
-                        anchors.centerIn: parent
-                        text: "🔆"
-                        color: backlightMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
-                    }
-
-                    HoverHandler {
-                        id: backlightButtonHover
-                        onHoveredChanged: backlightMenuCloseTimer.restart()
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: backlightMenu.requestOpen = !backlightMenu.requestOpen
-                    }
-                }
-
-                Rectangle {
-                    id: volumeButton
-
-                    readonly property var sinkAudio: Pipewire.defaultAudioSink ? Pipewire.defaultAudioSink.audio : null
-
-                    width: volumeText.implicitWidth + 12
-                    height: 24
-                    radius: 4
-                    color: volumeMenu.requestOpen ? "#89b4fa" : "transparent"
-
-                    Text {
-                        id: volumeText
-                        anchors.centerIn: parent
-                        color: volumeMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
-                        text: {
-                            if (!volumeButton.sinkAudio)
-                                return "🔈 --";
-                            if (volumeButton.sinkAudio.muted)
-                                return "🔇";
-                            var icon = volumeButton.sinkAudio.volume > 0.5 ? "🔊" : (volumeButton.sinkAudio.volume > 0 ? "🔉" : "🔈");
-                            return icon + " " + Math.round(volumeButton.sinkAudio.volume * 100) + "%";
+                        Text {
+                            anchors.centerIn: parent
+                            text: "BT"
+                            color: bluetoothMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
                         }
-                    }
 
-                    HoverHandler {
-                        id: volumeButtonHover
-                        onHoveredChanged: volumeMenuCloseTimer.restart()
-                    }
-
-                    WheelHandler {
-                        onWheel: event => {
-                            if (!volumeButton.sinkAudio)
-                                return;
-                            var step = event.angleDelta.y > 0 ? 0.05 : -0.05;
-                            volumeButton.sinkAudio.volume = Math.max(0, Math.min(1, volumeButton.sinkAudio.volume + step));
+                        HoverHandler {
+                            id: bluetoothButtonHover
+                            onHoveredChanged: bluetoothMenuCloseTimer.restart()
                         }
-                    }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-                        onClicked: mouse => {
-                            if (mouse.button === Qt.MiddleButton) {
-                                if (volumeButton.sinkAudio)
-                                    volumeButton.sinkAudio.muted = !volumeButton.sinkAudio.muted;
-                            } else {
-                                volumeMenu.requestOpen = !volumeMenu.requestOpen;
+                        MouseArea {
+                            anchors.fill: parent
+                            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+                            onClicked: mouse => {
+                                if (mouse.button === Qt.MiddleButton) {
+                                    if (bluetoothButton.adapter)
+                                        bluetoothButton.adapter.enabled = !bluetoothButton.adapter.enabled;
+                                } else {
+                                    bluetoothMenu.requestOpen = !bluetoothMenu.requestOpen;
+                                }
                             }
                         }
                     }
-                }
 
-                Rectangle {
-                    id: bluetoothButton
+                    Rectangle {
+                        id: powerProfile
 
-                    readonly property var adapter: Bluetooth.defaultAdapter
+                        width: profileText.implicitWidth + 12
+                        height: 24
+                        radius: 4
+                        color: profileMouse.containsMouse ? "#313244" : "transparent"
 
-                    width: 24
-                    height: 24
-                    radius: 4
-                    color: bluetoothMenu.requestOpen ? "#89b4fa" : "transparent"
+                        Text {
+                            id: profileText
+                            anchors.centerIn: parent
+                            color: "#cdd6f4"
+                            text: {
+                                var icon = "🔋";
+                                if (PowerProfiles.profile === PowerProfile.Balanced)
+                                    icon = "⚖";
+                                else if (PowerProfiles.profile === PowerProfile.Performance)
+                                    icon = "⚡";
+                                return icon + " " + Math.round(UPower.displayDevice.percentage * 100) + "%";
+                            }
+                        }
 
-                    Text {
-                        anchors.centerIn: parent
-                        text: "BT"
-                        color: bluetoothMenu.requestOpen ? "#1e1e2e" : "#cdd6f4"
-                    }
-
-                    HoverHandler {
-                        id: bluetoothButtonHover
-                        onHoveredChanged: bluetoothMenuCloseTimer.restart()
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-                        onClicked: mouse => {
-                            if (mouse.button === Qt.MiddleButton) {
-                                if (bluetoothButton.adapter)
-                                    bluetoothButton.adapter.enabled = !bluetoothButton.adapter.enabled;
-                            } else {
-                                bluetoothMenu.requestOpen = !bluetoothMenu.requestOpen;
+                        MouseArea {
+                            id: profileMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onClicked: {
+                                if (PowerProfiles.profile === PowerProfile.PowerSaver)
+                                    PowerProfiles.profile = PowerProfile.Balanced;
+                                else if (PowerProfiles.profile === PowerProfile.Balanced)
+                                    PowerProfiles.profile = PowerProfile.Performance;
+                                else
+                                    PowerProfiles.profile = PowerProfile.PowerSaver;
                             }
                         }
                     }
-                }
 
-                Rectangle {
-                    id: powerProfile
+                    Rectangle {
+                        id: powerButton
 
-                    width: profileText.implicitWidth + 12
-                    height: 24
-                    radius: 4
-                    color: profileMouse.containsMouse ? "#313244" : "transparent"
+                        width: 24
+                        height: 24
+                        radius: 4
+                        color: powerMenu.visible ? "#89b4fa" : "transparent"
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: "🔌"
+                            color: powerMenu.visible ? "#1e1e2e" : "#cdd6f4"
+                        }
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: powerMenu.visible = !powerMenu.visible
+                        }
+                    }
 
                     Text {
-                        id: profileText
-                        anchors.centerIn: parent
+                        height: 24
+                        verticalAlignment: Text.AlignVCenter
                         color: "#cdd6f4"
-                        text: {
-                            var icon = "🔋";
-                            if (PowerProfiles.profile === PowerProfile.Balanced)
-                                icon = "⚖";
-                            else if (PowerProfiles.profile === PowerProfile.Performance)
-                                icon = "⚡";
-                            return icon + " " + Math.round(UPower.displayDevice.percentage * 100) + "%";
-                        }
-                    }
-
-                    MouseArea {
-                        id: profileMouse
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        onClicked: {
-                            if (PowerProfiles.profile === PowerProfile.PowerSaver)
-                                PowerProfiles.profile = PowerProfile.Balanced;
-                            else if (PowerProfiles.profile === PowerProfile.Balanced)
-                                PowerProfiles.profile = PowerProfile.Performance;
-                            else
-                                PowerProfiles.profile = PowerProfile.PowerSaver;
-                        }
+                        text: Qt.formatDateTime(clock.date, "yyyy-MM-dd @ hh:mm")
                     }
                 }
 
-                Rectangle {
-                    id: powerButton
+            }
 
-                    width: 24
-                    height: 24
-                    radius: 4
-                    color: powerMenu.visible ? "#89b4fa" : "transparent"
+            Item {
+                id: maskRegion
 
-                    Text {
-                        anchors.centerIn: parent
-                        text: "🔌"
-                        color: powerMenu.visible ? "#1e1e2e" : "#cdd6f4"
-                    }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        onClicked: powerMenu.visible = !powerMenu.visible
-                    }
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
                 }
+                height: bar.hidden ? 6 : parent.height
 
-                Text {
-                    height: 24
-                    verticalAlignment: Text.AlignVCenter
-                    color: "#cdd6f4"
-                    text: Qt.formatDateTime(clock.date, "yyyy-MM-dd @ hh:mm")
+                Behavior on height {
+                    NumberAnimation { duration: 150; easing.type: Easing.OutCubic }
                 }
             }
 

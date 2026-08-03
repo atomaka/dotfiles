@@ -366,10 +366,15 @@ ShellRoot {
                             width: parent.width
                             spacing: 8
 
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "🔆"
-                                color: "#cdd6f4"
+                            Item {
+                                width: 24
+                                height: 24
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "🔆"
+                                    color: "#cdd6f4"
+                                }
                             }
 
                             Item {
@@ -380,7 +385,7 @@ ShellRoot {
                                 property real settledFraction: 0
                                 property real fraction: dragging ? dragFraction : settledFraction
 
-                                width: parent.width - 24
+                                width: parent.width - 32
                                 height: 24
                                 anchors.verticalCenter: parent.verticalCenter
 
@@ -428,10 +433,15 @@ ShellRoot {
                             width: parent.width
                             spacing: 8
 
-                            Text {
-                                anchors.verticalCenter: parent.verticalCenter
-                                text: "⌨"
-                                color: "#cdd6f4"
+                            Item {
+                                width: 24
+                                height: 24
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "⌨"
+                                    color: "#cdd6f4"
+                                }
                             }
 
                             Item {
@@ -448,7 +458,7 @@ ShellRoot {
                                 property real settledFraction: 0
                                 property real fraction: dragging ? dragFraction : settledFraction
 
-                                width: parent.width - 24
+                                width: parent.width - 32
                                 height: 24
                                 anchors.verticalCenter: parent.verticalCenter
 
@@ -590,7 +600,7 @@ ShellRoot {
                                 property real settledFraction: volumeButton.sinkAudio ? Math.min(1, volumeButton.sinkAudio.volume) : 0
                                 property real fraction: dragging ? dragFraction : settledFraction
 
-                                width: parent.width - 24
+                                width: parent.width - 32
                                 height: 24
                                 anchors.verticalCenter: parent.verticalCenter
 

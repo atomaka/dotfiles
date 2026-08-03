@@ -58,12 +58,6 @@ ShellRoot {
                 precision: SystemClock.Minutes
             }
 
-            Text {
-                anchors.centerIn: parent
-                color: "#cdd6f4"
-                text: Qt.formatDateTime(clock.date, "hh:mm")
-            }
-
             Process {
                 id: brightnessQuery
                 command: ["brightnessctl", "-m", "-d", "intel_backlight"]
@@ -299,7 +293,7 @@ ShellRoot {
 
                     Text {
                         anchors.centerIn: parent
-                        text: "⏻"
+                        text: "🔌"
                         color: powerMenu.visible ? "#1e1e2e" : "#cdd6f4"
                     }
 
@@ -307,6 +301,13 @@ ShellRoot {
                         anchors.fill: parent
                         onClicked: powerMenu.visible = !powerMenu.visible
                     }
+                }
+
+                Text {
+                    height: 24
+                    verticalAlignment: Text.AlignVCenter
+                    color: "#cdd6f4"
+                    text: Qt.formatDateTime(clock.date, "yyyy-MM-dd @ hh:mm")
                 }
             }
 

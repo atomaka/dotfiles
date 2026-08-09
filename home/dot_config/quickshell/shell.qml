@@ -870,36 +870,17 @@ ShellRoot {
                                 Text {
                                     anchors.left: parent.left
                                     anchors.leftMargin: 8
-                                    anchors.right: forgetButton.left
-                                    anchors.rightMargin: 4
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 8
                                     anchors.verticalCenter: parent.verticalCenter
                                     elide: Text.ElideRight
                                     color: modelData.connected ? "#1e1e2e" : "#cdd6f4"
                                     text: modelData.name + (modelData.batteryAvailable ? " (" + Math.round(modelData.battery * 100) + "%)" : "")
                                 }
 
-                                Text {
-                                    id: forgetButton
-                                    anchors.right: parent.right
-                                    anchors.rightMargin: 8
-                                    anchors.verticalCenter: parent.verticalCenter
-                                    text: "✕"
-                                    color: forgetMouse.containsMouse ? "#f38ba8" : (modelData.connected ? "#1e1e2e" : "#6c7086")
-
-                                    MouseArea {
-                                        id: forgetMouse
-                                        anchors.fill: parent
-                                        hoverEnabled: true
-                                        onClicked: modelData.forget()
-                                    }
-                                }
-
                                 MouseArea {
                                     id: deviceMouse
-                                    anchors.left: parent.left
-                                    anchors.right: forgetButton.left
-                                    anchors.top: parent.top
-                                    anchors.bottom: parent.bottom
+                                    anchors.fill: parent
                                     hoverEnabled: true
                                     onClicked: {
                                         if (modelData.connected)

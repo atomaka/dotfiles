@@ -98,12 +98,22 @@ managers = ["brew", "aur"]
 aur = "nodenv-node-build"
 
 [[packages.tool]]
+name = "nslookup"
+managers = ["pacman"]
+pacman = "bind"
+
+[[packages.tool]]
 name = "opencode"
 
 [[packages.tool]]
 name = "openssl"
 brew = "openssl@3"
 managers = ["brew"]
+
+[[packages.tool]]
+name = "pi-coding-agent"
+managers = ["brew", "aur"]
+aur = "pi-coding-agent-bin"
 
 [[packages.tool]]
 name = "qmk"

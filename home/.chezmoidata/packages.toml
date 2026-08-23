@@ -162,6 +162,7 @@ name = "zsh"
 [[packages.tool]]
 name = "claude"
 managers = ["cask", "aur"]
+aur = "claude-desktop"
 
 [[packages.tool]]
 name = "claude-code"

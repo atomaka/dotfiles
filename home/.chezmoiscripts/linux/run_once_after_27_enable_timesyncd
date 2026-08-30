@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if ! systemctl is-enabled --quiet systemd-timesyncd; then
+  echo "Enabling systemd-timesyncd"
+  sudo systemctl enable --now systemd-timesyncd
+fi

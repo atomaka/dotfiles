@@ -244,6 +244,12 @@ aur = "mqtt-explorer-appimage"
 personal = true
 
 [[packages.tool]]
+name = "opencode-desktop"
+managers = ["cask", "aur"]
+aur = "opencode-desktop-bin"
+personal = true
+
+[[packages.tool]]
 name = "openscad"
 managers = ["cask", "pacman"]
 personal = true

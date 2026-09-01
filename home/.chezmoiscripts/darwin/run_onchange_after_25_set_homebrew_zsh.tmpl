@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# /etc/shells hash: {{ include "/etc/shells" | sha256sum }}
+# login shell hash: {{ output "sh" "-c" "dscl . -read \"$HOME\" UserShell 2>/dev/null || true" | trim | sha256sum }}
+
+set -euo pipefail
+
+zsh_path="/opt/homebrew/bin/zsh"
+shells_file="/etc/shells"
+
+if [[ ! -x "$zsh_path" ]]; then
+  exit 0
+fi
+
+if ! grep -Fqx "$zsh_path" "$shells_file"; then
+  echo "Adding $zsh_path to $shells_file"
+  printf '%s\n' "$zsh_path" | sudo tee -a "$shells_file" >/dev/null
+fi
+
+current_shell="$(dscl . -read "$HOME" UserShell | awk '{print $2}')"
+if [[ "$current_shell" != "$zsh_path" ]]; then
+  echo "Changing login shell to $zsh_path"
+  chsh -s "$zsh_path"
+fi

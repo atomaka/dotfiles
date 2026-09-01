@@ -158,12 +158,6 @@ managers = ["brew"]
 [[packages.tool]]
 name = "zsh"
 
-# GUI apps (darwin via cask, linux via AUR/pacman where available)
-[[packages.tool]]
-name = "claude"
-managers = ["cask", "aur"]
-aur = "claude-desktop"
-
 [[packages.tool]]
 name = "claude-code"
 managers = ["cask", "aur"]
@@ -221,6 +215,12 @@ managers = ["cask", "aur"]
 aur = "visual-studio-code-bin"
 
 # Personal-only casks (gated on .personal)
+[[packages.tool]]
+name = "claude"
+managers = ["cask", "aur"]
+aur = "claude-desktop"
+personal = true
+
 [[packages.tool]]
 name = "arduino-ide"
 managers = ["cask", "aur"]

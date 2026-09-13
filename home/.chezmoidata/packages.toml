@@ -59,6 +59,11 @@ managers = ["brew"]
 name = "gnupg"
 
 [[packages.tool]]
+name = "herdr"
+managers = ["brew", "aur"]
+aur = "herdr-bin"
+
+[[packages.tool]]
 name = "hyprsunset"
 managers = ["pacman"]
 
@@ -161,6 +166,11 @@ name = "zsh"
 [[packages.tool]]
 name = "claude-code"
 managers = ["cask", "aur"]
+
+[[packages.tool]]
+name = "pi-coding-agent"
+managers = ["brew", "aur"]
+aur = "pi-coding-agent-bin"
 
 [[packages.tool]]
 name = "firefox"

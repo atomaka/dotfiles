@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [[ "$(uname -m)" == "arm64" ]] && [[ ! -f /Library/Apple/usr/libexec/oah/libRosettaRuntime ]]; then
+  softwareupdate --install-rosetta --agree-to-license
+fi

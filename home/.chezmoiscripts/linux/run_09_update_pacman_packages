@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo Updating pacman packages
+sudo pacman -Syu --noconfirm
+echo Done updating pacman packages

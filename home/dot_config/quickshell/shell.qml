@@ -123,12 +123,16 @@ ShellRoot {
                     command: ["brightnessctl", "-m", "-d", "intel_backlight"]
                     stdout: StdioCollector {
                         onStreamFinished: {
-                            // acpi_video0,backlight,<raw>,<percent>%,<max>
+                            // intel_backlight,backlight,<raw>,<percent>%,<max>
                             var parts = text.trim().split(",");
                             if (parts.length >= 4) {
                                 var pct = parseInt(parts[3]);
-                                if (!isNaN(pct))
-                                    brightnessTrack.settledFraction = pct / 100;
+                                if (!isNaN(pct)) {
+                                    var frac = Math.max(0, Math.min(1, pct / 100));
+                                    brightnessTrack.settledFraction = frac;
+                                    if (frac > 0)
+                                        brightnessTrack.lastOnFraction = frac;
+                                }
                             }
                         }
                     }
@@ -148,16 +152,10 @@ ShellRoot {
                             if (parts.length >= 4) {
                                 var pct = parseInt(parts[3]);
                                 if (!isNaN(pct)) {
-                                    var floor = kbdBrightnessTrack.minPercent;
-                                    var offZone = kbdBrightnessTrack.offZoneFraction;
-                                    var frac;
-                                    if (pct <= 0) {
-                                        frac = 0;
-                                    } else {
-                                        var clamped = Math.max(pct, floor);
-                                        frac = offZone + (clamped - floor) / (100 - floor) * (1 - offZone);
-                                    }
-                                    kbdBrightnessTrack.settledFraction = Math.max(0, Math.min(1, frac));
+                                    var frac = Math.max(0, Math.min(1, pct / 100));
+                                    kbdBrightnessTrack.settledFraction = frac;
+                                    if (pct >= kbdBrightnessTrack.minPercent)
+                                        kbdBrightnessTrack.lastOnFraction = frac;
                                 }
                             }
                         }
@@ -401,7 +399,7 @@ ShellRoot {
                 anchor.gravity: Edges.Bottom | Edges.Left
                 anchor.margins.top: 4
 
-                implicitWidth: 180
+                implicitWidth: 212
                 implicitHeight: sliderColumn.implicitHeight + 16
 
                 Timer {
@@ -444,26 +442,56 @@ ShellRoot {
                             width: parent.width
                             spacing: 8
 
-                            Item {
+                            Rectangle {
                                 width: 24
                                 height: 24
+                                radius: 4
+                                color: screenIconMouse.containsMouse ? "#313244" : "transparent"
 
                                 Text {
                                     anchors.centerIn: parent
                                     text: "🔆"
                                     color: "#cdd6f4"
                                 }
+
+                                MouseArea {
+                                    id: screenIconMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: brightnessTrack.sendPercent(brightnessTrack.minPercent)
+                                }
                             }
 
                             Item {
                                 id: brightnessTrack
 
+                                // lowest setting that still emits light (0 is true off)
+                                readonly property int minPercent: 1
+
                                 property bool dragging: false
                                 property real dragFraction: 0
                                 property real settledFraction: 0
+                                property real lastOnFraction: 0.5
                                 property real fraction: dragging ? dragFraction : settledFraction
+                                readonly property bool isOn: Math.round(fraction * 100) >= minPercent
 
-                                width: parent.width - 32
+                                function sendPercent(pct) {
+                                    pct = Math.max(0, Math.min(100, Math.round(pct)));
+                                    settledFraction = pct / 100;
+                                    if (pct > 0)
+                                        lastOnFraction = settledFraction;
+                                    brightnessSet.command = ["brightnessctl", "-d", "intel_backlight", "set", pct + "%"];
+                                    brightnessSet.running = true;
+                                }
+
+                                function toggle() {
+                                    if (isOn)
+                                        sendPercent(0);
+                                    else
+                                        sendPercent(Math.max(minPercent, lastOnFraction * 100));
+                                }
+
+                                width: parent.width - 64
                                 height: 24
                                 anchors.verticalCenter: parent.verticalCenter
 
@@ -499,10 +527,28 @@ ShellRoot {
                                     }
                                     onReleased: {
                                         brightnessTrack.dragging = false;
-                                        brightnessTrack.settledFraction = brightnessTrack.dragFraction;
-                                        brightnessSet.command = ["brightnessctl", "-d", "intel_backlight", "set", Math.round(brightnessTrack.dragFraction * 100) + "%"];
-                                        brightnessSet.running = true;
+                                        brightnessTrack.sendPercent(brightnessTrack.dragFraction * 100);
                                     }
+                                }
+                            }
+
+                            Rectangle {
+                                width: 24
+                                height: 24
+                                radius: 4
+                                color: screenToggleMouse.containsMouse ? "#313244" : "transparent"
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "⏻"
+                                    color: brightnessTrack.isOn ? "#a6e3a1" : "#f38ba8"
+                                }
+
+                                MouseArea {
+                                    id: screenToggleMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: brightnessTrack.toggle()
                                 }
                             }
                         }
@@ -511,14 +557,23 @@ ShellRoot {
                             width: parent.width
                             spacing: 8
 
-                            Item {
+                            Rectangle {
                                 width: 24
                                 height: 24
+                                radius: 4
+                                color: kbdIconMouse.containsMouse ? "#313244" : "transparent"
 
                                 Text {
                                     anchors.centerIn: parent
                                     text: "⌨"
                                     color: "#cdd6f4"
+                                }
+
+                                MouseArea {
+                                    id: kbdIconMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: kbdBrightnessTrack.sendPercent(kbdBrightnessTrack.minPercent)
                                 }
                             }
 
@@ -526,17 +581,37 @@ ShellRoot {
                                 id: kbdBrightnessTrack
 
                                 // below this, the keyboard LED is visibly off despite brightnessctl
-                                // reporting a nonzero value; scale the slider to the visible range,
-                                // reserving a small zone at the left for true off
-                                readonly property real minPercent: 50
-                                readonly property real offZoneFraction: 0.12
+                                // reporting a nonzero value; the slider spans minPercent-100% so
+                                // every slider position stays lit
+                                readonly property int minPercent: 49
 
                                 property bool dragging: false
                                 property real dragFraction: 0
                                 property real settledFraction: 0
-                                property real fraction: dragging ? dragFraction : settledFraction
+                                property real lastOnFraction: minPercent / 100
+                                readonly property int settledPercent: Math.round(settledFraction * 100)
+                                readonly property real fillFraction: dragging
+                                    ? dragFraction
+                                    : (settledPercent >= minPercent ? (settledPercent - minPercent) / (100 - minPercent) : 0)
+                                readonly property bool isOn: dragging || settledPercent >= minPercent
 
-                                width: parent.width - 32
+                                function sendPercent(pct) {
+                                    pct = Math.max(0, Math.min(100, Math.round(pct)));
+                                    settledFraction = pct / 100;
+                                    if (pct >= minPercent)
+                                        lastOnFraction = settledFraction;
+                                    kbdBrightnessSet.command = ["brightnessctl", "-d", "system76_acpi::kbd_backlight", "set", pct + "%"];
+                                    kbdBrightnessSet.running = true;
+                                }
+
+                                function toggle() {
+                                    if (isOn)
+                                        sendPercent(0);
+                                    else
+                                        sendPercent(Math.max(minPercent, lastOnFraction * 100));
+                                }
+
+                                width: parent.width - 64
                                 height: 24
                                 anchors.verticalCenter: parent.verticalCenter
 
@@ -548,7 +623,7 @@ ShellRoot {
                                     color: "#313244"
 
                                     Rectangle {
-                                        width: parent.width * kbdBrightnessTrack.fraction
+                                        width: parent.width * kbdBrightnessTrack.fillFraction
                                         height: parent.height
                                         radius: 4
                                         color: "#89b4fa"
@@ -572,19 +647,29 @@ ShellRoot {
                                     }
                                     onReleased: {
                                         kbdBrightnessTrack.dragging = false;
-                                        kbdBrightnessTrack.settledFraction = kbdBrightnessTrack.dragFraction;
-                                        var floor = kbdBrightnessTrack.minPercent;
-                                        var offZone = kbdBrightnessTrack.offZoneFraction;
-                                        var pct;
-                                        if (kbdBrightnessTrack.dragFraction < offZone) {
-                                            pct = 0;
-                                        } else {
-                                            var remapped = (kbdBrightnessTrack.dragFraction - offZone) / (1 - offZone);
-                                            pct = Math.round(floor + remapped * (100 - floor));
-                                        }
-                                        kbdBrightnessSet.command = ["brightnessctl", "-d", "system76_acpi::kbd_backlight", "set", pct + "%"];
-                                        kbdBrightnessSet.running = true;
+                                        kbdBrightnessTrack.sendPercent(kbdBrightnessTrack.minPercent
+                                            + kbdBrightnessTrack.dragFraction * (100 - kbdBrightnessTrack.minPercent));
                                     }
+                                }
+                            }
+
+                            Rectangle {
+                                width: 24
+                                height: 24
+                                radius: 4
+                                color: kbdToggleMouse.containsMouse ? "#313244" : "transparent"
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "⏻"
+                                    color: kbdBrightnessTrack.isOn ? "#a6e3a1" : "#f38ba8"
+                                }
+
+                                MouseArea {
+                                    id: kbdToggleMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: kbdBrightnessTrack.toggle()
                                 }
                             }
                         }

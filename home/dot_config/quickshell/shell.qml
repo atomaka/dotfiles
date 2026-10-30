@@ -167,6 +167,28 @@ ShellRoot {
                     onExited: kbdBrightnessQuery.running = true
                 }
 
+                Process {
+                    id: gammaQuery
+                    command: ["hyprctl", "hyprsunset", "gamma"]
+                    stdout: StdioCollector {
+                        onStreamFinished: {
+                            var pct = parseInt(text.trim());
+                            if (!isNaN(pct)) {
+                                pct = Math.max(gammaTrack.minPercent, Math.min(gammaTrack.maxPercent, pct));
+                                var frac = pct / 100;
+                                gammaTrack.settledFraction = frac;
+                                if (pct < gammaTrack.maxPercent)
+                                    gammaTrack.lastDimFraction = frac;
+                            }
+                        }
+                    }
+                }
+
+                Process {
+                    id: gammaSet
+                    onExited: gammaQuery.running = true
+                }
+
                 PwObjectTracker {
                     objects: Pipewire.defaultAudioSink ? [Pipewire.defaultAudioSink] : []
                 }
@@ -178,12 +200,14 @@ ShellRoot {
                     onTriggered: {
                         brightnessQuery.running = true;
                         kbdBrightnessQuery.running = true;
+                        gammaQuery.running = true;
                     }
                 }
 
                 Component.onCompleted: {
                     brightnessQuery.running = true;
                     kbdBrightnessQuery.running = true;
+                    gammaQuery.running = true;
                 }
 
                 Row {
@@ -407,7 +431,8 @@ ShellRoot {
                     interval: 300
                     onTriggered: {
                         if (!backlightButtonHover.hovered && !backlightMenuHover.hovered
-                                && !brightnessTrack.dragging && !kbdBrightnessTrack.dragging)
+                                && !brightnessTrack.dragging && !kbdBrightnessTrack.dragging
+                                && !gammaTrack.dragging)
                             backlightMenu.requestOpen = false;
                     }
                 }
@@ -670,6 +695,132 @@ ShellRoot {
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     onClicked: kbdBrightnessTrack.toggle()
+                                }
+                            }
+                        }
+
+                        Row {
+                            width: parent.width
+                            spacing: 8
+
+                            Rectangle {
+                                width: 24
+                                height: 24
+                                radius: 4
+                                color: gammaIconMouse.containsMouse ? "#313244" : "transparent"
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "🌙"
+                                    color: "#cdd6f4"
+                                }
+
+                                MouseArea {
+                                    id: gammaIconMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: gammaTrack.sendPercent(gammaTrack.minPercent)
+                                }
+                            }
+
+                            Item {
+                                id: gammaTrack
+
+                                // software dimming via hyprsunset's gamma filter:
+                                // 100% is no artificial dim, lower is darker.
+                                // clamped above 0 so the screen can't go fully black
+                                // with no hardware key to undo it
+                                readonly property int minPercent: 10
+                                readonly property int maxPercent: 100
+
+                                property bool dragging: false
+                                property real dragFraction: 0
+                                property real settledFraction: 1
+                                property real lastDimFraction: 0.6
+                                readonly property int settledPercent: Math.round(settledFraction * 100)
+                                readonly property real fillFraction: dragging
+                                    ? dragFraction
+                                    : (settledPercent >= minPercent
+                                        ? (settledPercent - minPercent) / (maxPercent - minPercent) : 0)
+                                readonly property bool isOn: dragging
+                                    ? dragFraction < 1
+                                    : settledPercent < maxPercent
+
+                                function sendPercent(pct) {
+                                    pct = Math.max(minPercent, Math.min(maxPercent, Math.round(pct)));
+                                    settledFraction = pct / 100;
+                                    if (pct < maxPercent)
+                                        lastDimFraction = settledFraction;
+                                    gammaSet.command = ["hyprctl", "hyprsunset", "gamma", String(pct)];
+                                    gammaSet.running = true;
+                                }
+
+                                function toggle() {
+                                    if (isOn)
+                                        sendPercent(maxPercent);
+                                    else
+                                        sendPercent(Math.max(minPercent, lastDimFraction * 100));
+                                }
+
+                                width: parent.width - 64
+                                height: 24
+                                anchors.verticalCenter: parent.verticalCenter
+
+                                Rectangle {
+                                    anchors.centerIn: parent
+                                    width: parent.width
+                                    height: 8
+                                    radius: 4
+                                    color: "#313244"
+
+                                    Rectangle {
+                                        width: parent.width * gammaTrack.fillFraction
+                                        height: parent.height
+                                        radius: 4
+                                        color: "#89b4fa"
+                                    }
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+
+                                    function updateDrag(x) {
+                                        gammaTrack.dragFraction = Math.max(0, Math.min(1, x / gammaTrack.width));
+                                    }
+
+                                    onPressed: mouse => {
+                                        gammaTrack.dragging = true;
+                                        updateDrag(mouse.x);
+                                    }
+                                    onPositionChanged: mouse => {
+                                        if (pressed)
+                                            updateDrag(mouse.x);
+                                    }
+                                    onReleased: {
+                                        gammaTrack.dragging = false;
+                                        gammaTrack.sendPercent(gammaTrack.minPercent
+                                            + gammaTrack.dragFraction * (gammaTrack.maxPercent - gammaTrack.minPercent));
+                                    }
+                                }
+                            }
+
+                            Rectangle {
+                                width: 24
+                                height: 24
+                                radius: 4
+                                color: gammaToggleMouse.containsMouse ? "#313244" : "transparent"
+
+                                Text {
+                                    anchors.centerIn: parent
+                                    text: "⏻"
+                                    color: gammaTrack.isOn ? "#a6e3a1" : "#f38ba8"
+                                }
+
+                                MouseArea {
+                                    id: gammaToggleMouse
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    onClicked: gammaTrack.toggle()
                                 }
                             }
                         }
